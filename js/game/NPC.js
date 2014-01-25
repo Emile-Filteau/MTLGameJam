@@ -19,11 +19,16 @@ var NPC = Base.extend({
 
 	update : function(framerate) {
 		var rand = Math.random();
-		if(rand > 0.5 && this.x < 700) {	//700 is arbitrary for testing
-			this.x += 1;		
-		}
-		else if(this.x > 0){
-			this.x -= 1;
+		if(rand > 0.1 ){
+			rand = Math.random();
+			if( rand > 0.5 && this.x < 900) {	//900 is arbitrary for testing
+				this.x += 1;		
+				//console.log("Friendly move RIGHT");
+			}
+			else if(this.x > 0){
+				this.x -= 1;
+				//console.log("Friendly move LEFT");
+			}
 		}
 	}
 

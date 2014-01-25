@@ -30,6 +30,11 @@ constructor : function(width, height, posX, posY, sprite) {
 				//console.log("Friendly move LEFT");
 			}
 		}
+	},
+
+	interact : function(framerate){
+		console.log("FRIENDLY INTERACTION :D");
+
 	}
 
 

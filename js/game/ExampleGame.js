@@ -38,7 +38,7 @@ var ExampleGame = Game.extend({
        // console.log(this.camera.width, this.camera.height);
        this.areas[this.currentArea].update(framerate, this.player);
 	},
-
+	
     keypress : function(key) {
         
         switch(key)
@@ -51,6 +51,10 @@ var ExampleGame = Game.extend({
 	  		break;
 		case 39:
 			this.player.mouvement = "R";
+	 		break;
+
+	 	case 90:
+	 		this.player.interact();
 	 		break;
 		default:
 		 break;

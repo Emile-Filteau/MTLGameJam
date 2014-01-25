@@ -13,18 +13,19 @@ var Area = Base.extend({
         this.ground.src = groundSrc;
 
         this.doors = [];
-        this.npc = [new Friendly(80, 100, 80, 100, "")];
+        this.npc = [new Friendly(80, 100, 400, (height - 200), "")];
         this.ennemies = [new Hostile(80, 100, 80, 300, "")];
 
 
         this.doors.push(new Door("town", 740, height-210));
     },
 
+
     update : function(framerate, player) {
         for(var i = 0; i< this.npc.length; i++){
             this.npc[i].update(framerate);
         }
-        for(var i = 0; i< this.ennemies.length; i++){
+        for(i in this.ennemies){
             this.ennemies[i].update(framerate);
         }
 

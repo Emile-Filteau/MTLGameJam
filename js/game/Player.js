@@ -52,6 +52,12 @@ var Player = Base.extend({
         	this.velocityY = -6.0;
 	},
 
+	interact: function(){
+		console.log("PLAYER initiated Interaction.");
+		
+
+	},
+
 	move: function(){
 		if(this.mouvement.indexOf("L") != -1){
 			this.x -= this.speed;
@@ -68,6 +74,7 @@ var Player = Base.extend({
 	},
 
 	update: function(framerate){
+
 
 		this.velocityY += this.gravity;        // Apply gravity to vertical velocity
 	    this.x += this.velocityX;      // Apply horizontal velocity to X position

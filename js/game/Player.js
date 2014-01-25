@@ -113,15 +113,15 @@ var Player = Base.extend({
            // console.log("Cas 2");
             var relX = 0;
             if(this.x <= camera.position.x - camera.width * 0.25) {
-              //  console.log("2.1");
+                console.log("2.1");
                 relX = camera.halfWidth - (camera.width * 0.25);
             }
-            else if(this.x >= camera.position.x + camera.width * 0.25) {
-             //   console.log("2.2");
+            else if((this.x >= camera.position.x + camera.width * 0.25) && this.currentDirection == "R") {
+                console.log("2.2");
                 relX = camera.halfWidth + (camera.width * 0.25);
             }
             else {
-          //      console.log("2.3");
+                console.log("2.3");
                 relX = camera.halfWidth + (this.x - camera.position.x);
             }
 
@@ -136,11 +136,11 @@ var Player = Base.extend({
 	        this.velocityY = -22.0;
 	        this.onGround = false;
 
-	        if(this.currentDirection.indexOf("L") != -1){
+	        if(this.currentDirection.indexOf("L") != -1 && this.velocityX != 0){
 				this.velocityX = -2.0;
 			}
 				
-			else if(this.currentDirection.indexOf("R") != -1){
+			else if(this.currentDirection.indexOf("R") != -1 && this.velocityX != 0){
 				this.velocityX = 2.0;
 			}
 	    }

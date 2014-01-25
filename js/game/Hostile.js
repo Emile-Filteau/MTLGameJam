@@ -15,7 +15,7 @@ constructor : function(posX, posY) {
         this.speed = 4;
         this.attackReach = 40;
 
-
+        this.animationAttackingIndex = 0;
         this.animationIndex = 0;
         this.animation = 0;
 	},

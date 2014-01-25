@@ -70,9 +70,10 @@ constructor : function(posX, posY) {
         this.attacking = false;
         this.speed = 4;
         this.attackReach = 30;
-
+        this.attackSpeed = 1.7;
         this.animationIndex = 0;
         this.animation = 0;
+        this.animationFrameDamageTreshold = 3;
 	},
 	
 	draw : function(canvas, context, player, camera, area) {
@@ -111,9 +112,9 @@ constructor : function(posX, posY) {
             }
             else{
             	//console.log('atk3');
-            	var playerDistance = Math.abs(player.x - this.x);
+            	var playerDistance = player.x - this.x;
         	context.drawImage(SpitterConstants['attackImages'][this.currentDirection][this.animationIndex],
-        						camera.halfWidth - this.width/2 ,
+        						camera.halfWidth - playerDistance - this.width/2 ,
         						this.y);
             }
         }
@@ -121,22 +122,28 @@ constructor : function(posX, posY) {
 	},
 
 	update : function(framerate, player) {
-        if(Math.abs((this.x - player.x)) < this.attackReach){
+        if(Math.abs((this.x - player.x)) <= this.attackReach || (this.attacking && this.animationIndex > 0 )) {
         	this.moving = false;
-        	this.attacking = true;
-
+        	this.attacking = true; 
             //console.log('attack!');
         	this.animation += framerate;
-        	if(this.animation >= 150) {
+        	if(this.animation >= this.attackSpeed * 100) {
                 this.animationIndex++;
+                if(this.animationIndex == SpitterConstants['attackImages'][this.currentDirection].length - this.animationFrameDamageTreshold
+                    && (Math.abs((this.x - player.x)) <= this.attackReach ) ) {
+                    console.log('PUKE HITS OH YEAH');
+                    player.hp -= 1;
+                } 
                 if(this.animationIndex >= SpitterConstants['attackImages'][this.currentDirection].length) {
                     this.animationIndex=0;
+                    attacking = false;
+                    movien = true;
                 }
                 this.animation = 0;
             }
 
         }
-        else{
+        else if (this.animationIndex == 0){
         	this.attacking = false;
         	this.moving = true;
         	this.animationIndex = 0

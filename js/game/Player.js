@@ -71,7 +71,7 @@ var Player = Base.extend({
 		this.width = 120;
 		this.x = posX;
 		this.y = posY + this.height;
-		this.hp = 5;
+		this.hp = 6;
 		this.sanity = 100;
 
 		this.equippedWeapon = 0;
@@ -189,7 +189,7 @@ var Player = Base.extend({
 	},
 	move: function(area){
 
-		console.log(this.x);
+		//console.log(this.x);
 
 		if(this.mouvement.indexOf("L") != -1){
 			this.x -= this.speed;
@@ -225,8 +225,9 @@ var Player = Base.extend({
                 this.animationAttacking = 0;       
         	}
         } 
-        else
+        else{
         	this.doDamage = false;       	
+        }
 
         
         if(this.mouvement != "") {      	

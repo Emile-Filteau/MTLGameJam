@@ -6,10 +6,10 @@ var BoommerConstants = {
     MOVE : 1
 }
 BoommerConstants['idleImages']['L'] = new Image();
-BoommerConstants['idleImages']['L'].src = "/images/boomers/standbyLeft.png";
+BoommerConstants['idleImages']['L'].src = "./images/boomers/standbyLeft.png";
 
 BoommerConstants['idleImages']['R'] = new Image();
-BoommerConstants['idleImages']['R'].src = "/images/Mooses/standbyRight.png";
+BoommerConstants['idleImages']['R'].src = "./images/Mooses/standbyRight.png";
 
 BoommerConstants['moveImages']['L'] = [];
 BoommerConstants['moveImages']['L'].push(new Image());
@@ -18,7 +18,7 @@ BoommerConstants['moveImages']['L'].push(new Image());
 BoommerConstants['moveImages']['L'].push(new Image());
 BoommerConstants['moveImages']['L'].push(new Image());
 for(i in BoommerConstants['moveImages']['L']) {
-    BoommerConstants['moveImages']['L'][i].src = "/images/boomers/runLeft/SlugWalk"+i+".png";
+    BoommerConstants['moveImages']['L'][i].src = "./images/boomers/runLeft/SlugWalk"+i+".png";
 }
 BoommerConstants['moveImages']['R'] = [];
 BoommerConstants['moveImages']['R'].push(new Image());
@@ -27,7 +27,7 @@ BoommerConstants['moveImages']['R'].push(new Image());
 BoommerConstants['moveImages']['R'].push(new Image());
 BoommerConstants['moveImages']['R'].push(new Image());
 for(i in BoommerConstants['moveImages']['R']) {
-    BoommerConstants['moveImages']['R'][i].src = "/images/boomers/runRight/SlugWalk"+i+".png";
+    BoommerConstants['moveImages']['R'][i].src = "./images/boomers/runRight/SlugWalk"+i+".png";
 }
 
 var Hostile = NPC.extend({

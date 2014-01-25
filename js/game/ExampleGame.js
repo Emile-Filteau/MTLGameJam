@@ -8,7 +8,7 @@ var ExampleGame = Game.extend({
         this.currentArea = "";
 
 
-        this.addArea("main", new Area(5000, 2000, "/images/Background.png", "/images/Middle_ground.png", "/images/Ground1.png"));
+        this.addArea("main", new Area(5000, 2000, "./images/Background.png", "./images/Middle_ground.png", "./images/Ground1.png"));
         this.changeArea("main");
         //this.player = new Player();
 	},
@@ -26,10 +26,12 @@ var ExampleGame = Game.extend({
 		context.fillRect(0, 0, canvas.width, canvas.height);
 
         this.areas[this.currentArea].draw(canvas, context, this.camera);
+        
 	},
 
 	update : function(framerate) {
        // console.log(this.camera.width, this.camera.height);
+       this.areas[this.currentArea].update(framerate);
 	},
 
     keypress : function(key) {

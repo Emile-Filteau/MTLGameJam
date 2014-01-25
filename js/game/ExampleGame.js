@@ -4,9 +4,6 @@ include("js/game/Player.js");
 var ExampleGame = Game.extend({
 	constructor : function(cameraWidth, cameraHeight) {
 		this.base(cameraWidth, cameraHeight);
-        this.player = new Player(173, 250, 100, this.camera.height - 185, "./images/Barb_knight_small.png");
-
-
         this.areas = [];
         this.currentArea = "";
         this.addArea("main", new Area(this, 5000, cameraHeight, "./images/Background.png", "./images/Middle_ground.png", "./images/Ground1.png"));
@@ -66,10 +63,7 @@ var ExampleGame = Game.extend({
 
 
     keyrelease : function(key) {
-<<<<<<< HEAD
 
-=======
->>>>>>> ac69b738c33f772589f40e2d43648eac84e551f1
     	switch(key)
 		{
 		case 32:

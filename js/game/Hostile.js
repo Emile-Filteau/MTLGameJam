@@ -103,9 +103,9 @@ constructor : function(posX, posY) {
                 this.x += this.speed;
                 this.currentDirection = "R";
             }
-        }
+        }*/
         this.collide(player);
-        */
+        
 	},
 	collide : function(player){
 		this.base(player);

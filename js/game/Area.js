@@ -23,6 +23,8 @@ var Area = Base.extend({
         this.ennemies = [new Hostile(600, this.groundLevel)];
 
         this.backgroundOffset = 0;
+        this.foreGroundFinalOffset = 0;
+        this.groundFinalOffset = 0;
         //this.doors.push(new Door("town", 1000, height-198));
     },
 
@@ -55,11 +57,11 @@ var Area = Base.extend({
         }
         else if(player.x > this.width - camera.halfWidth - player.width/2) {
             finaloffset = this.width - camera.halfWidth - player.width/2;
-            context.drawImage(this.foreground, finaloffset, camera.height-465);
+            context.drawImage(this.foreground, -this.foreGroundFinalOffset, camera.height-465);
         }
         else {
+            this.foreGroundFinalOffset = this.backgroundOffset/2;
             context.drawImage(this.foreground, -this.backgroundOffset/2, camera.height-465);
-            context.drawImage(this.ground, -this.backgroundOffset, camera.height-100);
         }
 
     },
@@ -78,9 +80,10 @@ var Area = Base.extend({
         }
         else if(player.x > this.width - camera.halfWidth - player.width/2) {
             finaloffset = this.width - camera.halfWidth - player.width/2;
-            context.drawImage(this.ground, finaloffset, camera.height-100);
+            context.drawImage(this.ground, -this.groundFinalOffset, camera.height-100);
         }
         else {
+            this.groundFinalOffset = this.backgroundOffset;
             context.drawImage(this.ground, -this.backgroundOffset, camera.height-100);
         }
 

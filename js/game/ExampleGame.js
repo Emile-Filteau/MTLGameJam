@@ -8,7 +8,7 @@ var ExampleGame = Game.extend({
         this.currentArea = "";
         this.addArea("main", new Area(this, 5000, cameraHeight, "./images/Background.png", "./images/Middle_ground.png", "./images/Ground1.png"));
         this.setArea("main");
-        this.player = new Player(173, 250, 100, this.camera.height - 185, "./images/Barb_knight_small_R.png");
+        this.player = new Player(173, 250, 100, this.camera.height - 185, "./images/Barb_knight_small_L.png", "./images/Barb_knight_small_R.png");
 	},
 
     addArea : function(areaName, area) {

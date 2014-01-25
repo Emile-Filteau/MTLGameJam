@@ -12,7 +12,7 @@ var Area = Base.extend({
         this.ground.src = groundSrc;
 
         this.doors = [];
-        this.npc = [new Friendly(80, 100, 80, (height - 100), "")];
+        this.npc = [new Friendly(80, 100, 400, (height - 200), "")];
         this.ennemies = [new Hostile(80, 100, 80, 300, "")];
 
 
@@ -20,10 +20,10 @@ var Area = Base.extend({
     },
 
     update : function(framerate) {
-        for(var i = 0; i< this.npc.length; i++){
+        for(i in this.npc){
             this.npc[i].update(framerate);
         }
-        for(var i = 0; i< this.ennemies.length; i++){
+        for(i in this.ennemies){
             this.ennemies[i].update(framerate);
         }
     },

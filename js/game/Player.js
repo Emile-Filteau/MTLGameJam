@@ -28,6 +28,12 @@ var Player = Base.extend({
 
 	},
 
+	interact: function(){
+		console.log("PLAYER initiated Interaction.");
+		
+
+	},
+
 	move: function(){
 		if(this.mouvement.indexOf("L") != -1){
 			this.x -= this.speed;

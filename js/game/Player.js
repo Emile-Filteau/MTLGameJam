@@ -1,3 +1,40 @@
+var PlayerContants = {
+    idleImages : [],
+    moveImages : [],
+    IDLE : 0,
+    MOVE : 1
+}
+PlayerContants['idleImages']['L'] = new Image();
+PlayerContants['idleImages']['L'].src = "./images/player/standbyLeft.png";
+
+PlayerContants['idleImages']['R'] = new Image();
+PlayerContants['idleImages']['R'].src = "./images/player/standbyRight.png";
+
+PlayerContants['moveImages']['L'] = [];
+PlayerContants['moveImages']['L'].push(new Image());
+PlayerContants['moveImages']['L'].push(new Image());
+PlayerContants['moveImages']['L'].push(new Image());
+PlayerContants['moveImages']['L'].push(new Image());
+PlayerContants['moveImages']['L'].push(new Image());
+PlayerContants['moveImages']['L'].push(new Image());
+PlayerContants['moveImages']['L'].push(new Image());
+PlayerContants['moveImages']['L'].push(new Image());
+for(i in PlayerContants['moveImages']['L']) {
+    PlayerContants['moveImages']['L'][i].src = "./images/player/runLeft/run"+i+".png";
+}
+PlayerContants['moveImages']['R'] = [];
+PlayerContants['moveImages']['R'].push(new Image());
+PlayerContants['moveImages']['R'].push(new Image());
+PlayerContants['moveImages']['R'].push(new Image());
+PlayerContants['moveImages']['R'].push(new Image());
+PlayerContants['moveImages']['R'].push(new Image());
+PlayerContants['moveImages']['R'].push(new Image());
+PlayerContants['moveImages']['R'].push(new Image());
+PlayerContants['moveImages']['R'].push(new Image());
+for(i in PlayerContants['moveImages']['R']) {
+    PlayerContants['moveImages']['R'][i].src = "./images/player/runRight/run"+i+".png";
+}
+
 var Player = Base.extend({
 	constructor: function(width, height, posX, posY, spriteSrcL, spriteSrcR){
 
@@ -25,6 +62,9 @@ var Player = Base.extend({
 		this.onGround = true;
 		this.groundY = posY;
 		this.collidingObject = false;
+
+        this.animationIndex = 0;
+        this.animation = 0;
 	},
 
 	attack: function(){
@@ -43,14 +83,20 @@ var Player = Base.extend({
 
 	},
 	draw: function(canvas, context, camera, area){
+        var img;
+        if(this.mouvement != "") {
+            img = PlayerContants['moveImages'][this.currentDirection][this.animationIndex];
+        } else {
+            img = PlayerContants['idleImages'][this.currentDirection];
+        }
 
         if(this.x < camera.halfWidth + camera.width* 0.25) {
             //console.log("Cas 1");
-            context.drawImage(this.images[this.currentDirection], this.x, this.y);
+            context.drawImage(img, this.x, this.y);
         }
         else if(this.x > area.width - (camera.width * 0.75)) {
             //console.log("Cas 3");
-            context.drawImage(this.images[this.currentDirection], camera.width - (area.width - this.x), this.y);
+            context.drawImage(img, camera.width - (area.width - this.x), this.y);
         }
         else {
            // console.log("Cas 2");
@@ -68,7 +114,7 @@ var Player = Base.extend({
                 relX = camera.halfWidth + (this.x - camera.position.x);
             }
 
-            context.drawImage(this.images[this.currentDirection], relX, this.y);
+            context.drawImage(img, relX, this.y);
         }
 
 	},
@@ -102,14 +148,18 @@ var Player = Base.extend({
 		}
 
 	},
-	move: function(){
+	move: function(area){
 		if(this.mouvement.indexOf("L") != -1){
 			this.x -= this.speed;
+            if(this.x <= 0)
+                this.x = 0;
 			this.currentDirection = "L";
 		}
 			
 		else if(this.mouvement.indexOf("R") != -1){
 			this.x += this.speed;
+            if(this.x >= area.width)
+                this.x = area.width;
 			this.currentDirection = "R";
 		}
 			
@@ -119,8 +169,19 @@ var Player = Base.extend({
 		this.mouvement = this.mouvement.replace(direction, "");
 	},
 
-	update: function(framerate){
+	update: function(framerate, area){
 
+        if(this.mouvement != "") {
+            this.animation += framerate;
+            if(this.animation >= 100) {
+                console.log("tick");
+                this.animationIndex++;
+                if(this.animationIndex >= PlayerContants['moveImages'][this.currentDirection].length) {
+                    this.animationIndex=0;
+                }
+                this.animation = 0;
+            }
+        }
 
 		this.velocityY += this.gravity;        // Apply gravity to vertical velocity
 	    this.x += this.velocityX;      // Apply horizontal velocity to X position
@@ -133,6 +194,6 @@ var Player = Base.extend({
 	        this.onGround = true;
 	    }
 
-	    this.move();
+	    this.move(area);
 	}
 });

@@ -50,12 +50,15 @@ var ExampleGame = Game.extend({
         switch(key)
 		{
 		case 32: //Spacebar
+            SoundManager.pause("footsteps");
 			this.player.jump();
 			break;
 		case 37://Left arrow
+            SoundManager.play("footsteps");
 			this.player.mouvement = "L";
 	  		break;
 		case 39://Right arrow
+            SoundManager.play("footsteps");
 			this.player.mouvement = "R";
 	 		break;
  		case 69://E
@@ -77,9 +80,11 @@ var ExampleGame = Game.extend({
 			this.player.endJump();
 			break;
 		case 37:
+            SoundManager.pause("footsteps");
 			this.player.mouvementReplace("L");
 	  		break;
 		case 39:
+            SoundManager.pause("footsteps");
 			this.player.mouvementReplace("R");
 	 		break;
 		default:

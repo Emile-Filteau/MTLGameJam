@@ -37,12 +37,12 @@ var Area = Base.extend({
         //this.doors.push(new Door("town", 1000, height-198));
     
         this.holes = [];
-        this.holes.push(new Hole(2530, 160));
-        this.holes.push(new Hole(2950, 220));
-        this.holes.push(new Hole(4100, 280));
-        this.holes.push(new Hole(5080, 170));
-        this.holes.push(new Hole(6640, 210));
-        this.holes.push(new Hole(7090, 220));
+        this.holes.push(new Hole(2480, 190));//2670
+        this.holes.push(new Hole(2900, 237));//3137
+        this.holes.push(new Hole(4047, 318));//4365
+        this.holes.push(new Hole(5025, 197));//5222
+        this.holes.push(new Hole(6580, 247));//6827
+        this.holes.push(new Hole(7035, 242));//7277
     },
 
 

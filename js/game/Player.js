@@ -68,7 +68,7 @@ var Player = Base.extend({
 	constructor: function(posX, posY, spriteSrcL, spriteSrcR){
 
 		this.height = 100;
-		this.width = 120;
+		this.width = 40;
 		this.x = posX;
 		this.y = posY + this.height;
 		this.hp = 5;
@@ -214,6 +214,7 @@ var Player = Base.extend({
 
 	update: function(framerate, area){
        
+       console.log((this.x - this.width/2) + " " + this.x + " " + (this.x + this.width/2));
 
         if(this.attacking){
         	this.animationAttacking += framerate;

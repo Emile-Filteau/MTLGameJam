@@ -19,6 +19,9 @@ constructor : function(width, height, posX, posY, sprite) {
 	},
 
 	update : function(framerate, player) {
+        this.collide(player);
+        //this.base(framerate);
+        /*
 		var rand = Math.random();
 		if(rand > 0.1 ){
 			rand = Math.random();
@@ -30,12 +33,10 @@ constructor : function(width, height, posX, posY, sprite) {
 				this.x -= 1;
 				//console.log("HOSTILE move LEFT");
 			}
-		}
+		}*/
 	},
 	collide : function(player){
 		this.base(player);
 	}
-
-
 
 });

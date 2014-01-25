@@ -6,9 +6,9 @@ var ExampleGame = Game.extend({
 		this.base(cameraWidth, cameraHeight);
         this.areas = [];
         this.currentArea = "";
-        this.addArea("main", new Area(this, 5000, cameraHeight, "./images/Background.png", "./images/Middle_ground.png", "./images/Ground1.png"));
+        this.addArea("main", new Area(this, 2000, cameraHeight, "./images/Background.png", "./images/Middle_ground.png", "./images/Ground1.png"));
         this.setArea("main");
-        this.player = new Player(173, 250, 100, this.camera.height - 185, "./images/Barb_knight_small_L.png", "./images/Barb_knight_small_R.png");
+        this.player = new Player(173, 250, 100, this.camera.height - 170, "./images/Barb_knight_small_L.png", "./images/Barb_knight_small_R.png");
 	},
 
     addArea : function(areaName, area) {
@@ -30,12 +30,16 @@ var ExampleGame = Game.extend({
 		context.fillRect(0, 0, canvas.width, canvas.height);
 
         this.areas[this.currentArea].drawBackground(canvas, context, this.camera);
-        this.player.draw(canvas, context);
+        this.player.draw(canvas, context, this.camera, this.areas[this.currentArea]);
         this.areas[this.currentArea].drawProps(canvas, context, this.camera);
 	},
 
 	update : function(framerate) {
-       // console.log(this.camera.width, this.camera.height);
+
+       this.player.update(framerate);
+
+       this.camera.update(framerate, this.player)
+
        this.areas[this.currentArea].update(framerate, this.player);
 	},
 	

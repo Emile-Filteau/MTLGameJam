@@ -8,6 +8,8 @@ var NPC = Base.extend({
 		this.y = posY;
 		this.sprite = sprite;
 
+
+        this.frameCounter = 0;
 	},
 	
 	draw : function(canvas, context) {
@@ -18,6 +20,7 @@ var NPC = Base.extend({
 	},
 
 	update : function(framerate, player) {
+		console.log(player);
 		var collisionResult = this.collide(player);
 		var rand = Math.random();
 		if(rand > 0.1 ){
@@ -46,4 +49,5 @@ var NPC = Base.extend({
     	
         }
    }
+
 });

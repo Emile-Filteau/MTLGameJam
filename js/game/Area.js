@@ -17,7 +17,7 @@ var Area = Base.extend({
         this.ennemies = [new Hostile(80, 100, 80, 300, "")];
 
 
-        this.doors.push(new Door("town", 740, height-210));
+        //this.doors.push(new Door("town", 1000, height-198));
     },
 
 
@@ -40,7 +40,7 @@ var Area = Base.extend({
 
         context.drawImage(this.backgound, -camera.halfWidth, -camera.halfHeight);
 
-        context.drawImage(this.foreground, 0, camera.height-265);
+        context.drawImage(this.foreground, 0, camera.height-465);
 
     },
 

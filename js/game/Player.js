@@ -9,10 +9,13 @@ var Player = Base.extend({
 		this.sanity = 100;
 		this.equippedWeapon = 0;
 		this.weapons = [,];
-		this.backgroundL = new Image();
-		this.backgroundR = new Image();
-		this.backgroundL.src = spriteSrcL;
-		this.backgroundR.src = spriteSrcR;
+
+        this.images = [];
+        this.images["R"] = new Image();
+        this.images["L"] = new Image();
+        this.images["R"].src = spriteSrcR;
+        this.images["L"].src = spriteSrcL;
+
 		this.speed = 7.5;
 		this.mouvement = "";
 		this.currentDirection = "R";
@@ -39,14 +42,35 @@ var Player = Base.extend({
 		}		
 
 	},
-	draw: function(canvas, context){
+	draw: function(canvas, context, camera, area){
 
-		if(this.currentDirection.indexOf("L") != -1){
-			context.drawImage(this.backgroundL, this.x, this.y);
-		}
-		else if(this.currentDirection.indexOf("R") != -1){
-			context.drawImage(this.backgroundR, this.x, this.y);
-		}		
+        if(this.x < camera.halfWidth + camera.width* 0.25) {
+            console.log("Cas 1");
+            context.drawImage(this.images[this.currentDirection], this.x, this.y);
+        }
+        else if(this.x > area.width - (camera.width * 0.75)) {
+            console.log("Cas 3");
+            context.drawImage(this.images[this.currentDirection], camera.width - (area.width - this.x), this.y);
+        }
+        else {
+            console.log("Cas 2");
+            var relX = 0;
+            if(this.x <= camera.position.x - camera.width * 0.25) {
+                console.log("2.1");
+                relX = camera.halfWidth - (camera.width * 0.25);
+            }
+            else if(this.x >= camera.position.x + camera.width * 0.25) {
+                console.log("2.2");
+                relX = camera.halfWidth + (camera.width * 0.25);
+            }
+            else {
+                console.log("2.3");
+                relX = camera.halfWidth + (this.x - camera.position.x);
+            }
+
+            context.drawImage(this.images[this.currentDirection], relX, this.y);
+        }
+
 	},
 
 	jump: function(){

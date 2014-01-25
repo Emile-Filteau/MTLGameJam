@@ -11,7 +11,7 @@ var ExampleGame = Game.extend({
         this.addArea("main", new Area(5000, 2000, "./images/Background.png", "./images/Middle_ground.png", "./images/Ground1.png"));
         this.changeArea("main");
         //this.player = new Player(173, 250, 100, this.camera.height - 195, "./images/Barb_knight_small.png");
-        this.player = new Player(173, 250, 100, this.camera.height - 185, "./images/Barb_knight_small.png");
+        this.player = new Player(173, 250, 100, this.camera.height - 185, "./images/Barb_knight_small_R.png");
 	},
 
     addArea : function(areaName, area) {
@@ -56,18 +56,16 @@ var ExampleGame = Game.extend({
 
     keyrelease : function(key) {
 
-    	console.log(key);
-
     	switch(key)
 		{
 		case 32:
-			this.player.jump();
+			this.player.endJump();
 			break;
 		case 37:
-			this.player.mouvement = this.player.mouvement.replace("L", "");
+			this.player.mouvementReplace("L");
 	  		break;
 		case 39:
-			this.player.mouvement = this.player.mouvement.replace("R", "");
+			this.player.mouvementReplace("R");
 	 		break;
 		default:
 		 break;

@@ -45,8 +45,6 @@ Example = FilthyEngine.extend({
                 ref.game.keyrelease(event.which);
             });
 
-
-
             $(ref.getView('GAME').rootId).bind("mousedown", function(event) {
                // ref.game.clearSquares();
             });

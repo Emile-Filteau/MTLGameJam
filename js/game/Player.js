@@ -126,12 +126,12 @@ var Player = Base.extend({
         }
         var offsetX = (this.mouvement == "" && this.currentDirection == "L") ? -20 : 0;
 
-
         if(this.x < camera.halfWidth) {
             context.drawImage(img, this.x - this.width/2 + offsetX, this.y - this.height/2);
         }
         else if(this.x > area.width - camera.halfWidth - this.width/2) {
-            context.drawImage(img, this.x - camera.width/2 + offsetX, this.y - this.height/2);
+            context.drawImage(img, this.x - area.width/2 + this.width/2 + offsetX, this.y - this.height/2);
+            //context.drawImage(img, this.x - camera.width/2 + offsetX, this.y - this.height/2);
         }
         else {
             context.drawImage(img, camera.halfWidth - this.width/2 + offsetX, this.y - this.height/2);

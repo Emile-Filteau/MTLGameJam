@@ -9,6 +9,11 @@ var Weapon = Base.extend({
 		this.typeAttack = typeAttack;
 		this.sprites = sprites;
 	},
+	
+	doDamage: function(npc){
+		console.log(npc);
+		npc.hp -= this.damage;
+	},
 
 	draw: function(){
 
@@ -19,8 +24,6 @@ var Weapon = Base.extend({
 	},
 
 	use: function(){
-		console.log(this.sprites["moveImages"]);
-
 
 	}
 });

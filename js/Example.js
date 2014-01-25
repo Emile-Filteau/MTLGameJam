@@ -14,6 +14,8 @@ Example = FilthyEngine.extend({
 			SoundManager.pause('hit_sound'); //pause(id) really usefull for looping sounds
 		*/
 
+        SoundManager.load("sounds/breakMelo_loop", 'background_melo', true);
+
 		/** Ajax call example
          AjaxManager.execute("scriptpath/scriptname.php", {key1:'value1', key2:'value2'}, function(data){
 			//callback with scripts answer passed as param
@@ -34,6 +36,7 @@ Example = FilthyEngine.extend({
 
                  */
 				ref.changeView('GAME');
+                SoundManager.play('background_melo'); //play(id)
             })
         );
         this.getView('GAME').init = function() {

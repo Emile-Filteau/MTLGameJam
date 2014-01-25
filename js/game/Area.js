@@ -69,10 +69,11 @@ var Area = Base.extend({
     drawProps : function(canvas, context, player, camera) {
         //NPCs
         for(var i = 0; i< this.npc.length; i++){
-            this.npc[i].draw(canvas, context);
+            this.npc[i].draw(canvas, context, player, camera, this);
         }
         for(var i = 0; i< this.ennemies.length; i++){
-            this.ennemies[i].draw(canvas, context);
+            if(this.ennemies[i].hp > 0)
+                this.ennemies[i].draw(canvas, context, player, camera, this);
         }
 
         if(player.x < camera.halfWidth) {

@@ -7,12 +7,13 @@ var NPC = Base.extend({
 		this.x = posX;
 		this.y = posY;
 		this.sprite = sprite;
+		this.hp = 100;	//À CHANGER, CRISSEMENT HARDCODÉ
 
 
         this.frameCounter = 0;
 	},
 	
-	draw : function(canvas, context) {
+	draw : function(canvas, context, player, camera, area) {
 		
 			context.fillStyle = '#FFFF00';
 			context.fillRect(square.x, square.y, this.x, this.y);

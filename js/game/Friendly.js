@@ -10,7 +10,7 @@ constructor : function(width, height, posX, posY, sprite) {
 
 	},
 	
-	draw : function(canvas, context) {
+	draw : function(canvas, context, player, camera, area) {
 		
 			context.fillStyle = '#00FF00';
 			context.fillRect(this.x, this.y, this.width, this.height);

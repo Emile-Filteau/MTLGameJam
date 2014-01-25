@@ -35,7 +35,8 @@ SpitterConstants['attackImages']['R'].push(new Image());
 SpitterConstants['attackImages']['R'].push(new Image());
 SpitterConstants['attackImages']['R'].push(new Image());
 SpitterConstants['attackImages']['R'].push(new Image());
-SpitterConstants['attackImages']['R'].push(new Image());SpitterConstants['attackImages']['R'].push(new Image());
+SpitterConstants['attackImages']['R'].push(new Image());
+SpitterConstants['attackImages']['R'].push(new Image());
 SpitterConstants['attackImages']['R'].push(new Image());
 SpitterConstants['attackImages']['R'].push(new Image());
 for(i in SpitterConstants['attackImages']['R']) {
@@ -47,7 +48,8 @@ SpitterConstants['attackImages']['L'].push(new Image());
 SpitterConstants['attackImages']['L'].push(new Image());
 SpitterConstants['attackImages']['L'].push(new Image());
 SpitterConstants['attackImages']['L'].push(new Image());
-SpitterConstants['attackImages']['L'].push(new Image());SpitterConstants['attackImages']['L'].push(new Image());
+SpitterConstants['attackImages']['L'].push(new Image());
+SpitterConstants['attackImages']['L'].push(new Image());
 SpitterConstants['attackImages']['L'].push(new Image());
 SpitterConstants['attackImages']['L'].push(new Image());
 for(i in SpitterConstants['attackImages']['L']) {
@@ -62,6 +64,7 @@ constructor : function(posX, posY) {
 		this.width = 110;
 		this.x = posX;
 		this.y = posY - this.height/2 - 50;
+        this.hp = 3;
         this.currentDirection = "L";
         this.moving = true;
         this.attacking = false;
@@ -89,7 +92,7 @@ constructor : function(posX, posY) {
                 var playerDistance = player.x - this.x;
                 context.drawImage(SpitterConstants['moveImages'][this.currentDirection][this.animationIndex],
                 	camera.halfWidth - playerDistance - this.width/2,
-                	this.y);
+                	this.y );
             }
 
         }
@@ -122,7 +125,7 @@ constructor : function(posX, posY) {
         	this.moving = false;
         	this.attacking = true;
 
-        	//console.log('attack!');
+            //console.log('attack!');
         	this.animation += framerate;
         	if(this.animation >= 150) {
                 this.animationIndex++;

@@ -66,8 +66,8 @@ var Area = Base.extend({
             this.holes[i].collide(player);
         }
 
-        for(i in this.blocks){
-            this.blocks[i]collide(player);
+        for(i in this.blocks) {
+            this.blocks[i].collide(player);
         }
     },
 

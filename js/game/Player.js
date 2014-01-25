@@ -1,6 +1,7 @@
 var PlayerContants = {
     idleImages : [],
     moveImages : [],
+    jumpImages : [],
     IDLE : 0,
     MOVE : 1
 }
@@ -9,6 +10,12 @@ PlayerContants['idleImages']['L'].src = "./images/player/standbyLeft.png";
 
 PlayerContants['idleImages']['R'] = new Image();
 PlayerContants['idleImages']['R'].src = "./images/player/standbyRight.png";
+
+PlayerContants['jumpImages']['L'] = new Image();
+PlayerContants['jumpImages']['L'].src = "./images/player/jumpLeft.png";
+
+PlayerContants['jumpImages']['R'] = new Image();
+PlayerContants['jumpImages']['R'].src = "./images/player/jumpRight.png";
 
 PlayerContants['moveImages']['L'] = [];
 PlayerContants['moveImages']['L'].push(new Image());
@@ -84,10 +91,14 @@ var Player = Base.extend({
 	},
 	draw: function(canvas, context, camera, area){
         var img;
-        if(this.mouvement != "") {
-            img = PlayerContants['moveImages'][this.currentDirection][this.animationIndex];
+        if(this.onGround) {
+            if(this.mouvement != "") {
+                img = PlayerContants['moveImages'][this.currentDirection][this.animationIndex];
+            } else {
+                img = PlayerContants['idleImages'][this.currentDirection];
+            }
         } else {
-            img = PlayerContants['idleImages'][this.currentDirection];
+            img = PlayerContants['jumpImages'][this.currentDirection];
         }
 
         if(this.x < camera.halfWidth + camera.width* 0.25) {

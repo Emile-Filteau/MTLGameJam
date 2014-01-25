@@ -37,6 +37,31 @@ for(i in PlayerContants['moveImages']['R']) {
     PlayerContants['moveImages']['R'][i].src = "./images/player/runRight/run"+i+".png";
 }
 
+var WeaponConstants = {
+	idleImages : [],
+	moveImages : [],
+	IDLE : 0,
+	UP : 0,
+	DOWN : 1
+}
+
+WeaponConstants['idleImages']['L'] = new Image();
+WeaponConstants['idleImages']['L'].src = "./images/player/attackLeft/stand2.png"
+WeaponConstants['idleImages']['R'] = new Image();
+WeaponConstants['idleImages']['R'].src = "./images/player/attackRight/stand2.png"
+
+WeaponConstants['moveImages']['L'] = [];
+WeaponConstants['moveImages']['L'].push(new Image());
+WeaponConstants['moveImages']['L'][0].src = "./images/player/attackLeft/attack1.png";
+WeaponConstants['moveImages']['L'].push(new Image());
+WeaponConstants['moveImages']['L'][1].src = "./images/player/attackLeft/attack2.png";
+
+WeaponConstants['moveImages']['R'] = [];
+WeaponConstants['moveImages']['R'].push(new Image());
+WeaponConstants['moveImages']['R'][0].src = "./images/player/attackRight/attack1.png";
+WeaponConstants['moveImages']['R'].push(new Image());
+WeaponConstants['moveImages']['R'][1].src = "./images/player/attackRight/attack2.png";
+
 var Player = Base.extend({
 	constructor: function(width, height, posX, posY, spriteSrcL, spriteSrcR){
 
@@ -51,7 +76,9 @@ var Player = Base.extend({
 		this.primaryWeapon = 0;
 		this.secondaryWeapon = 1;
 		this.weapons = [,];
-		this.axe = new Weapon(10, 1, 10, 80, 1, "slash", "");
+
+		this.axe = new Weapon(10, 1, 10, 80, 1, "slash", WeaponConstants);
+
 		this.weapons[this.primaryWeapon] = this.axe;
 
 

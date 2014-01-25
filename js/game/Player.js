@@ -1,7 +1,9 @@
 include("js/game/Weapon.js");
+
 var PlayerConstants = {
     idleImages : [],
     moveImages : [],
+    attackImages : [],
     jumpingImages : [],
     IDLE : 0,
     MOVE : 1
@@ -43,6 +45,25 @@ for(i in PlayerConstants['moveImages']['R']) {
     PlayerConstants['moveImages']['R'][i].src = "./images/player/runRight/run"+i+".png";
 }
 
+
+//Weapon images ------------------------------------------------------------------------------------------
+PlayerConstants['attackImages']['L'] = [];
+PlayerConstants['attackImages']['L'].push(new Image());
+PlayerConstants['attackImages']['L'].push(new Image());
+
+for(i in PlayerConstants['attackImages']['L']) {
+    PlayerConstants['attackImages']['L'][i].src = "./images/player/attackLeft/attack"+i+".png";
+}
+
+PlayerConstants['attackImages']['R'] = [];
+PlayerConstants['attackImages']['R'].push(new Image());
+PlayerConstants['attackImages']['R'].push(new Image());
+
+
+for(i in PlayerConstants['attackImages']['R']) {
+    PlayerConstants['attackImages']['R'][i].src = "./images/player/attackRight/attack"+i+".png";
+}
+
 var Player = Base.extend({
 	constructor: function(posX, posY, spriteSrcL, spriteSrcR){
 
@@ -50,14 +71,17 @@ var Player = Base.extend({
 		this.width = 120;
 		this.x = posX;
 		this.y = posY + this.height;
-		this.hp = 100;
+		this.hp = 5;
 		this.sanity = 100;
 
 		this.equippedWeapon = 0;
 		this.primaryWeapon = 0;
 		this.secondaryWeapon = 1;
 		this.weapons = [,];
-		this.axe = new Weapon(10, 1, 10, 80, 1, "slash", "");
+
+		//damage, attackSpeed, reach, sanityThreshold, cooldown, typeAttack, sprites
+		this.axe = new Weapon(35, 1.7, 58, 80, 1, "slash", "");
+
 		this.weapons[this.primaryWeapon] = this.axe;
 
 
@@ -79,10 +103,14 @@ var Player = Base.extend({
 
         this.animationIndex = 0;
         this.animation = 0;
+        this.attacking = false;
+        this.animationAttackingIndex = 0;
+        this.animationAttacking = 0;
+        this.doDamage = false;
 	},
 
 	attack: function(){
-		this.weapons[this.primaryWeapon].use();
+		this.attacking = true;
 	},
 	collidesWith : function(collidingObject){
 		if(collidingObject){
@@ -98,27 +126,36 @@ var Player = Base.extend({
 	},
 	draw: function(canvas, context, camera, area){
         var img;
-		//console.log(this.x);
-        if(this.onGround) {
-            if(this.mouvement != "") {
-                img = PlayerConstants['moveImages'][this.currentDirection][this.animationIndex];
-            } else {
-                img = PlayerConstants['idleImages'][this.currentDirection];
-            }
-        } else {
-            img = PlayerConstants['jumpingImages'][this.currentDirection];
+
+        //onsole.log(this.doDamage + " " + this.attacking);
+
+        if(this.attacking){       	
+        	img = PlayerConstants['attackImages'][this.currentDirection][this.animationAttackingIndex];
         }
+        else {
+        	if(this.onGround) {
+	            if(this.mouvement != "") {
+	                img = PlayerConstants['moveImages'][this.currentDirection][this.animationIndex];
+	            } else {
+	                img = PlayerConstants['idleImages'][this.currentDirection];
+	            }
+	        } else {
+	            img = PlayerConstants['jumpingImages'][this.currentDirection];
+	        }
+        }     
+        
         var offsetX = (this.mouvement == "" && this.currentDirection == "L") ? -20 : 0;
+        var offsetY = (this.attacking) ? 40 : 0;
 
         if(this.x < camera.halfWidth) {
-            context.drawImage(img, this.x - this.width/2 + offsetX, this.y - this.height/2);
+            context.drawImage(img, this.x - this.width/2 + offsetX, this.y - this.height/2 - offsetY);
         }
         else if(this.x > area.width - camera.halfWidth - this.width/2) {
-            context.drawImage(img, this.x - area.width/2 + this.width/2 + offsetX, this.y - this.height/2);
+            context.drawImage(img, this.x - area.width/2 + this.width/2 + offsetX, this.y - this.height/2 - offsetY);
             //context.drawImage(img, this.x - camera.width/2 + offsetX, this.y - this.height/2);
         }
         else {
-            context.drawImage(img, camera.halfWidth - this.width/2 + offsetX, this.y - this.height/2);
+            context.drawImage(img, camera.halfWidth - this.width/2 + offsetX, this.y - this.height/2 - offsetY);
         }
 
 	},
@@ -174,9 +211,27 @@ var Player = Base.extend({
 	},
 
 	update: function(framerate, area){
-        if(this.mouvement != "") {
+        
+        if(this.attacking){
+        	this.animationAttacking += framerate;
+        	if(this.animationAttacking >= this.weapons[this.equippedWeapon].attackSpeed * 100){
+        		this.animationAttackingIndex++;
+        		if(this.animationAttackingIndex >= PlayerConstants['attackImages'][this.currentDirection].length) {
+        			this.doDamage = true;
+                    this.animationAttackingIndex=0;
+                    this.attacking = false        				
+                }                	
+                this.animationAttacking = 0;       
+        	}
+        } 
+        else
+        	this.doDamage = false;       	
+
+        
+        if(this.mouvement != "") {      	
             this.animation += framerate;
             if(this.animation >= 100) {
+
                 this.animationIndex++;
                 if(this.animationIndex >= PlayerConstants['moveImages'][this.currentDirection].length) {
                     this.animationIndex=0;
@@ -185,8 +240,11 @@ var Player = Base.extend({
             }
         }
 
-		this.velocityY += this.gravity;        // Apply gravity to vertical velocity
-	    this.x += this.velocityX;      // Apply horizontal velocity to X position
+        
+
+        //Jump *************************
+		this.velocityY += this.gravity;        
+	    this.x += this.velocityX;    
 	    this.y += this.velocityY;  
 
 	    if(this.y > this.groundY){
@@ -198,6 +256,7 @@ var Player = Base.extend({
                 SoundManager.play("footsteps");
             }
 	    }
+	    //******************************
 
 	    this.move(area);
 	}

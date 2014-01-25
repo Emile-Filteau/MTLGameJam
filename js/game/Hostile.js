@@ -1,18 +1,20 @@
 include("js/game/NPC.js");
 include("js/game/Spitter.js")
 
+
 var Hostile = NPC.extend({
 	
 constructor : function(posX, posY) {
+		this.base(posX, posY);
 		this.height = 140;
 		this.width = 110;
 		this.x = posX;
 		this.y = posY - this.height/2 - 30;
         this.currentDirection = "L";
         this.moving = true;
-        this.attacking = false;
         this.speed = 4;
-        this.attackReach = 20;
+        this.attackReach = 40;
+
 
         this.animationIndex = 0;
         this.animation = 0;
@@ -38,6 +40,7 @@ constructor : function(posX, posY) {
             }
 
         }
+
         else if(this.attacking){
         	if(player.x < camera.halfWidth) {
         		console.log('atk1');
@@ -83,6 +86,7 @@ constructor : function(posX, posY) {
         	this.moving = true;
         	this.animationIndex = 0
         }
+
         if(this.moving) {
             this.animation += framerate;
             if(this.animation >= 250) {
@@ -105,6 +109,23 @@ constructor : function(posX, posY) {
 	},
 	collide : function(player){
 		this.base(player);
+
+		if(player.doDamage){
+			if(player.currentDirection.indexOf("L") != -1){
+				console.log((player.x - player.width/2) - player.weapons[player.equippedWeapon].reach + " " + (this.x + this.width/2));
+
+				if((player.x - player.width/2 -  player.weapons[player.equippedWeapon].reach) <= (this.x + this.width/2) && (player.x + player.width/2 +  player.weapons[player.equippedWeapon].reach) >= (this.x - this.width/2))
+					player.weapons[player.equippedWeapon].doDamage(this);
+			}		
+				
+			if(player.currentDirection.indexOf("R") != -1){
+				console.log((player.x + player.width/2) + " " + (player.weapons[player.equippedWeapon].reach + (player.x + player.width/2)) + " " + this.x + " " + (this.x - this.width/2));
+
+				if((player.x + player.width/2 +  player.weapons[player.equippedWeapon].reach) >= (this.x - this.width/2) && (player.x + player.width/2 +  player.weapons[player.equippedWeapon].reach) <= (this.x + this.width/2))
+					player.weapons[player.equippedWeapon].doDamage(this);					
+			}
+				
+		}
 	}
 
 });

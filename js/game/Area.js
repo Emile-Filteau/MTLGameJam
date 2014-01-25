@@ -11,7 +11,7 @@ var Area = Base.extend({
         this.clouds = new Image();
         this.ground = new Image();
 
-        this.groundLevel = height - 100;
+        this.groundLevel = height - 150;
 
         this.backgound.src = backgroundSrc;
         this.foreground.src = foregroundSrc;
@@ -72,19 +72,20 @@ var Area = Base.extend({
             this.npc[i].draw(canvas, context, player, camera, this);
         }
         for(var i = 0; i< this.ennemies.length; i++){
-            this.ennemies[i].draw(canvas, context, player, camera, this);
+            if(this.ennemies[i].hp > 0)
+                this.ennemies[i].draw(canvas, context, player, camera, this);
         }
 
         if(player.x < camera.halfWidth) {
-            context.drawImage(this.ground, 0, camera.height-100);
+            context.drawImage(this.ground, 0, camera.height-150);
         }
         else if(player.x > this.width - camera.halfWidth - player.width/2) {
             finaloffset = this.width - camera.halfWidth - player.width/2;
-            context.drawImage(this.ground, -this.groundFinalOffset, camera.height-100);
+            context.drawImage(this.ground, -this.groundFinalOffset, camera.height-150);
         }
         else {
             this.groundFinalOffset = this.backgroundOffset;
-            context.drawImage(this.ground, -this.backgroundOffset, camera.height-100);
+            context.drawImage(this.ground, -this.backgroundOffset, camera.height-150);
         }
 
         for(i in this.doors) {

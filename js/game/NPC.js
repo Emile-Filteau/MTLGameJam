@@ -7,6 +7,7 @@ var NPC = Base.extend({
 		this.x = posX;
 		this.y = posY;
 		this.sprite = sprite;
+		this.hp = 100;	//À CHANGER, CRISSEMENT HARDCODÉ
 
 
         this.frameCounter = 0;

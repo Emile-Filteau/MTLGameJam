@@ -72,6 +72,5 @@ Example = FilthyEngine.extend({
 	loop : function(framerate) {
 		this.base(framerate);
 		this.game.update(framerate);
-		this.game.player.update(framerate);
 	}
 });

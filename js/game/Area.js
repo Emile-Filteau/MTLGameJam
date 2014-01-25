@@ -17,7 +17,7 @@ var Area = Base.extend({
         this.ennemies = [new Hostile(80, 100, 80, 300, "")];
 
 
-        this.doors.push(new Door("town", 740, height-210));
+        //this.doors.push(new Door("town", 1000, height-198));
     },
 
 

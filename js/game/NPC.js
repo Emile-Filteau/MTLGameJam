@@ -21,7 +21,6 @@ var NPC = Base.extend({
 
 	update : function(framerate) {
         this.frameCounter += framerate;
-        console.log(framerate);
         if(this.frameCounter >= 10) {
             var rand = Math.random();
             if(rand > 0.1 ){

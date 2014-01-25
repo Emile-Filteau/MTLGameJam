@@ -56,15 +56,15 @@ var Player = Base.extend({
            // console.log("Cas 2");
             var relX = 0;
             if(this.x <= camera.position.x - camera.width * 0.25) {
-              //  console.log("2.1");
+                console.log("2.1");
                 relX = camera.halfWidth - (camera.width * 0.25);
             }
             else if(this.x >= camera.position.x + camera.width * 0.25) {
-             //   console.log("2.2");
+                console.log("2.2");
                 relX = camera.halfWidth + (camera.width * 0.25);
             }
             else {
-          //      console.log("2.3");
+                console.log("2.3");
                 relX = camera.halfWidth + (this.x - camera.position.x);
             }
 

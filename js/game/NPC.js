@@ -44,9 +44,8 @@ var NPC = Base.extend({
             }
         }
         else{
-        player.collidesWith(false);
-        return false;
-    	
+        	player.collidesWith(false);
+        	return false;
         }
    }
 

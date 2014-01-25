@@ -35,8 +35,5 @@ constructor : function(width, height, posX, posY, sprite) {
 	},
 	collide : function(player){
 		this.base(player);
-	 }
-	
-
-
+	}
 });

@@ -53,7 +53,8 @@ var Area = Base.extend({
             this.npc[i].update(framerate, player);
         }
         for(i in this.ennemies){
-            this.ennemies[i].update(framerate, player);
+            if(this.ennemies[i].hp > 0)
+                this.ennemies[i].update(framerate, player);
         }
 
         for(i in this.doors) {

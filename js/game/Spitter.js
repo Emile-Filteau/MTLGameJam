@@ -68,6 +68,7 @@ constructor : function(posX, posY) {
         this.currentDirection = "L";
         this.moving = true;
         this.attacking = false;
+        this.dying = false;
         this.speed = 4;
         this.attackReach = 30;
         this.attackSpeed = 1.7;

@@ -214,8 +214,6 @@ var Player = Base.extend({
 	},
 
 	update: function(framerate, area){
-       
-       console.log((this.x - this.width/2) + " " + this.x + " " + (this.x + this.width/2));
 
         if(this.attacking){
         	this.animationAttacking += framerate;

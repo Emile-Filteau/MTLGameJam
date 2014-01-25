@@ -1,6 +1,7 @@
 include("js/game/Door.js");
 include("js/game/Block.js");
 include("js/game/NPC.JS");
+include("js/game/Hole.js");
 
 var Area = Base.extend({
     constructor : function(gameRef, width, height, backgroundSrc, foregroundSrc, groundSrc, cloudsSrc) {
@@ -34,6 +35,14 @@ var Area = Base.extend({
         this.blocks.push(new Block(2440, this.groundLevel + 50));
         this.blocks.push(new Block(2440, this.groundLevel + 50 - 100));
         //this.doors.push(new Door("town", 1000, height-198));
+    
+        this.holes = [];
+        this.holes.push(new Hole(2530, 160));
+        this.holes.push(new Hole(2950, 220));
+        this.holes.push(new Hole(4100, 280));
+        this.holes.push(new Hole(5080, 170));
+        this.holes.push(new Hole(6640, 210));
+        this.holes.push(new Hole(7090, 220));
     },
 
 
@@ -51,6 +60,10 @@ var Area = Base.extend({
             if(this.doors[i].collide(player)) {
                 this.game.changeArea(this.doors[i]);
             }
+        }
+
+        for(i in this.holes){
+            this.holes[i].collide(player);
         }
     },
 

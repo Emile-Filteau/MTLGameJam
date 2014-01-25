@@ -66,6 +66,7 @@ constructor : function(posX, posY) {
 	},
 
 	update : function(framerate, player) {
+
       /*  if(Math.abs((this.x - player.x)) < this.attackReach){
         	this.moving = false;
         	this.attacking = true;
@@ -103,9 +104,9 @@ constructor : function(posX, posY) {
                 this.x += this.speed;
                 this.currentDirection = "R";
             }
-        }*/
+        }
         this.collide(player);
-        
+        */
 	},
 	collide : function(player){
 		this.base(player);

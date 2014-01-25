@@ -80,7 +80,7 @@ var Player = Base.extend({
 		this.weapons = [,];
 
 		//damage, attackSpeed, reach, sanityThreshold, cooldown, typeAttack, sprites
-		this.axe = new Weapon(35, 1.7, 58, 80, 1, "slash", "");
+		this.axe = new Weapon(1.2, 1.7, 58, 80, 1, "slash", "");
 
 		this.weapons[this.primaryWeapon] = this.axe;
 
@@ -98,6 +98,7 @@ var Player = Base.extend({
 		this.velocityX = 0.0;
 		this.velocityY = 0.0;
 		this.onGround = true;
+		this.inHole = false;
 		this.groundY = posY;
 		this.collidingObject = false;
 
@@ -161,7 +162,7 @@ var Player = Base.extend({
 
 	jump: function(){
 		
-		if(this.onGround){
+		if(this.onGround && !this.inHole){
 	        this.velocityY = -22.0;
 	        this.onGround = false;
 
@@ -191,8 +192,6 @@ var Player = Base.extend({
 	},
 	move: function(area){
 
-		console.log(this.x);
-
 		if(this.mouvement.indexOf("L") != -1){
 			this.x -= this.speed;
             if(this.x - this.width/2 <= 0)
@@ -214,7 +213,8 @@ var Player = Base.extend({
 	},
 
 	update: function(framerate, area){
-        
+       
+
         if(this.attacking){
         	this.animationAttacking += framerate;
         	if(this.animationAttacking >= this.weapons[this.equippedWeapon].attackSpeed * 100){
@@ -243,14 +243,18 @@ var Player = Base.extend({
             }
         }
 
-        
-
-        //Jump *************************
+        if(this.inHole && this.onGround){
+        	this.velocityY = 12.0;
+        }   
+        else {
+        	this.inHole = false;
+        }    
+        	
 		this.velocityY += this.gravity;        
 	    this.x += this.velocityX;    
 	    this.y += this.velocityY;  
 
-	    if(this.y > this.groundY){
+	    if(this.y > this.groundY && !this.inHole){
 	        this.y = this.groundY;
 	        this.velocityX = 0.0;
 	        this.velocityY = 0.0;
@@ -259,7 +263,6 @@ var Player = Base.extend({
                 SoundManager.play("footsteps");
             }
 	    }
-	    //******************************
 
 	    this.move(area);
 	}

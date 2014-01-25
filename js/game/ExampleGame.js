@@ -43,17 +43,17 @@ var ExampleGame = Game.extend({
         
         switch(key)
 		{
-		case 32:
+		case 32: //Spacebar
 			this.player.jump();
 			break;
-		case 37:
+		case 37://Left arrow
 			this.player.mouvement = "L";
 	  		break;
-		case 39:
+		case 39://Right arrow
 			this.player.mouvement = "R";
 	 		break;
 
-	 	case 90:
+	 	case 90://Z
 	 		this.player.interact();
 	 		break;
 		default:

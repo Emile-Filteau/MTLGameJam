@@ -1,7 +1,7 @@
 include("js/game/Door.js");
 include("js/game/Block.js");
 include("js/game/NPC.JS");
-inclue("js/game/Hole.js");
+include("js/game/Hole.js");
 
 var Area = Base.extend({
     constructor : function(gameRef, width, height, backgroundSrc, foregroundSrc, groundSrc, cloudsSrc) {
@@ -60,6 +60,10 @@ var Area = Base.extend({
             if(this.doors[i].collide(player)) {
                 this.game.changeArea(this.doors[i]);
             }
+        }
+
+        for(i in this.holes){
+            this.holes[i].collide(player);
         }
     },
 

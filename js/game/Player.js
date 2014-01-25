@@ -111,6 +111,7 @@ var Player = Base.extend({
 
 	attack: function(){
 		this.attacking = true;
+        SoundManager.play("swoosh");
 	},
 	collidesWith : function(collidingObject){
 		if(collidingObject){

@@ -9,7 +9,7 @@ var lastLoop = new Date().getTime();
 window.onload = init;
 
 function init() {
-	engine = new Example('engine-container', true, true);
+	engine = new Example('engine-container', false, true);
 	engine.init();
 	loop();
 }
@@ -22,7 +22,3 @@ function loop() {
 	lastLoop = new Date().getTime();
 	setTimeout(loop, FRAMERATE);
 }
-
-$(window).resize(function() {
-	engine.onResize();
-});

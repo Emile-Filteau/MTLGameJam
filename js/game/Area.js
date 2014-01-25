@@ -1,5 +1,6 @@
 include("js/game/Door.js");
 include("js/game/NPC.JS");
+inclue("js/game/Hole.js");
 
 var Area = Base.extend({
     constructor : function(gameRef, width, height, backgroundSrc, foregroundSrc, groundSrc, cloudsSrc) {
@@ -26,6 +27,14 @@ var Area = Base.extend({
         this.foreGroundFinalOffset = 0;
         this.groundFinalOffset = 0;
         //this.doors.push(new Door("town", 1000, height-198));
+    
+        this.holes = [];
+        this.holes.push(new Hole(2530, 160));
+        this.holes.push(new Hole(2950, 220));
+        this.holes.push(new Hole(4100, 280));
+        this.holes.push(new Hole(5080, 170));
+        this.holes.push(new Hole(6640, 210));
+        this.holes.push(new Hole(7090, 220));
     },
 
 

@@ -67,7 +67,6 @@ constructor : function(posX, posY) {
 
 	update : function(framerate, player) {
 
-		console.log("update");
       /*  if(Math.abs((this.x - player.x)) < this.attackReach){
         	this.moving = false;
         	this.attacking = true;
@@ -108,12 +107,9 @@ constructor : function(posX, posY) {
         }
         this.collide(player);
         */
-        this.collide(player);
 	},
 	collide : function(player){
 		this.base(player);
-		console.log("ANUS");
-		console.log(this.width);
 
 		if(player.doDamage && this.y <= player.y){
 			if(player.currentDirection.indexOf("L") != -1){

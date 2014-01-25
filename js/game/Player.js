@@ -80,7 +80,7 @@ var Player = Base.extend({
 		this.weapons = [,];
 
 		//damage, attackSpeed, reach, sanityThreshold, cooldown, typeAttack, sprites
-		this.axe = new Weapon(35, 1.7, 58, 80, 1, "slash", "");
+		this.axe = new Weapon(1.2, 1.7, 58, 80, 1, "slash", "");
 
 		this.weapons[this.primaryWeapon] = this.axe;
 
@@ -126,6 +126,8 @@ var Player = Base.extend({
 	},
 	draw: function(canvas, context, camera, area){
         var img;
+
+        console.log(this.x);
 
         if(this.attacking){       	
         	img = PlayerConstants['attackImages'][this.currentDirection][this.animationAttackingIndex];
@@ -190,6 +192,9 @@ var Player = Base.extend({
 	move: function(area){
 
 		//console.log(this.x);
+
+		if(this.x > 2530 && this.x < 2690)
+			console.log("FUCKING HOLE");
 
 		if(this.mouvement.indexOf("L") != -1){
 			this.x -= this.speed;

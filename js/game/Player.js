@@ -162,7 +162,7 @@ var Player = Base.extend({
 
 	jump: function(){
 		
-		if(this.onGround){
+		if(this.onGround && !this.inHole){
 	        this.velocityY = -22.0;
 	        this.onGround = false;
 

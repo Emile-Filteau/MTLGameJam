@@ -1,5 +1,5 @@
 include("js/game/Weapon.js");
-var PlayerContants = {
+var PlayerConstants = {
     idleImages : [],
     moveImages : [],
     IDLE : 0,

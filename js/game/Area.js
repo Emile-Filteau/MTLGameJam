@@ -12,7 +12,7 @@ var Area = Base.extend({
         this.ground.src = groundSrc;
 
         this.doors = [];
-        this.npc = [new Friendly(80, 100, 80, 100, "")];
+        this.npc = [new Friendly(80, 100, 80, (height - 100), "")];
         this.ennemies = [new Hostile(80, 100, 80, 300, "")];
     },
 

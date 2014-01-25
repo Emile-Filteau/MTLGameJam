@@ -56,7 +56,6 @@ constructor : function(posX, posY) {
         if(this.moving) {
             this.animation += framerate;
             if(this.animation >= 250) {
-                console.log("tick");
                 this.animationIndex++;
                 if(this.animationIndex >= BoommerConstants['moveImages'][this.currentDirection].length) {
                     this.animationIndex=0;

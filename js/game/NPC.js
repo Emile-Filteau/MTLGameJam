@@ -12,7 +12,7 @@ var NPC = Base.extend({
         this.frameCounter = 0;
 	},
 	
-	draw : function(canvas, context) {
+	draw : function(canvas, context, player, camera, area) {
 		
 			context.fillStyle = '#FFFF00';
 			context.fillRect(square.x, square.y, this.x, this.y);

@@ -45,9 +45,19 @@ constructor : function(posX, posY) {
         this.animation = 0;
 	},
 	
-	draw : function(canvas, context) {
+	draw : function(canvas, context, player, camera, area) {
         if(this.moving) {
-            context.drawImage(BoommerConstants['moveImages'][this.currentDirection][this.animationIndex], this.x, this.y);
+            if(player.x < camera.halfWidth) {
+                context.drawImage(BoommerConstants['moveImages'][this.currentDirection][this.animationIndex], this.x - this.width/2, this.y);
+            }
+            else if(player.x > area.width - camera.halfWidth - player.width/2) {
+                context.drawImage(BoommerConstants['moveImages'][this.currentDirection][this.animationIndex], this.x - area.width/2 + player.width/2, this.y);
+            }
+            else {
+                var playerDistance = player.x - this.x;
+                context.drawImage(BoommerConstants['moveImages'][this.currentDirection][this.animationIndex],camera.halfWidth - playerDistance - this.width/2, this.y);
+            }
+
         }
 
 	},

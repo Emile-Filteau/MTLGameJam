@@ -1,7 +1,7 @@
 include("js/game/Area.js");
 include("js/game/Player.js");
 
-var ExampleGame = Game.extend({
+var BlindedByRageGame = Game.extend({
 	constructor : function(cameraWidth, cameraHeight) {
 		this.base(cameraWidth, cameraHeight);
         this.areas = [];

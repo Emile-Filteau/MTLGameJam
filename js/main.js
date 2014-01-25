@@ -1,6 +1,6 @@
 //THIS IS AN EXAMPLE OF A STARTING POINT
 
-include('js/Example.js');
+include('js/BlindedByRage.js');
 
 var engine;
 
@@ -9,7 +9,7 @@ var lastLoop = new Date().getTime();
 window.onload = init;
 
 function init() {
-	engine = new Example('engine-container', false, true);
+	engine = new BlindedByRage('engine-container', false, true);
 	engine.init();
 	loop();
 }

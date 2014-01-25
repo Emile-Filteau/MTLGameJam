@@ -1,19 +1,18 @@
-include("js/game/ExampleGame.js");
-include("js/view/ExampleView.js");
+include("js/game/BlindedByRageGame.js");
+include("js/view/BlindedByRageView.js");
 
-Example = FilthyEngine.extend({
+BlindedByRage = FilthyEngine.extend({
 	constructor : function(containerId, fullscreen, alwaysRefresh) {
 		this.base(containerId, fullscreen, alwaysRefresh);
 		
 		
-		this.game = new ExampleGame(800, 600);
+		this.game = new BlindedByRageGame(800, 600);
 		/** Sound Example
 			SoundManager.load("sounds/hit", 'hit_sound', true); //load(url, id, isLooping)
 			SoundManager.setVolume('hit_sound', 0.3); //sets the volume in a range from 0 to 1
 			SoundManager.play('hit_sound'); //play(id)
 			SoundManager.pause('hit_sound'); //pause(id) really usefull for looping sounds
 		*/
-
         SoundManager.load("sounds/breakMelo_loop", 'background_melo', true);
         SoundManager.load("sounds/footsteps", 'footsteps', true);
         SoundManager.load("sounds/swoosh", 'swoosh', false);
@@ -34,7 +33,7 @@ Example = FilthyEngine.extend({
 		var ref = this;
 	
         this.addView('GAME',
-            new ExampleView('partials/example.htm', 'example_canvas', ref.game, function() {
+            new BlindedByRageView('partials/game.htm', 'example_canvas', ref.game, function() {
 				/* Socket events goes here
                  ref.getSocket('main').listenTo('gameMessage',  function(data) {
                  });

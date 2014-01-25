@@ -1,4 +1,4 @@
-ExampleView = CanvasView.extend({
+BlindedByRageView = CanvasView.extend({
 	constructor : function (partialURL, rootId, game, callback) {
 		this.base(partialURL, rootId, callback);
 		this.game = game;

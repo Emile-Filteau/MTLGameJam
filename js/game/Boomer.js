@@ -1,7 +1,59 @@
 include("js/game/NPC.js");
-include("js/game/Spitter.js")
+var BoommerConstants = {
+    idleImages : [],
+    moveImages : [],
+    attackImages : [],
+    IDLE : 0,
+    MOVE : 1
+}
+BoommerConstants['idleImages']['L'] = new Image();
+BoommerConstants['idleImages']['L'].src = "./images/boomers/standbyLeftBig.png";
 
-var Hostile = NPC.extend({
+BoommerConstants['idleImages']['R'] = new Image();
+BoommerConstants['idleImages']['R'].src = "./images/boomers/standbyRightBig.png";
+
+BoommerConstants['moveImages']['L'] = [];
+BoommerConstants['moveImages']['L'].push(new Image());
+BoommerConstants['moveImages']['L'].push(new Image());
+BoommerConstants['moveImages']['L'].push(new Image());
+BoommerConstants['moveImages']['L'].push(new Image());
+BoommerConstants['moveImages']['L'].push(new Image());
+for(i in BoommerConstants['moveImages']['L']) {
+    BoommerConstants['moveImages']['L'][i].src = "./images/boomers/runLeft/SlugWalkBig"+i+".png";
+}
+BoommerConstants['moveImages']['R'] = [];
+BoommerConstants['moveImages']['R'].push(new Image());
+BoommerConstants['moveImages']['R'].push(new Image());
+BoommerConstants['moveImages']['R'].push(new Image());
+BoommerConstants['moveImages']['R'].push(new Image());
+BoommerConstants['moveImages']['R'].push(new Image());
+for(i in BoommerConstants['moveImages']['R']) {
+    BoommerConstants['moveImages']['R'][i].src = "./images/boomers/runRight/SlugWalkBig"+i+".png";
+}
+BoommerConstants['attackImages']['R'] = [];
+BoommerConstants['attackImages']['R'].push(new Image());
+BoommerConstants['attackImages']['R'].push(new Image());
+BoommerConstants['attackImages']['R'].push(new Image());
+BoommerConstants['attackImages']['R'].push(new Image());
+BoommerConstants['attackImages']['R'].push(new Image());
+BoommerConstants['attackImages']['R'].push(new Image());
+for(i in BoommerConstants['attackImages']['R']) {
+    BoommerConstants['attackImages']['R'][i].src = "./images/boomers/slugAttackRight/SlugAttack"+i+".png";
+}
+BoommerConstants['attackImages']['L'] = [];
+BoommerConstants['attackImages']['L'].push(new Image());
+BoommerConstants['attackImages']['L'].push(new Image());
+BoommerConstants['attackImages']['L'].push(new Image());
+BoommerConstants['attackImages']['L'].push(new Image());
+BoommerConstants['attackImages']['L'].push(new Image());
+BoommerConstants['attackImages']['L'].push(new Image());
+for(i in BoommerConstants['attackImages']['L']) {
+    BoommerConstants['attackImages']['L'][i].src = "./images/boomers/slugAttackLeft/SlugAttack"+i+".png";
+}
+
+
+
+var Boomer = Hostile.extend({
 	
 constructor : function(posX, posY) {
 		this.height = 140;
@@ -19,7 +71,7 @@ constructor : function(posX, posY) {
 	},
 	
 	draw : function(canvas, context, player, camera, area) {
-       /* if(this.moving) {
+        if(this.moving) {
             if(player.x < camera.halfWidth) {
                 context.drawImage(BoommerConstants['moveImages'][this.currentDirection][this.animationIndex],
                  					this.x - this.width/2,
@@ -58,12 +110,12 @@ constructor : function(posX, posY) {
         						camera.halfWidth - this.width/2 - 90,
         						this.y-10);
             }
-        }*/
+        }
 
 	},
 
 	update : function(framerate, player) {
-      /*  if(Math.abs((this.x - player.x)) < this.attackReach){
+        if(Math.abs((this.x - player.x)) < this.attackReach){
         	this.moving = false;
         	this.attacking = true;
 
@@ -101,7 +153,6 @@ constructor : function(posX, posY) {
             }
         }
         this.collide(player);
-        */
 	},
 	collide : function(player){
 		this.base(player);

@@ -20,7 +20,7 @@ var Area = Base.extend({
 
         this.doors = [];
         this.npc = ""//[new Friendly(80, 100, 400, this.groundLevel - 200, "")];
-        this.ennemies = [new Hostile(600, this.groundLevel)];
+        this.ennemies = [new Spitter(600, this.groundLevel)];
 
         this.backgroundOffset = 0;
         this.foreGroundFinalOffset = 0;

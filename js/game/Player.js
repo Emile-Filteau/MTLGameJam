@@ -51,6 +51,5 @@ var Player = Base.extend({
 
 	update: function(framerate){
 		this.move();
-		console.log(this.mouvement);
 	}
 });

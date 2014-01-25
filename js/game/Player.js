@@ -68,7 +68,6 @@ var Player = Base.extend({
 	},
 
 	update: function(framerate){
-		
 
 		this.velocityY += this.gravity;        // Apply gravity to vertical velocity
 	    this.x += this.velocityX;      // Apply horizontal velocity to X position
@@ -81,6 +80,5 @@ var Player = Base.extend({
 	    }
 
 	    this.move();
-
 	}
 });

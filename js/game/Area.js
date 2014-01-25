@@ -14,6 +14,9 @@ var Area = Base.extend({
         this.doors = [];
         this.npc = [new Friendly(80, 100, 80, 100, "")];
         this.ennemies = [new Hostile(80, 100, 80, 300, "")];
+
+
+        this.doors.push(new Door("town", 750, height-200));
     },
 
     update : function(framerate) {
@@ -42,5 +45,9 @@ var Area = Base.extend({
         }
 
         context.drawImage(this.ground, 0, camera.height-100);
+
+        for(i in this.doors) {
+            this.doors[i].draw(canvas, context);
+        }
     }
 });

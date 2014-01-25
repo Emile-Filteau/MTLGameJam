@@ -6,7 +6,7 @@ Example = FilthyEngine.extend({
 		this.base(containerId, fullscreen, alwaysRefresh);
 		
 		
-		this.game = new ExampleGame(window.innerWidth, window.innerHeight);
+		this.game = new ExampleGame(800, 600);
 		/** Sound Example
 			SoundManager.load("sounds/hit", 'hit_sound', true); //load(url, id, isLooping)
 			SoundManager.setVolume('hit_sound', 0.3); //sets the volume in a range from 0 to 1
@@ -37,12 +37,7 @@ Example = FilthyEngine.extend({
             })
         );
         this.getView('GAME').init = function() {
-			
-			$(document).bind("keypress", function(event) {
-                console.log("KEYPRESS");
-                //ref.game.keypress(event.which);
-            });
-
+		
 			$(document).bind("keydown", function(event) {
                 ref.game.keypress(event.which);
             });
@@ -79,5 +74,6 @@ Example = FilthyEngine.extend({
 	loop : function(framerate) {
 		this.base(framerate);
 		this.game.update(framerate);
+		this.game.player.update(framerate);
 	}
 });

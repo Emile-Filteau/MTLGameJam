@@ -11,7 +11,8 @@ var Player = Base.extend({
 		this.weapons = [,];
 		this.background = new Image();
 		this.background.src = spriteSrc;
-		this.speed = 1;
+		this.speed = 5;
+		this.mouvement = "";
 
 	},
 
@@ -27,6 +28,17 @@ var Player = Base.extend({
 
 	},
 
+	move: function(){
+		if(this.mouvement.indexOf("L") != -1){
+			this.x -= this.speed;
+		}
+			
+		else if(this.mouvement.indexOf("R") != -1){
+			this.x += this.speed;
+		}
+			
+	},
+
 	moveLeft: function(){
 		console.log("LEFT");
 		this.x -= this.speed;
@@ -38,6 +50,6 @@ var Player = Base.extend({
 	},
 
 	update: function(framerate){
-
+		this.move();
 	}
 });

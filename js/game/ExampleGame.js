@@ -11,7 +11,7 @@ var ExampleGame = Game.extend({
         this.addArea("main", new Area(5000, 2000, "./images/Background.png", "./images/Middle_ground.png", "./images/Ground1.png"));
         this.changeArea("main");
         //this.player = new Player(173, 250, 100, this.camera.height - 195, "./images/Barb_knight_small.png");
-        this.player = new Player(173, 250, 100, 195, "./images/Barb_knight_small.png");
+        this.player = new Player(173, 250, 100, this.camera.height - 185, "./images/Barb_knight_small.png");
 	},
 
     addArea : function(areaName, area) {
@@ -39,10 +39,10 @@ var ExampleGame = Game.extend({
         switch(key)
 		{
 		case 37:
-			this.player.moveLeft();
+			this.player.mouvement = "L";
 	  		break;
 		case 39:
-			this.player.moveRight();
+			this.player.mouvement = "R";
 	 		break;
 		default:
 		 break;
@@ -52,5 +52,7 @@ var ExampleGame = Game.extend({
 
     keyrelease : function(key) {
 
+    	if(key == 37 || key == 39)
+    		this.player.mouvement = "";
     }
 });

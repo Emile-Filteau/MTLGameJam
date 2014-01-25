@@ -6,7 +6,7 @@ var ExampleGame = Game.extend({
 		this.base(cameraWidth, cameraHeight);
         this.areas = [];
         this.currentArea = "";
-        this.addArea("main", new Area(this, 8945, cameraHeight, "./images/Background.png", "./images/Middle_ground.png", "./images/Level_ground2.png", "./images/clouds.png"));
+        this.addArea("main", new Area(this, 8945, cameraHeight, "./images/Background.png", "./images/env/trees.png", "./images/Level_ground2.png", "./images/clouds.png"));
         this.setArea("main");
         this.player = new Player(100, this.camera.height - 170, "./images/Barb_knight_small_L.png", "./images/Barb_knight_small_R.png");
 

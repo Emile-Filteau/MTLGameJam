@@ -78,15 +78,15 @@ var Area = Base.extend({
         context.drawImage(this.clouds, 0, 0);
 
         if(player.x < camera.halfWidth) {
-            context.drawImage(this.foreground, 0, camera.height-465);
+            context.drawImage(this.foreground, 0, camera.height-390);
         }
         else if(player.x > this.width - camera.halfWidth - player.width/2) {
             finaloffset = this.width - camera.halfWidth - player.width/2;
-            context.drawImage(this.foreground, -this.foreGroundFinalOffset, camera.height-465);
+            context.drawImage(this.foreground, -this.foreGroundFinalOffset, camera.height-390);
         }
         else {
             this.foreGroundFinalOffset = this.backgroundOffset/2;
-            context.drawImage(this.foreground, -this.backgroundOffset/2, camera.height-465);
+            context.drawImage(this.foreground, -this.backgroundOffset/2, camera.height-390);
         }
 
     },

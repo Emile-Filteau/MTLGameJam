@@ -6,14 +6,14 @@ Example = FilthyEngine.extend({
 		this.base(containerId, fullscreen, alwaysRefresh);
 		
 		
-		this.game = new ExampleGame(400, 400);
+		this.game = new ExampleGame(window.innerWidth, window.innerHeight);
 		/** Sound Example
 			SoundManager.load("sounds/hit", 'hit_sound', true); //load(url, id, isLooping)
 			SoundManager.setVolume('hit_sound', 0.3); //sets the volume in a range from 0 to 1
 			SoundManager.play('hit_sound'); //play(id)
 			SoundManager.pause('hit_sound'); //pause(id) really usefull for looping sounds
 		*/
-		
+
 		/** Ajax call example
          AjaxManager.execute("scriptpath/scriptname.php", {key1:'value1', key2:'value2'}, function(data){
 			//callback with scripts answer passed as param
@@ -33,7 +33,6 @@ Example = FilthyEngine.extend({
                  });
 
                  */
-				
 				ref.changeView('GAME');
             })
         );

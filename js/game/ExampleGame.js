@@ -25,11 +25,11 @@ var ExampleGame = Game.extend({
 		context.fillStyle = "#666";
 		context.fillRect(0, 0, canvas.width, canvas.height);
 
-        this.areas[this.currentArea].draw(canvas, context);
+        this.areas[this.currentArea].draw(canvas, context, this.camera);
 	},
 
 	update : function(framerate) {
-
+       // console.log(this.camera.width, this.camera.height);
 	},
 
     keypress : function(key) {

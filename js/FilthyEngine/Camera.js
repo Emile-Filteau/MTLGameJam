@@ -15,6 +15,7 @@ var Camera = Base.extend({
 		this.height = height;
 		this.halfWidth = width/2;
 		this.halfHeight = height/2;
+        /*
 		if(this.position.x <= this.halfWidth) {
 			this.position.x = this.halfWidth;
 		}
@@ -27,6 +28,7 @@ var Camera = Base.extend({
 		else if(this.position.y >= world.height-(this.halfHeight)) {
 			this.position.y = world.height-(this.halfHeight);
 		}
+		*/
 	},
 	
 	update : function(world) {

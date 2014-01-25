@@ -40,7 +40,7 @@ var Area = Base.extend({
 
         context.drawImage(this.backgound, -camera.halfWidth, -camera.halfHeight);
 
-        context.drawImage(this.foreground, 0, camera.height-265);
+        context.drawImage(this.foreground, 0, camera.height-465);
 
     },
 

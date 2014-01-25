@@ -5,7 +5,6 @@ var ExampleGame = Game.extend({
 		this.squares = [];
 		this.randyCounter = 0;
 		this.randyThreshold = 2000;
-
 	},
 	
 	draw : function(canvas, context) {

@@ -1,5 +1,5 @@
 var Weapon = Base.extend({
-	constructor: function(damage, attackSpeed, reach, sanityThreshold, cooldown, typeAttack, sprite){
+	constructor: function(damage, attackSpeed, reach, sanityThreshold, cooldown, typeAttack, sprites){
 
 		this.damage = damage;
 		this.attackSpeed = attackSpeed;
@@ -7,7 +7,12 @@ var Weapon = Base.extend({
 		this.sanityThreshold = sanityThreshold;
 		this.cooldown = cooldown;
 		this.typeAttack = typeAttack;
-		this.sprite = sprite;
+		this.sprites = sprites;
+	},
+	
+	doDamage: function(npc){
+		console.log(npc);
+		npc.hp -= this.damage;
 	},
 
 	draw: function(){
@@ -19,6 +24,6 @@ var Weapon = Base.extend({
 	},
 
 	use: function(){
-		console.log(this.damage);
+
 	}
 });

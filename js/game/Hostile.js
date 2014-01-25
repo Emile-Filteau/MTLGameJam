@@ -56,6 +56,7 @@ for(i in BoommerConstants['attackImages']['L']) {
 var Hostile = NPC.extend({
 	
 constructor : function(posX, posY) {
+		this.base(posX, posY);
 		this.height = 140;
 		this.width = 110;
 		this.x = posX;
@@ -133,6 +134,33 @@ constructor : function(posX, posY) {
 	},
 	collide : function(player){
 		this.base(player);
+
+		if(player.doDamage){
+			//console.log("fais-moi mal mon beau");
+			//console.log(this.hp);
+
+			if(player.currentDirection.indexOf("L") != -1){
+				console.log((player.x - player.width/2) - player.weapons[player.equippedWeapon].reach + " " + (this.x + this.width/2));
+
+				//plus petit que playerX+playerWidth/2 + reach et plus grand que playerX + playerWidth/2
+				if( ((this.x + this.width/2) >= (player.x - player.width/2 - player.weapons[player.equippedWeapon].reach)) && ((this.x + this.width/2) <= (player.x + player.width/2)) ){
+					player.weapons[player.equippedWeapon].doDamage(this);
+					console.log(this.hp);
+				}
+			}
+				
+			if(player.currentDirection.indexOf("R") != -1){
+				console.log((player.x + player.width/2) + " " + (player.weapons[player.equippedWeapon].reach + (player.x + player.width/2)) + " " + this.x + " " + (this.x - this.width/2));
+
+				//plus petit que playerX+playerWidth/2 + reach et plus grand que playerX + playerWidth/2
+				if( ((this.x - this.width/2) <= (player.x + player.width/2 + player.weapons[player.equippedWeapon].reach)) && ((this.x - this.width/2) >= (player.x - player.width/2)) ){
+					player.weapons[player.equippedWeapon].doDamage(this);
+					console.log(this.hp);
+				}
+					
+			}
+				
+		}
 	}
 
 });

@@ -19,11 +19,11 @@ var Area = Base.extend({
     },
 
     draw : function(canvas, context, camera) {
-        console.log(camera.width, camera.height - 100)
+        console.log(camera.height);
         context.drawImage(this.backgound, -camera.halfWidth, -camera.halfHeight);
 
-        context.drawImage(this.foreground, 0, 140, 857, 200);
+        context.drawImage(this.foreground, 0, camera.height-265);
 
-        context.drawImage(this.ground, 0, 300);
-}
+        context.drawImage(this.ground, 0, camera.height-100);
+    }
 });

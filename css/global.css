@@ -15,3 +15,12 @@
 .prototype {
     display: none;
 }
+
+body {
+    background-image:url("../images/seamless_bg.png");
+}
+
+#engine-container {
+    margin:auto;
+    width:800px;
+}

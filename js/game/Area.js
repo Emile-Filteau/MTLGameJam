@@ -22,11 +22,11 @@ var Area = Base.extend({
 
 
     update : function(framerate, player) {
-        for(var i = 0; i< this.npc.length; i++){
-            this.npc[i].update(framerate);
+        for(i in this.npc){
+            this.npc[i].update(framerate, player);
         }
         for(i in this.ennemies){
-            this.ennemies[i].update(framerate);
+            this.ennemies[i].update(framerate, player);
         }
 
         for(i in this.doors) {

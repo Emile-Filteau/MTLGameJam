@@ -21,12 +21,24 @@ var Player = Base.extend({
 		this.velocityY = 0.0;
 		this.onGround = true;
 		this.groundY = posY;
+		this.collidingObject = false;
 	},
 
 	attack: function(){
 
 	},
+	collidesWith : function(collidingObject){
+		if(collidingObject){
+			//console.log (collidingObject);
+			this.collidingObject = collidingObject;
+			return this.collidingObject;
+		}
+		else{
+			this.collidingObject = false;
+			return false;
+		}		
 
+	},
 	draw: function(canvas, context){
 
 		if(this.currentDirection.indexOf("L") != -1){
@@ -61,10 +73,11 @@ var Player = Base.extend({
 
 	interact: function(){
 		console.log("PLAYER initiated Interaction.");
-		
+		if(this.collidingObject){
+			console.log("PLAYER is interacting near WorldObject '"+this.collidingObject+"'");
+		}
 
 	},
-
 	move: function(){
 		if(this.mouvement.indexOf("L") != -1){
 			this.x -= this.speed;

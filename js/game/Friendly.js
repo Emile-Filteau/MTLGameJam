@@ -17,7 +17,8 @@ constructor : function(width, height, posX, posY, sprite) {
 		
 	},
 
-	update : function(framerate) {
+	update : function(framerate, player) {
+		this.collide(player);
 		var rand = Math.random();
 		if(rand > 0.1 ){
 			rand = Math.random();
@@ -31,11 +32,10 @@ constructor : function(width, height, posX, posY, sprite) {
 			}
 		}
 	},
-
-	interact : function(framerate){
-		console.log("FRIENDLY INTERACTION :D");
-
-	}
+	collide : function(player){
+		this.base(player);
+	 }
+	
 
 
 });

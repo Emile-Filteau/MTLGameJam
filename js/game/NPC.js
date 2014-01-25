@@ -17,7 +17,8 @@ var NPC = Base.extend({
 		
 	},
 
-	update : function(framerate) {
+	update : function(framerate, player) {
+		var collisionResult = this.collide(player);
 		var rand = Math.random();
 		if(rand > 0.1 ){
 			rand = Math.random();
@@ -30,7 +31,19 @@ var NPC = Base.extend({
 				//console.log("Friendly move LEFT");
 			}
 		}
-	}
-
-
+	},
+	collide : function(player) {
+        if(player.x + 69 > this.x && player.x < this.x + 50) {
+            if(player.y >= this.y){
+                //console.log("COLLISION");
+                player.collidesWith(this);
+                return this;
+            }
+        }
+        else{
+        player.collidesWith(false);
+        return false;
+    	
+        }
+   }
 });

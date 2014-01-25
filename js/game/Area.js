@@ -65,6 +65,10 @@ var Area = Base.extend({
         for(i in this.holes){
             this.holes[i].collide(player);
         }
+
+        for(i in this.blocks){
+            this.blocks[i]collide(player);
+        }
     },
 
     drawBackground : function(canvas, context, player, camera) {

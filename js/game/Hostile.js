@@ -88,7 +88,9 @@ constructor : function(posX, posY) {
 	collide : function(player){
 		this.base(player);
 
-		if(player.doDamage){
+		console.log(player.y + " " + this.y);
+
+		if(player.doDamage && this.y <= player.y){
 			if(player.currentDirection.indexOf("L") != -1){
 				console.log((player.x - player.width/2) - player.weapons[player.equippedWeapon].reach + " " + (this.x + this.width/2));
 

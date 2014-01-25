@@ -2,6 +2,7 @@ include("js/game/Weapon.js");
 var PlayerConstants = {
     idleImages : [],
     moveImages : [],
+    jumpingImages : [],
     IDLE : 0,
     MOVE : 1
 }
@@ -10,6 +11,12 @@ PlayerConstants['idleImages']['L'].src = "./images/player/standbyLeft.png";
 
 PlayerConstants['idleImages']['R'] = new Image();
 PlayerConstants['idleImages']['R'].src = "./images/player/standbyRight.png";
+
+PlayerConstants['jumpingImages']['L'] = new Image();
+PlayerConstants['jumpingImages']['L'].src = "./images/player/jumpLeft.png";
+
+PlayerConstants['jumpingImages']['R'] = new Image();
+PlayerConstants['jumpingImages']['R'].src = "./images/player/jumpRight.png";
 
 PlayerConstants['moveImages']['L'] = [];
 PlayerConstants['moveImages']['L'].push(new Image());
@@ -40,7 +47,7 @@ var Player = Base.extend({
 	constructor: function(posX, posY, spriteSrcL, spriteSrcR){
 
 		this.height = 100;
-		this.width = 80;
+		this.width = 120;
 		this.x = posX;
 		this.y = posY + this.height;
 		this.hp = 100;
@@ -91,11 +98,15 @@ var Player = Base.extend({
 	},
 	draw: function(canvas, context, camera, area){
         var img;
-		//console.log(this.x);        
-        if(this.mouvement != "") {
-            img = PlayerConstants['moveImages'][this.currentDirection][this.animationIndex];
+		//console.log(this.x);
+        if(this.onGround) {
+            if(this.mouvement != "") {
+                img = PlayerConstants['moveImages'][this.currentDirection][this.animationIndex];
+            } else {
+                img = PlayerConstants['idleImages'][this.currentDirection];
+            }
         } else {
-            img = PlayerConstants['idleImages'][this.currentDirection];
+            img = PlayerConstants['jumpingImages'][this.currentDirection];
         }
         var offsetX = (this.mouvement == "" && this.currentDirection == "L") ? -20 : 0;
 

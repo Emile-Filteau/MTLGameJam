@@ -9,7 +9,7 @@ var lastLoop = new Date().getTime();
 window.onload = init;
 
 function init() {
-	engine = new Example('engine-container', false, true);
+	engine = new Example('engine-container', true, true);
 	engine.init();
 	loop();
 }
@@ -23,9 +23,6 @@ function loop() {
 	setTimeout(loop, FRAMERATE);
 }
 
-/* 
-Uncomment if you want to call onResize each time the web broswer is resized
 $(window).resize(function() {
 	engine.onResize();
 });
-*/

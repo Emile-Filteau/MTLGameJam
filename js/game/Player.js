@@ -39,7 +39,7 @@ var Player = Base.extend({
 			
 	},
 
-	moveLeft: function(){
+	/*moveLeft: function(){
 		console.log("LEFT");
 		this.x -= this.speed;
 	},
@@ -47,9 +47,10 @@ var Player = Base.extend({
 	moveRight: function(){
 		console.log("RIGHT");
 		this.x += this.speed;
-	},
+	},*/
 
 	update: function(framerate){
 		this.move();
+		console.log(this.mouvement);
 	}
 });

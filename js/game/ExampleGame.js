@@ -39,6 +39,9 @@ var ExampleGame = Game.extend({
         
         switch(key)
 		{
+		case 32:
+			this.player.jump();
+			break;
 		case 37:
 			this.player.mouvement = "L";
 	  		break;
@@ -53,7 +56,21 @@ var ExampleGame = Game.extend({
 
     keyrelease : function(key) {
 
-    	if(key == 37 || key == 39)
-    		this.player.mouvement = "";
+    	console.log(key);
+
+    	switch(key)
+		{
+		case 32:
+			this.player.jump();
+			break;
+		case 37:
+			this.player.mouvement = this.player.mouvement.replace("L", "");
+	  		break;
+		case 39:
+			this.player.mouvement = this.player.mouvement.replace("R", "");
+	 		break;
+		default:
+		 break;
+		}    		
     }
 });

@@ -2,7 +2,8 @@ include("js/game/Door.js");
 include("js/game/NPC.JS");
 
 var Area = Base.extend({
-    constructor : function(width, height, backgroundSrc, foregroundSrc, groundSrc) {
+    constructor : function(gameRef, width, height, backgroundSrc, foregroundSrc, groundSrc) {
+        this.game = gameRef;
         this.backgound = new Image();
         this.foreground = new Image();
         this.ground = new Image();
@@ -16,28 +17,36 @@ var Area = Base.extend({
         this.ennemies = [new Hostile(80, 100, 80, 300, "")];
 
 
-        this.doors.push(new Door("town", 750, height-200));
+        this.doors.push(new Door("town", 740, height-210));
     },
 
-    update : function(framerate) {
-        for(i in this.npc){
+
+    update : function(framerate, player) {
+        for(var i = 0; i< this.npc.length; i++){
             this.npc[i].update(framerate);
         }
         for(i in this.ennemies){
             this.ennemies[i].update(framerate);
         }
+
+        for(i in this.doors) {
+            if(this.doors[i].collide(player)) {
+                this.game.changeArea(this.doors[i]);
+            }
+        }
     },
 
-    draw : function(canvas, context, camera) {
+    drawBackground : function(canvas, context, camera) {
 
         context.drawImage(this.backgound, -camera.halfWidth, -camera.halfHeight);
 
         context.drawImage(this.foreground, 0, camera.height-265);
 
+    },
 
-
+    drawProps : function(canvas, context, camera) {
         //NPCs
-         for(var i = 0; i< this.npc.length; i++){
+        for(var i = 0; i< this.npc.length; i++){
             this.npc[i].draw(canvas, context);
         }
         for(var i = 0; i< this.ennemies.length; i++){

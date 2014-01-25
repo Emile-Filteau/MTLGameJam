@@ -189,7 +189,7 @@ var Player = Base.extend({
 	},
 	move: function(area){
 
-		console.log(this.x);
+		//console.log(this.x);
 
 		if(this.mouvement.indexOf("L") != -1){
 			this.x -= this.speed;

@@ -13,7 +13,7 @@ var Player = Base.extend({
 		this.background.src = spriteSrc;
 		this.speed = 5.0;
 		this.mouvement = "";
-		this.gravity = 0.8;
+		this.gravity = 1.2;
 		this.velocityX = 0.0;
 		this.velocityY = 0.0;
 		this.onGround = true;
@@ -41,7 +41,7 @@ var Player = Base.extend({
 	jump: function(){
 		
 		if(this.onGround){
-	        this.velocityY = -12.0;
+	        this.velocityY = -22.0;
 	        this.onGround = false;
 	    }
 	},

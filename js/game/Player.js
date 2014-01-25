@@ -50,7 +50,7 @@ var Player = Base.extend({
 		this.width = 120;
 		this.x = posX;
 		this.y = posY + this.height;
-		this.hp = 100;
+		this.hp = 6;
 		this.sanity = 100;
 
 		this.equippedWeapon = 0;

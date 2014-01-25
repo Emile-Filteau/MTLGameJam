@@ -9,6 +9,13 @@ var ExampleGame = Game.extend({
         this.addArea("main", new Area(this, 1500, cameraHeight, "./images/Background.png", "./images/Middle_ground.png", "./images/Ground1.png", "./images/clouds.png"));
         this.setArea("main");
         this.player = new Player(100, this.camera.height - 122, "./images/Barb_knight_small_L.png", "./images/Barb_knight_small_R.png");
+
+        this.appleFull = new Image();
+        this.appleFull.src = "./images/apples/AppleFull.png";
+        this.appleHalf = new Image();
+        this.appleHalf.src = "./images/apples/AppleHalf.png";
+        this.appleEmpty = new Image();
+        this.appleEmpty.sec = "./images/apples/AppleEmpty.png"
 	},
 
     addArea : function(areaName, area) {
@@ -24,7 +31,7 @@ var ExampleGame = Game.extend({
         this.player.x = door.destX;
         this.player.y = door.destY;
     },
-	
+
 	draw : function(canvas, context) {
 		context.fillStyle = "#666";
 		context.fillRect(0, 0, canvas.width, canvas.height);
@@ -34,7 +41,36 @@ var ExampleGame = Game.extend({
         this.player.draw(canvas, context, this.camera, this.areas[this.currentArea]);
 
         this.areas[this.currentArea].drawProps(canvas, context, this.player, this.camera);
+
+        this.drawPlayerLife(canvas, context);
 	},
+
+    drawPlayerLife : function(canvas, context) {
+        for(var i=0;i<3;i++) {
+            var img = this.appleEmpty;
+            if(i == 0) {
+                if(this.player.hp >= 2)
+                    img = this.appleFull
+                else if(this.player.hp == 1)
+                    img = this.appleHalf;
+            } else if(i == 1) {
+                if(this.player.hp >= 4)
+                    img = this.appleFull
+                else if(this.player.hp == 3)
+                    img = this.appleHalf;
+                else
+                    img = this.appleEmpty;
+            } else if(i == 2) {
+                if(this.player.hp >= 6)
+                    img = this.appleFull
+                else if(this.player.hp == 5)
+                    img = this.appleHalf;
+                else
+                    img = this.appleEmpty;
+            }
+            context.drawImage(img, 20 + i*30, 20);
+        }
+    },
 
 	update : function(framerate) {
 
@@ -44,9 +80,9 @@ var ExampleGame = Game.extend({
 
        this.areas[this.currentArea].update(framerate, this.player);
 	},
-	
+
     keypress : function(key) {
-        
+
         switch(key)
 		{
 		case 32: //Spacebar
@@ -89,6 +125,6 @@ var ExampleGame = Game.extend({
 	 		break;
 		default:
 		 break;
-		}    		
+		}
     }
 });

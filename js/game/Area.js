@@ -20,7 +20,7 @@ var Area = Base.extend({
 
         this.doors = [];
         this.npc = ""//[new Friendly(80, 100, 400, this.groundLevel - 200, "")];
-        this.ennemies = [new Hostile(600, this.groundLevel)];
+        this.ennemies = [new Spitter(600, this.groundLevel)];
 
         this.backgroundOffset = 0;
         this.foreGroundFinalOffset = 0;
@@ -68,12 +68,13 @@ var Area = Base.extend({
 
     drawProps : function(canvas, context, player, camera) {
         //NPCs
-        for(var i = 0; i< this.npc.length; i++){
+        for(var i in this.npc){
             this.npc[i].draw(canvas, context, player, camera, this);
         }
-        for(var i = 0; i< this.ennemies.length; i++){
-            if(this.ennemies[i].hp > 0)
+        for(var i in this.ennemies){
+            if(this.ennemies[i].hp > 0){
                 this.ennemies[i].draw(canvas, context, player, camera, this);
+            }
         }
 
         if(player.x < camera.halfWidth) {

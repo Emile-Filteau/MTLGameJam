@@ -9,7 +9,7 @@ BoommerConstants['idleImages']['L'] = new Image();
 BoommerConstants['idleImages']['L'].src = "./images/boomers/standbyLeft.png";
 
 BoommerConstants['idleImages']['R'] = new Image();
-BoommerConstants['idleImages']['R'].src = "./images/Mooses/standbyRight.png";
+BoommerConstants['idleImages']['R'].src = "./images/boomers/standbyRight.png";
 
 BoommerConstants['moveImages']['L'] = [];
 BoommerConstants['moveImages']['L'].push(new Image());

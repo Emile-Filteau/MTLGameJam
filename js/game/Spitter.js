@@ -76,6 +76,7 @@ constructor : function(posX, posY) {
 	},
 	
 	draw : function(canvas, context, player, camera, area) {
+
         if(this.moving) {
             if(player.x < camera.halfWidth) {
                 context.drawImage(SpitterConstants['moveImages'][this.currentDirection][this.animationIndex],

@@ -1,4 +1,5 @@
 include("js/game/Door.js");
+include("js/game/Block.js");
 include("js/game/NPC.JS");
 inclue("js/game/Hole.js");
 
@@ -20,12 +21,19 @@ var Area = Base.extend({
         this.clouds.src = cloudsSrc;
 
         this.doors = [];
+        this.blocks = [] ;
         this.npc = ""//[new Friendly(80, 100, 400, this.groundLevel - 200, "")];
         this.ennemies = [new Spitter(600, this.groundLevel)];
 
         this.backgroundOffset = 0;
         this.foreGroundFinalOffset = 0;
         this.groundFinalOffset = 0;
+
+
+        this.blocks.push(new Block(1495, this.groundLevel + 50));
+        this.blocks.push(new Block(2300, this.groundLevel + 50));
+        this.blocks.push(new Block(2440, this.groundLevel + 50));
+        this.blocks.push(new Block(2440, this.groundLevel + 50 - 100));
         //this.doors.push(new Door("town", 1000, height-198));
     
         this.holes = [];
@@ -76,7 +84,10 @@ var Area = Base.extend({
     },
 
     drawProps : function(canvas, context, player, camera) {
-        //NPCs
+        for(var i in this.blocks){
+            this.blocks[i].draw(canvas, context, player, camera, this);
+        }
+
         for(var i in this.npc){
             this.npc[i].draw(canvas, context, player, camera, this);
         }

@@ -9,20 +9,20 @@ var Block = Base.extend({
         this.x = x;
         this.y = y;
 
-        this.width = 150;
-        this.height = 112;
+        this.width = 160;
+        this.height = 119;
     },
 
     draw : function(canvas, context, player, camera, area) {
         if(player.x < camera.halfWidth) {
-            context.drawImage(BlockConstants['image'], this.x - this.width/2, this.y);
+            context.drawImage(BlockConstants['image'], this.x - this.width/2, this.y - this.height);
         }
         else if(player.x > area.width - camera.halfWidth - player.width/2) {
-            context.drawImage(BlockConstants['image'], this.x - area.width/2 + player.width/2, this.y);
+            context.drawImage(BlockConstants['image'], this.x - area.width/2 + player.width/2, this.y - this.height);
         }
         else {
             var playerDistance = player.x - this.x;
-            context.drawImage(BlockConstants['image'], camera.halfWidth - playerDistance - this.width/2, this.y);
+            context.drawImage(BlockConstants['image'], camera.halfWidth - playerDistance - this.width/2, this.y - this.height);
         }
     },
 

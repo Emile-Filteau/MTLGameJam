@@ -29,7 +29,10 @@ var Area = Base.extend({
         this.groundFinalOffset = 0;
 
 
-        this.blocks.push(new Block(1450, this.groundLevel));
+        this.blocks.push(new Block(1495, this.groundLevel + 50));
+        this.blocks.push(new Block(2300, this.groundLevel + 50));
+        this.blocks.push(new Block(2440, this.groundLevel + 50));
+        this.blocks.push(new Block(2440, this.groundLevel + 50 - 100));
         //this.doors.push(new Door("town", 1000, height-198));
     },
 
@@ -72,7 +75,10 @@ var Area = Base.extend({
     },
 
     drawProps : function(canvas, context, player, camera) {
-        //NPCs
+        for(var i in this.blocks){
+            this.blocks[i].draw(canvas, context, player, camera, this);
+        }
+
         for(var i in this.npc){
             this.npc[i].draw(canvas, context, player, camera, this);
         }

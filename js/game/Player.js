@@ -1,3 +1,5 @@
+include("js/game/Weapon.js");
+
 var PlayerContants = {
     idleImages : [],
     moveImages : [],
@@ -44,8 +46,14 @@ var Player = Base.extend({
 		this.y = posY;
 		this.hp = 100;
 		this.sanity = 100;
+
 		this.equippedWeapon = 0;
+		this.primaryWeapon = 0;
+		this.secondaryWeapon = 1;
 		this.weapons = [,];
+		this.axe = new Weapon(10, 1, 10, 80, 1, "slash", "");
+		this.weapons[this.primaryWeapon] = this.axe;
+
 
         this.images = [];
         this.images["R"] = new Image();
@@ -68,7 +76,7 @@ var Player = Base.extend({
 	},
 
 	attack: function(){
-
+		this.weapons[this.primaryWeapon].use();
 	},
 	collidesWith : function(collidingObject){
 		if(collidingObject){

@@ -56,7 +56,9 @@ var ExampleGame = Game.extend({
 		case 39://Right arrow
 			this.player.mouvement = "R";
 	 		break;
-
+ 		case 69://E
+ 			this.player.attack();
+ 			break;
 	 	case 90://Z
 	 		this.player.interact();
 	 		break;

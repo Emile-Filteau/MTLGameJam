@@ -9,7 +9,7 @@ var Area = Base.extend({
         this.clouds = new Image();
         this.ground = new Image();
 
-        this.groundLevel = height - 168;
+        this.groundLevel = height - 100;
 
         this.backgound.src = backgroundSrc;
         this.foreground.src = foregroundSrc;

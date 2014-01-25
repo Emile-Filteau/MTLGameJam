@@ -19,6 +19,6 @@ var Weapon = Base.extend({
 	},
 
 	use: function(){
-
+		console.log(this.damage);
 	}
 });

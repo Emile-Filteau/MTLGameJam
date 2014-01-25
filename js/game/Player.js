@@ -1,7 +1,6 @@
 var PlayerContants = {
     idleImages : [],
     moveImages : [],
-    jumpImages : [],
     IDLE : 0,
     MOVE : 1
 }
@@ -10,12 +9,6 @@ PlayerContants['idleImages']['L'].src = "./images/player/standbyLeft.png";
 
 PlayerContants['idleImages']['R'] = new Image();
 PlayerContants['idleImages']['R'].src = "./images/player/standbyRight.png";
-
-PlayerContants['jumpImages']['L'] = new Image();
-PlayerContants['jumpImages']['L'].src = "./images/player/jumpLeft.png";
-
-PlayerContants['jumpImages']['R'] = new Image();
-PlayerContants['jumpImages']['R'].src = "./images/player/jumpRight.png";
 
 PlayerContants['moveImages']['L'] = [];
 PlayerContants['moveImages']['L'].push(new Image());
@@ -91,14 +84,11 @@ var Player = Base.extend({
 	},
 	draw: function(canvas, context, camera, area){
         var img;
-        if(this.onGround) {
-            if(this.mouvement != "") {
-                img = PlayerContants['moveImages'][this.currentDirection][this.animationIndex];
-            } else {
-                img = PlayerContants['idleImages'][this.currentDirection];
-            }
+		//console.log(this.x);        
+        if(this.mouvement != "") {
+            img = PlayerContants['moveImages'][this.currentDirection][this.animationIndex];
         } else {
-            img = PlayerContants['jumpImages'][this.currentDirection];
+            img = PlayerContants['idleImages'][this.currentDirection];
         }
 
         if(this.x < camera.halfWidth + camera.width* 0.25) {
@@ -110,13 +100,38 @@ var Player = Base.extend({
             context.drawImage(img, camera.width - (area.width - this.x), this.y);
         }
         else {
-           // console.log("Cas 2");
+          if(this.x >= camera.maxTreshold){
+          	camera.maxTreshold = this.x;
+          	camera.minTreshold = this.x - (2 * camera.deltaX);
+          	camera.position.x = this.x - camera.deltaX;
+          	context.drawImage(img, camera.halfWidth + camera.deltaX , this.y);
+
+          }
+          else if(this.x <= camera.minTreshold){
+          	camera.minTreshold = this.x;
+			camera.maxTreshold = this.x + (2 * camera.deltaX);
+
+          	camera.position.x = this.x + camera.deltaX;
+          	context.drawImage(img, camera.halfWidth - camera.deltaX , this.y);
+          }
+		  else{
+		  	var relX;
+		  	if(this.x > camera.position.x){
+		  		relX = camera.halfWidth + (this.x - camera.position.x )
+		  	}
+		  	else{
+		  		relX = camera.halfWidth + ( camera.position.x - this.x )
+
+		  	}
+		  	context.drawImage(img, relX , this.y)
+		  }
+          /* // console.log("Cas 2");
             var relX = 0;
             if(this.x <= camera.position.x - camera.width * 0.25) {
                 console.log("2.1");
                 relX = camera.halfWidth - (camera.width * 0.25);
             }
-            else if((this.x >= camera.position.x + camera.width * 0.25) && this.currentDirection == "R") {
+            else if((this.x >= camera.position.x + camera.width * 0.25) ) {
                 console.log("2.2");
                 relX = camera.halfWidth + (camera.width * 0.25);
             }
@@ -124,8 +139,8 @@ var Player = Base.extend({
                 console.log("2.3");
                 relX = camera.halfWidth + (this.x - camera.position.x);
             }
-
-            context.drawImage(img, relX, this.y);
+			*/
+            
         }
 
 	},

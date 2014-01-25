@@ -6,6 +6,10 @@ var Camera = Base.extend({
 		this.halfHeight = height/2;
 		//this.position = new Point(this.halfWidth, this.halfHeight);
         this.position = new Point(this.halfWidth, 0);
+        this.deltaX = (1/8) * this.width;
+        this.minTreshold = this.position.x - this.deltaX;
+        this.maxTreshold = this.position.x + this.deltaX;
+                
 	},
 	
 	resize : function(width, height, world) {

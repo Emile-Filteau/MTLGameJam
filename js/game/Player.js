@@ -194,6 +194,9 @@ var Player = Base.extend({
 	        this.velocityX = 0.0;
 	        this.velocityY = 0.0;
 	        this.onGround = true;
+            if(this.mouvement !=  "") {
+                SoundManager.play("footsteps");
+            }
 	    }
 
 	    this.move(area);

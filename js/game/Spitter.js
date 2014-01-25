@@ -57,7 +57,7 @@ for(i in SpitterConstants['attackImages']['L']) {
 }
 
 
-var Spitter = NPC.extend({
+var Spitter = Hostile.extend({
 	
 constructor : function(posX, posY) {
 		this.height = 140;

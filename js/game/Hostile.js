@@ -103,25 +103,23 @@ constructor : function(posX, posY) {
                 this.x += this.speed;
                 this.currentDirection = "R";
             }
-        }
+        }*/
         this.collide(player);
-        */
+        
 	},
 	collide : function(player){
 		this.base(player);
 
-		console.log(player.y + " " + this.y);
-
 		if(player.doDamage && this.y <= player.y){
 			if(player.currentDirection.indexOf("L") != -1){
-				console.log((player.x - player.width/2) - player.weapons[player.equippedWeapon].reach + " " + (this.x + this.width/2));
+				//console.log((player.x - player.width/2) - player.weapons[player.equippedWeapon].reach + " " + (this.x + this.width/2));
 
 				if((player.x - player.width/2 -  player.weapons[player.equippedWeapon].reach) <= (this.x + this.width/2) && (player.x + player.width/2 +  player.weapons[player.equippedWeapon].reach) >= (this.x - this.width/2))
 					player.weapons[player.equippedWeapon].doDamage(this);
 			}		
 				
 			if(player.currentDirection.indexOf("R") != -1){
-				console.log((player.x + player.width/2) + " " + (player.weapons[player.equippedWeapon].reach + (player.x + player.width/2)) + " " + this.x + " " + (this.x - this.width/2));
+				//console.log((player.x + player.width/2) + " " + (player.weapons[player.equippedWeapon].reach + (player.x + player.width/2)) + " " + this.x + " " + (this.x - this.width/2));
 
 				if((player.x + player.width/2 +  player.weapons[player.equippedWeapon].reach) >= (this.x - this.width/2) && (player.x + player.width/2 +  player.weapons[player.equippedWeapon].reach) <= (this.x + this.width/2))
 					player.weapons[player.equippedWeapon].doDamage(this);					

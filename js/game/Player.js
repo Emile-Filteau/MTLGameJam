@@ -2,6 +2,7 @@ include("js/game/Weapon.js");
 var PlayerConstants = {
     idleImages : [],
     moveImages : [],
+    attackImages : [],
     IDLE : 0,
     MOVE : 1
 }
@@ -36,30 +37,24 @@ for(i in PlayerConstants['moveImages']['R']) {
     PlayerConstants['moveImages']['R'][i].src = "./images/player/runRight/run"+i+".png";
 }
 
-var WeaponConstants = {
-	idleImages : [],
-	moveImages : [],
-	IDLE : 0,
-	UP : 0,
-	DOWN : 1
+
+//Weapon images ------------------------------------------------------------------------------------------
+PlayerConstants['attackImages']['L'] = [];
+PlayerConstants['attackImages']['L'].push(new Image());
+PlayerConstants['attackImages']['L'].push(new Image());
+
+for(i in PlayerConstants['attackImages']['L']) {
+    PlayerConstants['attackImages']['L'][i].src = "./images/player/attackLeft/attack"+i+".png";
 }
 
-WeaponConstants['idleImages']['L'] = new Image();
-WeaponConstants['idleImages']['L'].src = "./images/player/attackLeft/stand2.png"
-WeaponConstants['idleImages']['R'] = new Image();
-WeaponConstants['idleImages']['R'].src = "./images/player/attackRight/stand2.png"
+PlayerConstants['attackImages']['R'] = [];
+PlayerConstants['attackImages']['R'].push(new Image());
+PlayerConstants['attackImages']['R'].push(new Image());
 
-WeaponConstants['moveImages']['L'] = [];
-WeaponConstants['moveImages']['L'].push(new Image());
-WeaponConstants['moveImages']['L'][0].src = "./images/player/attackLeft/attack1.png";
-WeaponConstants['moveImages']['L'].push(new Image());
-WeaponConstants['moveImages']['L'][1].src = "./images/player/attackLeft/attack2.png";
 
-WeaponConstants['moveImages']['R'] = [];
-WeaponConstants['moveImages']['R'].push(new Image());
-WeaponConstants['moveImages']['R'][0].src = "./images/player/attackRight/attack1.png";
-WeaponConstants['moveImages']['R'].push(new Image());
-WeaponConstants['moveImages']['R'][1].src = "./images/player/attackRight/attack2.png";
+for(i in PlayerConstants['attackImages']['R']) {
+    PlayerConstants['attackImages']['R'][i].src = "./images/player/attackRight/attack"+i+".png";
+}
 
 var Player = Base.extend({
 	constructor: function(posX, posY, spriteSrcL, spriteSrcR){
@@ -76,7 +71,7 @@ var Player = Base.extend({
 		this.secondaryWeapon = 1;
 		this.weapons = [,];
 
-		this.axe = new Weapon(10, 1, 10, 80, 1, "slash", WeaponConstants);
+		this.axe = new Weapon(10, 1, 10, 80, 1, "slash", "");
 
 		this.weapons[this.primaryWeapon] = this.axe;
 
@@ -102,7 +97,12 @@ var Player = Base.extend({
 	},
 
 	attack: function(){
-		this.weapons[this.primaryWeapon].use();
+		//this.weapons[this.primaryWeapon].use();
+		//console.log(PlayerConstants['moveImages']['L'].length+1);
+
+		setTimeout(function(){
+			console.log("FUCK THIS SHIT");
+		}, this.weapons[this.primaryWeapon].attackSpeed * 1000);
 	},
 	collidesWith : function(collidingObject){
 		if(collidingObject){
@@ -118,7 +118,7 @@ var Player = Base.extend({
 	},
 	draw: function(canvas, context, camera, area){
         var img;
-		//console.log(this.x);        
+	
         if(this.mouvement != "") {
             img = PlayerConstants['moveImages'][this.currentDirection][this.animationIndex];
         } else {
@@ -201,8 +201,8 @@ var Player = Base.extend({
             }
         }
 
-		this.velocityY += this.gravity;        // Apply gravity to vertical velocity
-	    this.x += this.velocityX;      // Apply horizontal velocity to X position
+		this.velocityY += this.gravity;        
+	    this.x += this.velocityX;    
 	    this.y += this.velocityY;  
 
 	    if(this.y > this.groundY){

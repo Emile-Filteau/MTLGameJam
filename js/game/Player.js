@@ -71,7 +71,8 @@ var Player = Base.extend({
 		this.secondaryWeapon = 1;
 		this.weapons = [,];
 
-		this.axe = new Weapon(10, 1, 10, 80, 1, "slash", "");
+		//damage, attackSpeed, reach, sanityThreshold, cooldown, typeAttack, sprites
+		this.axe = new Weapon(10, 2.7, 10, 80, 1, "slash", "");
 
 		this.weapons[this.primaryWeapon] = this.axe;
 
@@ -94,15 +95,13 @@ var Player = Base.extend({
 
         this.animationIndex = 0;
         this.animation = 0;
+        this.attacking = false;
+        this.animationAttackingIndex = 0;
+        this.animationAttacking = 0;
 	},
 
 	attack: function(){
-		//this.weapons[this.primaryWeapon].use();
-		//console.log(PlayerConstants['moveImages']['L'].length+1);
-
-		setTimeout(function(){
-			console.log("FUCK THIS SHIT");
-		}, this.weapons[this.primaryWeapon].attackSpeed * 1000);
+		this.attacking = true;
 	},
 	collidesWith : function(collidingObject){
 		if(collidingObject){
@@ -118,12 +117,19 @@ var Player = Base.extend({
 	},
 	draw: function(canvas, context, camera, area){
         var img;
-	
-        if(this.mouvement != "") {
-            img = PlayerConstants['moveImages'][this.currentDirection][this.animationIndex];
-        } else {
-            img = PlayerConstants['idleImages'][this.currentDirection];
+
+        if(this.attacking){       	
+        	img = PlayerConstants['attackImages'][this.currentDirection][this.animationAttackingIndex];
         }
+        else {
+        	if(this.mouvement != "") {
+            img = PlayerConstants['moveImages'][this.currentDirection][this.animationIndex];
+	        } else {
+	            img = PlayerConstants['idleImages'][this.currentDirection];
+	        }
+        }
+
+        
         var offsetX = (this.mouvement == "" && this.currentDirection == "L") ? -20 : 0;
 
         if(this.x < camera.halfWidth) {
@@ -190,9 +196,22 @@ var Player = Base.extend({
 	},
 
 	update: function(framerate, area){
-        if(this.mouvement != "") {
+        
+        if(this.attacking){
+        	this.animationAttacking += framerate;
+        	if(this.animationAttacking >= this.weapons[this.equippedWeapon].attackSpeed * 100){
+        		this.animationAttackingIndex++;
+        		if(this.animationAttackingIndex >= PlayerConstants['attackImages'][this.currentDirection].length) {
+                    this.animationAttackingIndex=0;
+                    this.attacking = false
+                }
+                this.animationAttacking = 0;           
+        	}
+        }
+        else if(this.mouvement != "") {
             this.animation += framerate;
             if(this.animation >= 100) {
+
                 this.animationIndex++;
                 if(this.animationIndex >= PlayerConstants['moveImages'][this.currentDirection].length) {
                     this.animationIndex=0;
@@ -201,6 +220,7 @@ var Player = Base.extend({
             }
         }
 
+        //Jump *************************
 		this.velocityY += this.gravity;        
 	    this.x += this.velocityX;    
 	    this.y += this.velocityY;  
@@ -211,6 +231,7 @@ var Player = Base.extend({
 	        this.velocityY = 0.0;
 	        this.onGround = true;
 	    }
+	    //******************************
 
 	    this.move(area);
 	}

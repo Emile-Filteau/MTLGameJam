@@ -41,6 +41,8 @@ constructor : function(posX, posY) {
         this.currentDirection = "L";
         this.moving = true;
         this.speed = 4;
+        this.attackReach = 40;
+
 
         this.animationIndex = 0;
         this.animation = 0;
@@ -90,20 +92,15 @@ constructor : function(posX, posY) {
 			if(player.currentDirection.indexOf("L") != -1){
 				console.log((player.x - player.width/2) - player.weapons[player.equippedWeapon].reach + " " + (this.x + this.width/2));
 
-				if( ((this.x + this.width/2) >= (player.x - player.width/2 - player.weapons[player.equippedWeapon].reach)) && ((this.x + this.width/2) <= (player.x + player.width/2)) ){
+				if((player.x - player.width/2 -  player.weapons[player.equippedWeapon].reach) <= (this.x + this.width/2) && (player.x + player.width/2 +  player.weapons[player.equippedWeapon].reach) >= (this.x - this.width/2))
 					player.weapons[player.equippedWeapon].doDamage(this);
-					console.log(this.hp);
-				}
-			}
+			}		
 				
 			if(player.currentDirection.indexOf("R") != -1){
 				console.log((player.x + player.width/2) + " " + (player.weapons[player.equippedWeapon].reach + (player.x + player.width/2)) + " " + this.x + " " + (this.x - this.width/2));
 
-				if( ((this.x - this.width/2) <= (player.x + player.width/2 + player.weapons[player.equippedWeapon].reach)) && ((this.x - this.width/2) >= (player.x - player.width/2)) ){
-					player.weapons[player.equippedWeapon].doDamage(this);
-					console.log(this.hp);
-				}
-					
+				if((player.x + player.width/2 +  player.weapons[player.equippedWeapon].reach) >= (this.x - this.width/2) && (player.x + player.width/2 +  player.weapons[player.equippedWeapon].reach) <= (this.x + this.width/2))
+					player.weapons[player.equippedWeapon].doDamage(this);					
 			}
 				
 		}

@@ -64,7 +64,7 @@ constructor : function(posX, posY) {
         this.moving = true;
         this.attacking = false;
         this.speed = 4;
-        this.attackReach = 40;
+        this.attackReach = 20;
 
         this.animationIndex = 0;
         this.animation = 0;

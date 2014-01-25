@@ -172,6 +172,7 @@ var Player = Base.extend({
 			else if(this.currentDirection.indexOf("R") != -1 && this.velocityX != 0){
 				this.velocityX = 2.0;
 			}
+            SoundManager.play("jump");
 	    }
 	},
 

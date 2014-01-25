@@ -17,7 +17,9 @@ Example = FilthyEngine.extend({
         SoundManager.load("sounds/breakMelo_loop", 'background_melo', true);
         SoundManager.load("sounds/footsteps", 'footsteps', true);
         SoundManager.load("sounds/swoosh", 'swoosh', false);
+        SoundManager.load("sounds/jump", 'jump', false);
         SoundManager.setVolume("swoosh", 0.5)
+        SoundManager.setVolume("jump", 0.2)
         SoundManager.setVolume("footsteps", 0.3)
 		/** Ajax call example
          AjaxManager.execute("scriptpath/scriptname.php", {key1:'value1', key2:'value2'}, function(data){

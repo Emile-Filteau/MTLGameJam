@@ -39,14 +39,14 @@ Example = FilthyEngine.extend({
         );
         this.getView('GAME').init = function() {
 			$(document).bind("keydown", function(event) {
-                console.log(event.which);
+                ref.game.keypress(event.which);
             });
             $(document).bind("keyup", function(event) {
-                console.log(event.which);
+                ref.game.keyrelease(event.which);
             });
 
             $(ref.getView('GAME').rootId).bind("mousedown", function(event) {
-                ref.game.clearSquares();
+               // ref.game.clearSquares();
             });
 			
 			/* Mouse Release

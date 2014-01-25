@@ -18,10 +18,8 @@ var Player = Base.extend({
 	},
 
 	draw: function(canvas, context){
-
-		context.fillStyle = "#666";
-		context.save();
-		context.restore();
+		context.drawImage(this.backgound, 0, 0, canvas.width, canvas.height);
+        context.drawImage(this.ground, 0, canvas.height - 195, 1920, 195);
 	},
 
 	jump: function(){

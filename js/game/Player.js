@@ -127,8 +127,6 @@ var Player = Base.extend({
 	draw: function(canvas, context, camera, area){
         var img;
 
-        //onsole.log(this.doDamage + " " + this.attacking);
-
         if(this.attacking){       	
         	img = PlayerConstants['attackImages'][this.currentDirection][this.animationAttackingIndex];
         }

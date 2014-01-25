@@ -84,7 +84,7 @@ var FilthyEngine = Base.extend({
                     this.views[this.currentView].resize(width, height);
             }
         }
-		//this.game.camera.resize(window.innerWidth, window.innerHeight, this.game.world);
+		this.game.camera.resize(window.innerWidth, window.innerHeight, this.game.world);
 		//this.view.resize(this.game.camera);
 	}
 });

@@ -1,6 +1,7 @@
 include("js/game/Door.js");
 include("js/game/Block.js");
 include("js/game/NPC.JS");
+include("js/game/Hole.js");
 
 var Area = Base.extend({
     constructor : function(gameRef, width, height, backgroundSrc, foregroundSrc, groundSrc, cloudsSrc) {
@@ -34,6 +35,14 @@ var Area = Base.extend({
         this.blocks.push(new Block(2440, this.groundLevel + 50));
         this.blocks.push(new Block(2440, this.groundLevel + 50 - 100));
         //this.doors.push(new Door("town", 1000, height-198));
+    
+        this.holes = [];
+        this.holes.push(new Hole(2480, 190));//2670
+        this.holes.push(new Hole(2900, 237));//3137
+        this.holes.push(new Hole(4047, 318));//4365
+        this.holes.push(new Hole(5025, 197));//5222
+        this.holes.push(new Hole(6580, 247));//6827
+        this.holes.push(new Hole(7035, 242));//7277
     },
 
 
@@ -52,6 +61,14 @@ var Area = Base.extend({
                 this.game.changeArea(this.doors[i]);
             }
         }
+
+        for(i in this.holes){
+            this.holes[i].collide(player);
+        }
+
+        for(i in this.blocks) {
+            this.blocks[i].collide(player);
+        }
     },
 
     drawBackground : function(canvas, context, player, camera) {
@@ -61,15 +78,15 @@ var Area = Base.extend({
         context.drawImage(this.clouds, 0, 0);
 
         if(player.x < camera.halfWidth) {
-            context.drawImage(this.foreground, 0, camera.height-465);
+            context.drawImage(this.foreground, 0, camera.height-390);
         }
         else if(player.x > this.width - camera.halfWidth - player.width/2) {
             finaloffset = this.width - camera.halfWidth - player.width/2;
-            context.drawImage(this.foreground, -this.foreGroundFinalOffset, camera.height-465);
+            context.drawImage(this.foreground, -this.foreGroundFinalOffset, camera.height-390);
         }
         else {
             this.foreGroundFinalOffset = this.backgroundOffset/2;
-            context.drawImage(this.foreground, -this.backgroundOffset/2, camera.height-465);
+            context.drawImage(this.foreground, -this.backgroundOffset/2, camera.height-390);
         }
 
     },

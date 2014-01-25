@@ -32,6 +32,7 @@ var ExampleGame = Game.extend({
 
 	update : function(framerate) {
        // console.log(this.camera.width, this.camera.height);
+       this.areas[this.currentArea].update(framerate);
 	},
 
     keypress : function(key) {

@@ -1,47 +1,47 @@
-var PlayerContants = {
+var PlayerConstants = {
     idleImages : [],
     moveImages : [],
     IDLE : 0,
     MOVE : 1
 }
-PlayerContants['idleImages']['L'] = new Image();
-PlayerContants['idleImages']['L'].src = "./images/player/standbyLeft.png";
+PlayerConstants['idleImages']['L'] = new Image();
+PlayerConstants['idleImages']['L'].src = "./images/player/standbyLeft.png";
 
-PlayerContants['idleImages']['R'] = new Image();
-PlayerContants['idleImages']['R'].src = "./images/player/standbyRight.png";
+PlayerConstants['idleImages']['R'] = new Image();
+PlayerConstants['idleImages']['R'].src = "./images/player/standbyRight.png";
 
-PlayerContants['moveImages']['L'] = [];
-PlayerContants['moveImages']['L'].push(new Image());
-PlayerContants['moveImages']['L'].push(new Image());
-PlayerContants['moveImages']['L'].push(new Image());
-PlayerContants['moveImages']['L'].push(new Image());
-PlayerContants['moveImages']['L'].push(new Image());
-PlayerContants['moveImages']['L'].push(new Image());
-PlayerContants['moveImages']['L'].push(new Image());
-PlayerContants['moveImages']['L'].push(new Image());
-for(i in PlayerContants['moveImages']['L']) {
-    PlayerContants['moveImages']['L'][i].src = "./images/player/runLeft/run"+i+".png";
+PlayerConstants['moveImages']['L'] = [];
+PlayerConstants['moveImages']['L'].push(new Image());
+PlayerConstants['moveImages']['L'].push(new Image());
+PlayerConstants['moveImages']['L'].push(new Image());
+PlayerConstants['moveImages']['L'].push(new Image());
+PlayerConstants['moveImages']['L'].push(new Image());
+PlayerConstants['moveImages']['L'].push(new Image());
+PlayerConstants['moveImages']['L'].push(new Image());
+PlayerConstants['moveImages']['L'].push(new Image());
+for(i in PlayerConstants['moveImages']['L']) {
+    PlayerConstants['moveImages']['L'][i].src = "./images/player/runLeft/run"+i+".png";
 }
-PlayerContants['moveImages']['R'] = [];
-PlayerContants['moveImages']['R'].push(new Image());
-PlayerContants['moveImages']['R'].push(new Image());
-PlayerContants['moveImages']['R'].push(new Image());
-PlayerContants['moveImages']['R'].push(new Image());
-PlayerContants['moveImages']['R'].push(new Image());
-PlayerContants['moveImages']['R'].push(new Image());
-PlayerContants['moveImages']['R'].push(new Image());
-PlayerContants['moveImages']['R'].push(new Image());
-for(i in PlayerContants['moveImages']['R']) {
-    PlayerContants['moveImages']['R'][i].src = "./images/player/runRight/run"+i+".png";
+PlayerConstants['moveImages']['R'] = [];
+PlayerConstants['moveImages']['R'].push(new Image());
+PlayerConstants['moveImages']['R'].push(new Image());
+PlayerConstants['moveImages']['R'].push(new Image());
+PlayerConstants['moveImages']['R'].push(new Image());
+PlayerConstants['moveImages']['R'].push(new Image());
+PlayerConstants['moveImages']['R'].push(new Image());
+PlayerConstants['moveImages']['R'].push(new Image());
+PlayerConstants['moveImages']['R'].push(new Image());
+for(i in PlayerConstants['moveImages']['R']) {
+    PlayerConstants['moveImages']['R'][i].src = "./images/player/runRight/run"+i+".png";
 }
 
 var Player = Base.extend({
-	constructor: function(width, height, posX, posY, spriteSrcL, spriteSrcR){
+	constructor: function(posX, posY, spriteSrcL, spriteSrcR){
 
-		this.height = height;
-		this.width = width;
+		this.height = 100;
+		this.width = 80;
 		this.x = posX;
-		this.y = posY;
+		this.y = posY + this.height;
 		this.hp = 100;
 		this.sanity = 100;
 		this.equippedWeapon = 0;
@@ -86,74 +86,22 @@ var Player = Base.extend({
         var img;
 		//console.log(this.x);        
         if(this.mouvement != "") {
-            img = PlayerContants['moveImages'][this.currentDirection][this.animationIndex];
+            img = PlayerConstants['moveImages'][this.currentDirection][this.animationIndex];
         } else {
-            img = PlayerContants['idleImages'][this.currentDirection];
+            img = PlayerConstants['idleImages'][this.currentDirection];
         }
         var offsetX = (this.mouvement == "" && this.currentDirection == "L") ? -20 : 0;
 
 
-
-        if(this.x < camera.halfWidth + camera.width* 0.25) {
-            //console.log("Cas 1");
-            context.drawImage(img, this.x + offsetX, this.y);
+        if(this.x < camera.halfWidth) {
+            context.drawImage(img, this.x - this.width/2 + offsetX, this.y - this.height/2);
         }
-        else if(this.x > area.width - (camera.width * 0.75)) {
-            //console.log("Cas 3");
-            context.drawImage(img, camera.width - (area.width - this.x) + offsetX, this.y);
+        else if(this.x > area.width - camera.halfWidth - this.width/2) {
+            context.drawImage(img, this.x - camera.width/2 + offsetX, this.y - this.height/2);
         }
-/*   
-
-Manipuler la caméra pour garder un buffer aux extrémités de l'écran fait chier royalement.
-J'ai codé des méthodes pour calculer les positions de points selon s'ils sont centrés sur la caméra, le area ou le canvas
-Ce bloc en bordel est sensé gérer les positions pour dessiner les NPC, le Player et les éventuels objets, portes etc
-Allez voir les fonctions dans Camera.js
-Je dois dormir un peu -- b0ul
-
-	     else {
-          if(this.x >= camera.maxTreshold){
-          	camera.maxTreshold = this.x;
-          	camera.minTreshold = this.x - (2 * camera.deltaX);
-          	camera.position.x = this.x - camera.deltaX;
-          	context.drawImage(img, camera.calculateRelativePosition(new Point(this.x, this.y)) , this.y);
-
-          }
-          else if(this.x <= camera.minTreshold){
-          	camera.minTreshold = this.x;
-			camera.maxTreshold = this.x + (2 * camera.deltaX);
-
-          	camera.position.x = this.x + camera.deltaX;
-          	context.drawImage(img, camera.calculateRelativePosition(new Point(this.x, this.y)) , this.y);
-          }
-		  else{
-		  	var relX;
-		  	if(this.x > camera.position.x){
-		  		relX = camera.halfWidth + (this.x - camera.position.x )
-		  	}
-		  	else{
-		  		relX = camera.halfWidth + ( camera.position.x - this.x )
-
-		  	}
-		  	context.drawImage(img, relX , this.y)
-		  }
-          /* // console.log("Cas 2");
-            var relX = 0;
-            if(this.x <= camera.position.x - camera.width * 0.25) {
-                console.log("2.1");
-                relX = camera.halfWidth - (camera.width * 0.25);
-            }
-            else if((this.x >= camera.position.x + camera.width * 0.25) ) {
-                console.log("2.2");
-                relX = camera.halfWidth + (camera.width * 0.25);
-            }
-            else {
-                console.log("2.3");
-                relX = camera.halfWidth + (this.x - camera.position.x);
-            }
-			*/
-            
-
-//        }
+        else {
+            context.drawImage(img, camera.halfWidth - this.width/2 + offsetX, this.y - this.height/2);
+        }
 
 	},
 
@@ -189,8 +137,8 @@ Je dois dormir un peu -- b0ul
 	move: function(area){
 		if(this.mouvement.indexOf("L") != -1){
 			this.x -= this.speed;
-            if(this.x <= 0)
-                this.x = 0;
+            if(this.x - this.width/2 <= 0)
+                this.x = this.width/2;
 			this.currentDirection = "L";
 		}
 			
@@ -208,12 +156,11 @@ Je dois dormir un peu -- b0ul
 	},
 
 	update: function(framerate, area){
-
         if(this.mouvement != "") {
             this.animation += framerate;
             if(this.animation >= 100) {
                 this.animationIndex++;
-                if(this.animationIndex >= PlayerContants['moveImages'][this.currentDirection].length) {
+                if(this.animationIndex >= PlayerConstants['moveImages'][this.currentDirection].length) {
                     this.animationIndex=0;
                 }
                 this.animation = 0;

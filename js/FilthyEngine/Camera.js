@@ -34,11 +34,7 @@ var Camera = Base.extend({
 	},
 	
 	update : function(player) {
-        if(player.x >= this.position.x + this.halfWidth * 0.25) {
-            this.position.x = player.x - this.halfWidth * 0.25;
-        } else if(player.x <= this.position.x - this.halfWidth * 0.25) {
-            this.position.x = player.x + this.halfWidth * 0.25;
-        }
+
 	},
 
 	isInViewport : function(searchedPosition) {

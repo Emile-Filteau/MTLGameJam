@@ -90,14 +90,15 @@ var Player = Base.extend({
         } else {
             img = PlayerContants['idleImages'][this.currentDirection];
         }
+        var offsetX = (this.mouvement == "" && this.currentDirection == "L") ? -20 : 0;
 
         if(this.x < camera.halfWidth + camera.width* 0.25) {
             //console.log("Cas 1");
-            context.drawImage(img, this.x, this.y);
+            context.drawImage(img, this.x + offsetX, this.y);
         }
         else if(this.x > area.width - (camera.width * 0.75)) {
             //console.log("Cas 3");
-            context.drawImage(img, camera.width - (area.width - this.x), this.y);
+            context.drawImage(img, camera.width - (area.width - this.x) + offsetX, this.y);
         }
         else {
           if(this.x >= camera.maxTreshold){
@@ -141,6 +142,7 @@ var Player = Base.extend({
             }
 			*/
             
+
         }
 
 	},
@@ -200,7 +202,6 @@ var Player = Base.extend({
         if(this.mouvement != "") {
             this.animation += framerate;
             if(this.animation >= 100) {
-                console.log("tick");
                 this.animationIndex++;
                 if(this.animationIndex >= PlayerContants['moveImages'][this.currentDirection].length) {
                     this.animationIndex=0;

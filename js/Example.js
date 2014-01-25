@@ -15,7 +15,7 @@ Example = FilthyEngine.extend({
 		*/
 		
 		/** Ajax call example
-		AjaxManager.execute("scriptpath/scriptname.php", {key1:'value1', key2:'value2'}, function(data){
+         AjaxManager.execute("scriptpath/scriptname.php", {key1:'value1', key2:'value2'}, function(data){
 			//callback with scripts answer passed as param
 			console.log(data);
 		});
@@ -28,12 +28,11 @@ Example = FilthyEngine.extend({
 	
         this.addView('GAME',
             new ExampleView('partials/example.htm', 'example_canvas', ref.game, function() {
-			
 				/* Socket events goes here
-                ref.getSocket('main').listenTo('gameMessage',  function(data) {
-                });
-				
-				*/
+                 ref.getSocket('main').listenTo('gameMessage',  function(data) {
+                 });
+
+                 */
 				
 				ref.changeView('GAME');
             })

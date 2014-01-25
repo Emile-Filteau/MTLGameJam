@@ -1,4 +1,4 @@
-var ExampleGame = Base.extend({
+var ExampleGame = Game.extend({
 	constructor : function(cameraWidth, cameraHeight) {
 		this.base(cameraWidth, cameraHeight);
 		

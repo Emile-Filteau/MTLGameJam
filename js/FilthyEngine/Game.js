@@ -4,6 +4,8 @@ var Game = Base.extend({
 	constructor : function(cameraWidth, cameraHeight, world) {
 		this.camera = new Camera(cameraWidth, cameraHeight);
 		this.world = world;
+
+
         this.currentFrame = 0;
         this.wait = false;
 

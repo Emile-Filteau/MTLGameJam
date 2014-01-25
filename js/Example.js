@@ -37,12 +37,20 @@ Example = FilthyEngine.extend({
             })
         );
         this.getView('GAME').init = function() {
+			
+			$(document).bind("keypress", function(event) {
+                console.log("KEYPRESS");
+                //ref.game.keypress(event.which);
+            });
+
 			$(document).bind("keydown", function(event) {
                 ref.game.keypress(event.which);
             });
             $(document).bind("keyup", function(event) {
                 ref.game.keyrelease(event.which);
             });
+
+
 
             $(ref.getView('GAME').rootId).bind("mousedown", function(event) {
                // ref.game.clearSquares();

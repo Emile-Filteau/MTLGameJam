@@ -1,5 +1,5 @@
 var Player = Base.extend({
-	constructor: function(height, width, posX, posY, sprite){
+	constructor: function(width, height, posX, posY, spriteSrc){
 
 		this.height = height;
 		this.width = width;
@@ -9,7 +9,9 @@ var Player = Base.extend({
 		this.sanity = 100;
 		this.equippedWeapon = 0;
 		this.weapons = [,];
-		this.sprite = sprite;
+		this.background = new Image();
+		this.background.src = spriteSrc;
+		this.speed = 1;
 
 	},
 
@@ -18,16 +20,21 @@ var Player = Base.extend({
 	},
 
 	draw: function(canvas, context){
-		context.drawImage(this.backgound, 0, 0, canvas.width, canvas.height);
-        context.drawImage(this.ground, 0, canvas.height - 195, 1920, 195);
+		context.drawImage(this.background, this.x, this.y);
 	},
 
 	jump: function(){
 
 	},
 
-	move: function(){
+	moveLeft: function(){
+		console.log("LEFT");
+		this.x -= this.speed;
+	},
 
+	moveRight: function(){
+		console.log("RIGHT");
+		this.x += this.speed;
 	},
 
 	update: function(framerate){

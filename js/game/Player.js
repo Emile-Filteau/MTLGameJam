@@ -92,6 +92,8 @@ var Player = Base.extend({
         }
         var offsetX = (this.mouvement == "" && this.currentDirection == "L") ? -20 : 0;
 
+
+
         if(this.x < camera.halfWidth + camera.width* 0.25) {
             //console.log("Cas 1");
             context.drawImage(img, this.x + offsetX, this.y);
@@ -100,12 +102,20 @@ var Player = Base.extend({
             //console.log("Cas 3");
             context.drawImage(img, camera.width - (area.width - this.x) + offsetX, this.y);
         }
-        else {
+/*   
+
+Manipuler la caméra pour garder un buffer aux extrémités de l'écran fait chier royalement.
+J'ai codé des méthodes pour calculer les positions de points selon s'ils sont centrés sur la caméra, le area ou le canvas
+Ce bloc en bordel est sensé gérer les positions pour dessiner les NPC, le Player et les éventuels objets, portes etc
+Allez voir les fonctions dans Camera.js
+Je dois dormir un peu -- b0ul
+
+	     else {
           if(this.x >= camera.maxTreshold){
           	camera.maxTreshold = this.x;
           	camera.minTreshold = this.x - (2 * camera.deltaX);
           	camera.position.x = this.x - camera.deltaX;
-          	context.drawImage(img, camera.halfWidth + camera.deltaX , this.y);
+          	context.drawImage(img, camera.calculateRelativePosition(new Point(this.x, this.y)) , this.y);
 
           }
           else if(this.x <= camera.minTreshold){
@@ -113,7 +123,7 @@ var Player = Base.extend({
 			camera.maxTreshold = this.x + (2 * camera.deltaX);
 
           	camera.position.x = this.x + camera.deltaX;
-          	context.drawImage(img, camera.halfWidth - camera.deltaX , this.y);
+          	context.drawImage(img, camera.calculateRelativePosition(new Point(this.x, this.y)) , this.y);
           }
 		  else{
 		  	var relX;
@@ -143,7 +153,7 @@ var Player = Base.extend({
 			*/
             
 
-        }
+//        }
 
 	},
 

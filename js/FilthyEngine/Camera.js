@@ -41,22 +41,26 @@ var Camera = Base.extend({
         }
 	},
 
-	isInViewport : function(position, width, height) {
-		if(position.x + width/2 > this.position.x - this.halfWidth && position.x - width/2 < this.position.x + this.halfWidth)
-		{
-			if(position.y + height/2 > this.position.y - this.halfHeight && position.y - height/2 < this.position.y + this.halfHeight)
-			{
+	isInViewport : function(searchedPosition) {
+		var result = calculateRelativePosition(searchedPosition);
+		if(result.x >= 0 && result.y >= 0 && result.x < 2 * this.halfWidth && result.y > 2 * this.halfHeight ){
 				return true;
 			}
+		else{
+			return false;
 		}
-		return false;
 	},
 	
-	calculateRelativePosition : function(position) {
-		return new Point(position.x - (this.position.x-this.halfWidth), position.y - (this.position.y - this.halfHeight));
+	// returns the relative (canevas) value for an absolute point, 
+	// Camera's X = 0 and Y = 0 in the middle of the canevas 
+	// && canevas X = 0 ad Y = 0 are in the center of the canevas
+	calculateRelativePosition : function(searchedPosition) {
+		return new Point (Math.abs(searchedPosition.x - (this.position.x - this.halfWidth)),
+								Math.abs(searchedPosition.y - (this.position.y - this.halfHeight))) ;
+
 	},
 	
-	calculateAbsolutePosition : function(x, y) {
+	calculateAbsolutePosition : function(x, y) { //returns the absolute value of a Canevas Point
 		return new Point(x + (this.position.x-this.halfWidth), y + (this.position.y - this.halfHeight));
 	}
 });

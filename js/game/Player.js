@@ -45,26 +45,26 @@ var Player = Base.extend({
 	draw: function(canvas, context, camera, area){
 
         if(this.x < camera.halfWidth + camera.width* 0.25) {
-            console.log("Cas 1");
+            //console.log("Cas 1");
             context.drawImage(this.images[this.currentDirection], this.x, this.y);
         }
         else if(this.x > area.width - (camera.width * 0.75)) {
-            console.log("Cas 3");
+            //console.log("Cas 3");
             context.drawImage(this.images[this.currentDirection], camera.width - (area.width - this.x), this.y);
         }
         else {
-            console.log("Cas 2");
+           // console.log("Cas 2");
             var relX = 0;
             if(this.x <= camera.position.x - camera.width * 0.25) {
-                console.log("2.1");
+              //  console.log("2.1");
                 relX = camera.halfWidth - (camera.width * 0.25);
             }
             else if(this.x >= camera.position.x + camera.width * 0.25) {
-                console.log("2.2");
+             //   console.log("2.2");
                 relX = camera.halfWidth + (camera.width * 0.25);
             }
             else {
-                console.log("2.3");
+          //      console.log("2.3");
                 relX = camera.halfWidth + (this.x - camera.position.x);
             }
 

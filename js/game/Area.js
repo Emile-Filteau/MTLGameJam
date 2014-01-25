@@ -8,13 +8,15 @@ var Area = Base.extend({
         this.foreground = new Image();
         this.ground = new Image();
 
+        this.groundLevel = height - 168;
+
         this.backgound.src = backgroundSrc;
         this.foreground.src = foregroundSrc;
         this.ground.src = groundSrc;
 
         this.doors = [];
-        this.npc = [new Friendly(80, 100, 400, (height - 200), "")];
-        this.ennemies = [new Hostile(80, 100, 80, 300, "")];
+        this.npc = [new Friendly(80, 100, 400, this.groundLevel - 200, "")];
+        this.ennemies = [new Hostile(600, this.groundLevel)];
 
 
         //this.doors.push(new Door("town", 1000, height-198));

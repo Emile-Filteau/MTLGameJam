@@ -15,7 +15,8 @@ var Player = Base.extend({
 		this.backgroundR.src = spriteSrcR;
 		this.speed = 7.5;
 		this.mouvement = "";
-		this.gravity = 1.2;
+		this.currentDirection = "R";
+		this.gravity = 1.4;
 		this.velocityX = 0.0;
 		this.velocityY = 0.0;
 		this.onGround = true;
@@ -28,10 +29,10 @@ var Player = Base.extend({
 
 	draw: function(canvas, context){
 
-		if(this.mouvement.indexOf("L") != -1){
+		if(this.currentDirection.indexOf("L") != -1){
 			context.drawImage(this.backgroundL, this.x, this.y);
 		}
-		else if(this.mouvement.indexOf("R") != -1){
+		else if(this.currentDirection.indexOf("R") != -1){
 			context.drawImage(this.backgroundR, this.x, this.y);
 		}		
 	},
@@ -42,11 +43,11 @@ var Player = Base.extend({
 	        this.velocityY = -22.0;
 	        this.onGround = false;
 
-	        if(this.mouvement.indexOf("L") != -1){
+	        if(this.currentDirection.indexOf("L") != -1){
 				this.velocityX = -2.0;
 			}
 				
-			else if(this.mouvement.indexOf("R") != -1){
+			else if(this.currentDirection.indexOf("R") != -1){
 				this.velocityX = 2.0;
 			}
 	    }
@@ -67,10 +68,12 @@ var Player = Base.extend({
 	move: function(){
 		if(this.mouvement.indexOf("L") != -1){
 			this.x -= this.speed;
+			this.currentDirection = "L";
 		}
 			
 		else if(this.mouvement.indexOf("R") != -1){
 			this.x += this.speed;
+			this.currentDirection = "R";
 		}
 			
 	},

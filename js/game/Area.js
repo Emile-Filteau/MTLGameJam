@@ -1,4 +1,5 @@
 include("js/game/Door.js");
+include("js/game/Block.js");
 include("js/game/NPC.JS");
 
 var Area = Base.extend({
@@ -19,12 +20,16 @@ var Area = Base.extend({
         this.clouds.src = cloudsSrc;
 
         this.doors = [];
+        this.blocks = [] ;
         this.npc = ""//[new Friendly(80, 100, 400, this.groundLevel - 200, "")];
         this.ennemies = [new Spitter(600, this.groundLevel)];
 
         this.backgroundOffset = 0;
         this.foreGroundFinalOffset = 0;
         this.groundFinalOffset = 0;
+
+
+        this.blocks.push(new Block(1450, this.groundLevel));
         //this.doors.push(new Door("town", 1000, height-198));
     },
 

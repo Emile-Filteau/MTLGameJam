@@ -73,7 +73,7 @@ var ExampleGame = Game.extend({
     },
 
 	update : function(framerate) {
-
+       console.log(this.player.x)
        this.player.update(framerate, this.areas[this.currentArea]);
 
        this.camera.update(framerate, this.player)

@@ -36,17 +36,17 @@ for(i in SpectreConstants['deathImages']['R']) {
 }*/
 var Spectre = Hostile.extend({
 	
-    constructor : function(posX, posY) {
+    constructor : function(posX, posY, curDir) {
 		this.height = 62;
 		this.width = 58;
 		this.x = posX ;
 		this.y = posY - this.height/2 - 50;
         this.hp = 1;
-        this.currentDirection = "L";
-        this.currentOrientation = "U";
+        this.currentDirection = curDir;
+        this.currentOrientation = "D";
         this.moving = true;
         this.attacking = false;
-        this.speed = 4;
+        this.speed = 6;
         this.attackReach = 100;
         this.attackSpeed = 1.7;
         this.animationIndex = 0;
@@ -54,8 +54,8 @@ var Spectre = Hostile.extend({
         this.animationFrameDamageTreshold = 3
         this.aggroRadius = 900;
         this.isAggro = false;
-        this.minHeight = 200;
-        this.maxHeight = 350;
+        this.minHeight = 370;
+        this.maxHeight = 100;
 	},
 	
 	draw : function(canvas, context, player, camera, area) {
@@ -84,50 +84,55 @@ var Spectre = Hostile.extend({
 	update : function(framerate, player) {
         if(Math.abs(this.x - player.x) < this.aggroRadius  || this.isAggro) {
             this.isAggro = true;
-        if(Math.abs((this.x - player.x)) <= this.attackReach || (this.attacking && this.animationIndex > 0 )) {
-        	this.moving = false;
-        	this.attacking = true;
-        }
+        //if(Math.abs((this.x - player.x)) <= this.attackReach || (this.attacking && this.animationIndex > 0 )) {
+        	//this.moving = false;
+        	//this.attacking = true;
+        //}
         if(this.moving) {
             if(this.currentDirection == "L") {
+                this.x -= this.speed;
                 if(this.currentOrientation == "U") {
-                    this.x -= this.speed;
-                    this.y -= this.speed;
-                    if(this.y <= this.minHeight)
-                        this.currentOrientation = "D";
-                } else {
-                    this.x -= this.speed;
-                    this.y += this.speed;
-                    if(this.y >= this.maxHeight)
-                        this.currentOrientation = "U";
+                        this.y -= this.speed;
+                } else if(this.y < this.minHeight){
+                        this.y += this.speed;
+                        //this.currentOrientation = "D";
                 }
             } else {
+                 this.x += this.speed;
                 if(this.currentOrientation == "U") {
-                    this.x += this.speed;
-                    this.y -= this.speed;
-                    if(this.y <= this.minHeight)
-                        this.currentOrientation = "D";
-                } else {
-                    this.x += this.speed;
-                    this.y += this.speed;
-                    if(this.y >= this.maxHeight)
-                        this.currentOrientation = "U";
+                        this.y -= this.speed;
+                } else if(this.y < this.minHeight){
+                        this.y += this.speed;
                 }
             }
-        } else if(this.attacking) {
-            if(this.x < player.x) {
+            if(this.x - this.width/2  < player.x - player.width/2 - 50 && this.currentDirection == 'L')
+            {
+                this.currentDirection = 'R';
+            }
+            else if(this.x + this.width/2  > player.x + player.width/2 + 50 && this.currentDirection == 'R') {
+                this.currentDirection = 'L';
+            }
+            if(this.y > player.y + player.height/3){
+                this.currentOrientation = 'U';
+            }
+            else{
+                this.currentOrientation = 'D';
+            }
+        } /*else if(this.attacking) {
+            if(this.x < player.x - 40) {
                 this.x+=this.speed;
                 this.currentDirection = "R";
-            } else {
+            } else if(this.x > player.x + 40) {
                 this.x-=this.speed;
                 this.currentDirection = "L";
             }
-            if(this.x > player.x - player.width/2 && this.x < player.x + player.width/2) {
+            if(this.x > player.x - player.width/2
+            && this.x < player.x + player.width/2) {
                 this.y += this.speed;
             } else {
-                this.y -= this.speed;
+                //this.y -= this.speed;
             }
-        }
+        }*/
         this.collide(player);
     }
 	},

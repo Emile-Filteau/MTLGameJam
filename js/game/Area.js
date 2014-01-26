@@ -25,6 +25,20 @@ var Area = Base.extend({
         this.holes = [];
         this.npc = ""//[new Friendly(80, 100, 400, this.groundLevel - 200, "")];
         this.ennemies = [new Spitter(600, this.groundLevel)];
+        this.ennemies.push(new Spitter(600, this.groundLevel));
+        this.ennemies.push(new Spitter(1600, this.groundLevel));
+        this.ennemies.push(new Spitter(1000, this.groundLevel));
+        this.ennemies.push(new Spitter(700, this.groundLevel));
+        this.ennemies.push(new Spitter(2500, this.groundLevel));
+        this.ennemies.push(new Spitter(3000, this.groundLevel));
+        this.ennemies.push(new Spitter(2800, this.groundLevel));
+        this.ennemies.push(new Spitter(5000, this.groundLevel));
+        this.ennemies.push(new Spitter(4000, this.groundLevel));
+        this.ennemies.push(new Spitter(8000, this.groundLevel));
+        this.ennemies.push(new Spitter(6500, this.groundLevel));
+        this.ennemies.push(new Spitter(2100, this.groundLevel));
+        this.ennemies.push(new Spitter(2200, this.groundLevel));
+
         this.ennemies.push(new Spectre(500, 200));
         this.ennemies = [];
 

@@ -26,11 +26,37 @@ var Block = Base.extend({
         }
     },
 
-    collide : function(player) {
-        if(player.x + 69 > this.x && player.x < this.x + 50) {
-            if(player.y >= this.y)
-                return true;
+    collide : function(player, area) {
+
+        if((player.x + player.width/2) > (this.x - this.width/2) && (player.x + player.width/2) < (this.x + this.width/2) && (player.groundY - player.y) > this.height - 41){
+            player.onBlock = true;
+            console.log(this);
         }
-        return false;
+     
+        if((player.x + player.width/2) > (this.x - this.width/2) && (player.x + player.width/2) < (this.x + this.width/2)){
+
+            if(player.mouvement.indexOf("R") != -1 && (player.staticGround - player.y) < this.height - 41){
+                player.canRunRight = false;
+            }
+
+            else if(player.mouvement.indexOf("L") != -1 && (player.staticGround - player.y) < this.height - 41){
+                player.canRunLeft = false;
+            }
+
+            if((player.groundY - player.y) > this.height - 41 && player.onBlock){
+                player.groundY = (area.groundLevel - this.height + 21);
+                player.canRunLeft = true;
+                player.canRunRight = true;
+            }
+
+            if(player.onBlock && (player.x - player.width/2) < (this.x - this.width/2 - 30) && player.mouvement.indexOf("L") != -1){
+                player.onBlock = false;
+            }
+                
+        }
+        
+            if(player.onBlock && (player.x - player.width/2) > (this.x + this.width/2) && player.mouvement.indexOf("R") != -1){
+                player.onBlock = false;
+            }
     }
 });

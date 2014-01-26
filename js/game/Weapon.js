@@ -13,17 +13,5 @@ var Weapon = Base.extend({
 	doDamage: function(npc){
 		console.log(npc);
 		npc.hp -= this.damage;
-	},
-
-	draw: function(){
-
-	},
-
-	update: function(){
-		
-	},
-
-	use: function(){
-
 	}
 });

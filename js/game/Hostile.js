@@ -1,5 +1,6 @@
 include("js/game/NPC.js");
 include("js/game/Spitter.js")
+include("js/game/Spectre.js")
 
 
 var Hostile = NPC.extend({

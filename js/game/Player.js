@@ -233,6 +233,14 @@ var Player = Base.extend({
 	},
 
 	update: function(framerate, area){
+        if(this.hp == 0) {
+            alert("You are dead !!");
+            window.location = "/";
+        }
+
+        if(this.y > area.height) {
+            this.hp = 0;
+        }
 
 		if(this.recovery <= 0){
 			this.recovery = 0;

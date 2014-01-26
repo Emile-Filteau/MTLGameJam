@@ -13,7 +13,7 @@ var Area = Base.extend({
         this.clouds = new Image();
         this.ground = new Image();
 
-        this.groundLevel = height - 150;
+        this.groundLevel = height - 170;
 
         this.backgound.src = backgroundSrc;
         this.foreground.src = foregroundSrc;
@@ -25,6 +25,7 @@ var Area = Base.extend({
         this.holes = [];
         this.npc = ""//[new Friendly(80, 100, 400, this.groundLevel - 200, "")];
         this.ennemies = [];
+        /*
         this.ennemies.push(new Spitter(600, this.groundLevel));
         this.ennemies.push(new Spitter(1600, this.groundLevel));
         this.ennemies.push(new Spitter(1000, this.groundLevel));
@@ -38,17 +39,17 @@ var Area = Base.extend({
         this.ennemies.push(new Spitter(6500, this.groundLevel));
         this.ennemies.push(new Spitter(2100, this.groundLevel));
         this.ennemies.push(new Spitter(2600, this.groundLevel));
-
-        this.ennemies.push(new Spectre(1100, 200));
+        */
+        this.ennemies.push(new Spectre(800, 200,"L"));
         this.backgroundOffset = 0;
         this.foreGroundFinalOffset = 0;
         this.groundFinalOffset = 0;
 
 
-        this.blocks.push(new Block(1495, this.groundLevel + 50));
-        this.blocks.push(new Block(2105, this.groundLevel + 50));
-        this.blocks.push(new Block(2440, this.groundLevel + 50));
-        this.blocks.push(new Block(2440, this.groundLevel + 50 - 100));
+        this.blocks.push(new Block(1495, this.groundLevel + 70));
+        this.blocks.push(new Block(2105, this.groundLevel + 70));
+        this.blocks.push(new Block(2440, this.groundLevel + 70));
+        this.blocks.push(new Block(2440, this.groundLevel + 70 - 100));
         //this.doors.push(new Door("town", 1000, height-198));  
         
         this.holes.push(new Hole(2480, 185));//2670

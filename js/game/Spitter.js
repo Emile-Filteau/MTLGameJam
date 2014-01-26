@@ -75,6 +75,9 @@ constructor : function(posX, posY) {
         this.animationIndex = 0;
         this.animation = 0;
         this.animationFrameDamageTreshold = 3;
+        this.aggroRadius = 300;
+        isAggro = false;
+
 	},
 	
 	draw : function(canvas, context, player, camera, area) {
@@ -123,50 +126,56 @@ constructor : function(posX, posY) {
 	},
 
 	update : function(framerate, player) {
-        if(Math.abs((this.x - player.x)) <= this.attackReach || (this.attacking && this.animationIndex > 0 )) {
-        	this.moving = false;
-        	this.attacking = true; 
-            //console.log('attack!');
-        	this.animation += framerate;
-        	if(this.animation >= this.attackSpeed * 100) {
-                this.animationIndex++;
-                if(this.animationIndex == SpitterConstants['attackImages'][this.currentDirection].length - this.animationFrameDamageTreshold
-                    && (Math.abs((this.x - player.x)) <= this.attackReach ) ) {
-                    console.log('PUKE HITS OH YEAH');
-                    player.takeDamage(1);
-                } 
-                if(this.animationIndex >= SpitterConstants['attackImages'][this.currentDirection].length) {
-                    this.animationIndex=0;
-                    attacking = false;
-                    movien = true;
+         if(Math.abs(this.x - player.x) < this.aggroRadius  || isAggro) {
+            isAggro = true;
+           if( Math.abs((this.x - player.x)) <= this.attackReach || (this.attacking && this.animationIndex > 0 )) {
+            	this.moving = false;
+            	this.attacking = true; 
+                //console.log('attack!');
+            	this.animation += framerate;
+            	if(this.animation >= this.attackSpeed * 100) {
+                    this.animationIndex++;
+                    if(this.animationIndex == SpitterConstants['attackImages'][this.currentDirection].length - this.animationFrameDamageTreshold
+                        && (Math.abs((this.x - player.x)) <= this.attackReach ) ) {
+                        console.log('PUKE HITS OH YEAH');
+                        player.takeDamage(1, this);
+                    } 
+                    if(this.animationIndex >= SpitterConstants['attackImages'][this.currentDirection].length) {
+                        this.animationIndex=0;
+                        attacking = false;
+                        movien = true;
+                    }
+                    this.animation = 0;
                 }
-                this.animation = 0;
-            }
 
-        }
-        else if (this.animationIndex == 0){
-        	this.attacking = false;
-        	this.moving = true;
-        	this.animationIndex = 0
-        }
-        if(this.moving) {
-            this.animation += framerate;
-            if(this.animation >= 250) {
-                this.animationIndex++;
-                if(this.animationIndex >= SpitterConstants['moveImages'][this.currentDirection].length) {
-                    this.animationIndex=0;
+            }
+            else if (this.animationIndex == 0){
+            	this.attacking = false;
+            	this.moving = true;
+            	this.animationIndex = 0
+            }
+            if(this.moving) {
+                this.animation += framerate;
+                if(this.animation >= 250) {
+                    this.animationIndex++;
+                    if(this.animationIndex >= SpitterConstants['moveImages'][this.currentDirection].length) {
+                        this.animationIndex=0;
+                    }
+                    this.animation = 0;
                 }
-                this.animation = 0;
+                if(this.x > player.x) {
+                    this.x -= this.speed;
+                    this.currentDirection = "L";
+                } else {
+                    this.x += this.speed;
+                    this.currentDirection = "R";
+                }
             }
-            if(this.x > player.x) {
-                this.x -= this.speed;
-                this.currentDirection = "L";
-            } else {
-                this.x += this.speed;
-                this.currentDirection = "R";
-            }
+            this.collide(player);
         }
-        this.collide(player);
+        else{
+                //patrol
+        }
 	},
 	collide : function(player){
 		this.base(player);

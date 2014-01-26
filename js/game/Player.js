@@ -279,7 +279,7 @@ var Player = Base.extend({
 
 	    this.move(area);
 	},
-	takeDamage:function(dmg){
+	takeDamage:function(dmg, sourceOfDmg){
 		if(this.onGround && !this.inHole){
 	        this.velocityY = -22.0;
 	        this.onGround = false;
@@ -296,7 +296,7 @@ var Player = Base.extend({
 
 		this.velocityY 	= -22;
 		var knockbackDirection;
-		if(this.currentDirection == 'R'){
+		if(sourceOfDmg.x >= this.x){
 			knockbackDirection = -1;
 		}
 		else{
@@ -307,6 +307,6 @@ var Player = Base.extend({
 
 
 		this.hp -= dmg;
-		this.recovery = 4500;		
+		this.recovery = 300;		
 	}
 });

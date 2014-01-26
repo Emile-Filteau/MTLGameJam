@@ -19,6 +19,7 @@ constructor : function(posX, posY) {
         this.animationAttackingIndex = 0;
         this.animationIndex = 0;
         this.animation = 0;
+        this.aggroRadius = 350;
 	},
 	
 	draw : function(canvas, context, player, camera, area) {
@@ -114,7 +115,7 @@ constructor : function(posX, posY) {
 		console.log(colisionBool);
 		if(colisionBool){
 			if(player.recovery == 0){
-				player.takeDamage(1);
+				player.takeDamage(1, this);
 			}
 		}
 		if(player.doDamage && this.y <= player.y){

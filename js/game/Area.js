@@ -23,23 +23,24 @@ var Area = Base.extend({
         this.doors = [];
         this.blocks = [] ;
         this.holes = [];
-        this.npc = ""//[new Friendly(80, 100, 400, this.groundLevel - 200, "")];
         this.ennemies = [];
-        this.ennemies.push(new Spitter(600, this.groundLevel));
-        this.ennemies.push(new Spitter(1600, this.groundLevel));
-        this.ennemies.push(new Spitter(1000, this.groundLevel));
-        this.ennemies.push(new Spitter(700, this.groundLevel));
-        this.ennemies.push(new Spitter(15000, this.groundLevel));
-        this.ennemies.push(new Spitter(3000, this.groundLevel));
-        this.ennemies.push(new Spitter(2800, this.groundLevel));
-        this.ennemies.push(new Spitter(5000, this.groundLevel));
-        this.ennemies.push(new Spitter(4000, this.groundLevel));
-        this.ennemies.push(new Spitter(8000, this.groundLevel));
-        this.ennemies.push(new Spitter(6500, this.groundLevel));
-        this.ennemies.push(new Spitter(2100, this.groundLevel));
-        this.ennemies.push(new Spitter(2600, this.groundLevel));
+        this.npc = ""//[new Friendly(80, 100, 400, this.groundLevel - 200, "")];
 
-        this.ennemies.push(new Spectre(1100, 200));
+       //this.ennemies = [new Spitter(600, this.groundLevel)];
+
+        this.ennemies = [];
+        this.ennemies.push(new Spitter(600, this.groundLevel + 20));
+        this.ennemies.push(new Spitter(700, this.groundLevel + 20));
+        this.ennemies.push(new Spitter(1000, this.groundLevel + 20));
+        this.ennemies.push(new Spitter(2800, this.groundLevel + 20));
+        this.ennemies.push(new Spitter(4000, this.groundLevel + 20));
+        this.ennemies.push(new Spitter(5000, this.groundLevel + 20));
+        this.ennemies.push(new Spitter(6500, this.groundLevel + 20));
+        this.ennemies.push(new Spitter(8000, this.groundLevel + 20));
+        this.ennemies.push(new Spitter(15000, this.groundLevel + 20));
+
+        //this.ennemies.push(new Spectre(500, 200));
+
         this.backgroundOffset = 0;
         this.foreGroundFinalOffset = 0;
         this.groundFinalOffset = 0;
@@ -68,8 +69,9 @@ var Area = Base.extend({
             this.npc[i].update(framerate, player);
         }
         for(i in this.ennemies){
-            if(this.ennemies[i].hp > 0)
+            if(this.ennemies[i].hp > 0){
                 this.ennemies[i].update(framerate, player);
+            }           
         }
 
         for(i in this.doors) {
@@ -80,10 +82,19 @@ var Area = Base.extend({
 
         for(i in this.holes){
             this.holes[i].collide(player);
+
+            for(j in this.ennemies){
+                this.holes[i].collideNPC(this.ennemies[j]);
+            } 
         }
 
         for(i in this.blocks) {
             this.blocks[i].collide(player, this);
+
+
+            for(j in this.ennemies){
+                this.blocks[i].collideNPC(this.ennemies[j], this);
+            }            
         }
     },
 

@@ -234,7 +234,7 @@ constructor : function(posX, posY) {
                 //console.log((player.x - player.width/2) - player.weapons[player.equippedWeapon].reach + " " + (this.x + this.width/2));
 
                 if((player.x - player.width/2 -  player.weapons[player.equippedWeapon].reach) <= (this.x + this.width/2) 
-                    && (player.x + player.width/2 +  player.weapons[player.equippedWeapon].reach) >= (this.x - this.width/2)){
+                && (player.x - player.width/2 -  player.weapons[player.equippedWeapon].reach) >= (this.x - this.width/2)){
                     player.weapons[player.equippedWeapon].doDamage(this);
                     SoundManager.play("moan");
                     this.hit = 250;
@@ -245,10 +245,10 @@ constructor : function(posX, posY) {
                 //console.log((player.x + player.width/2) + " " + (player.weapons[player.equippedWeapon].reach + (player.x + player.width/2)) + " " + this.x + " " + (this.x - this.width/2));
 
                 if((player.x + player.width/2 +  player.weapons[player.equippedWeapon].reach) >= (this.x - this.width/2) 
-                    && (player.x + player.width/2 +  player.weapons[player.equippedWeapon].reach) <= (this.x + this.width/2)){
+                && (player.x + player.width/2 +  player.weapons[player.equippedWeapon].reach) <= (this.x + this.width/2 - 15)){
                     player.weapons[player.equippedWeapon].doDamage(this);
-                SoundManager.play("moan");
-                this.hit = 250;
+                    SoundManager.play("moan");
+                    this.hit = 250;
                 }
             }        
         }

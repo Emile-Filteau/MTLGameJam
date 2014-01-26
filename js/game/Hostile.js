@@ -118,24 +118,29 @@ constructor : function(posX, posY) {
 				player.takeDamage(1, this);
 			}
 		}
-		if(player.doDamage && ( (this.y + this.height >= player.y && this.y + this.height < player.y + player.height) 
+		if(player.doDamage && ( (this.y + this.height >= player.y && this.y < player.y + player.height) 
 								|| (this.y <= player.y + player.height && this.y > player.y)  ) )
-		{
-			if(player.currentDirection.indexOf("L") != -1){
-				if((player.x - player.width/2 -  player.weapons[player.equippedWeapon].reach) <= (this.x + this.width/2) 
-					&& (player.x + player.width/2 +  player.weapons[player.equippedWeapon].reach) >= (this.x - this.width/2)){
+		{	console.log(0);
+			if(player.currentDirection.indexOf("L") != -1 && player.currentDirection.indexOf("R") == -1){
+				console.log(1);
+				if((player.x - player.width/2 -  player.weapons[player.equippedWeapon].reach) <= (this.x + this.width/2) && (player.x - player.width/2 -  player.weapons[player.equippedWeapon].reach) >= (this.x - this.width/2))
+				{
+					console.log("mobLeftX: "+(this.x - this.width));
+					console.log("WepLeftLimit: "+(player.x - player.width/2 -  player.weapons[player.equippedWeapon].reach));
 					player.weapons[player.equippedWeapon].doDamage(this);
                 	SoundManager.play("moan");
             	}
 			}		
-				
-			if(player.currentDirection.indexOf("R") != -1){
+			
+			else if(player.currentDirection.indexOf("R") != -1 && player.currentDirection.indexOf("L") == -1 ){
 				//console.log((player.x + player.width/2) + " " + (player.weapons[player.equippedWeapon].reach + (player.x + player.width/2)) + " " + this.x + " " + (this.x - this.width/2));
-
+				console.log(3);
 				if((player.x + player.width/2 +  player.weapons[player.equippedWeapon].reach) >= (this.x - this.width/2) 
-					&& (player.x + player.width/2 +  player.weapons[player.equippedWeapon].reach) <= (this.x + this.width/2)){
+					&& (player.x + player.width/2 +  player.weapons[player.equippedWeapon].reach) <= (this.x + this.width/2))
+				{
+					console.log(4);
 					player.weapons[player.equippedWeapon].doDamage(this);
-                SoundManager.play("moan");
+                	SoundManager.play("moan");
             	}
 			}
 				

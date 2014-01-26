@@ -303,7 +303,7 @@ var Player = Base.extend({
 	},
 	takeDamage:function(dmg, sourceOfDmg){
 		if(this.onGround && !this.inHole){
-	        this.velocityY = -22.0;
+	        this.velocityY = -10.0;
 	        this.onGround = false;
 
 	        if(this.currentDirection.indexOf("L") != -1 && this.velocityX != 0){
@@ -324,7 +324,7 @@ var Player = Base.extend({
 		else{
 			knockbackDirection = 1
 		}
-		this.velocityX += (14 * dmg * knockbackDirection)
+		this.velocityX += (10 * dmg * knockbackDirection)
 		
 
 

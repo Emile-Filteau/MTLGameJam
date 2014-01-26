@@ -37,9 +37,13 @@ var NPC = Base.extend({
 		}
 	},
 	collide : function(player) {
+		if(player.y + player.height/2 < this.y+this.height/3){
+			player.collidesWith(false);
+        	return false;
+		}
         if(player.x + (player.width/2 - 10) > this.x && player.x - (player.width/2 - 5) < this.x ) {
-            if(player.y + player.height >= this.y && player.y <= this.y + this.height){
-                //console.log("COLLISION");
+            if( (player.y + player.height >= this.y && player.y <= this. y) || (player.y <= this.y + this.height && player.y + player.height >= this.y + this.height)){
+            //    console.log("mob "+this.y+":"+player.y+player.height);
                 player.collidesWith(this);
                 return this;
             }

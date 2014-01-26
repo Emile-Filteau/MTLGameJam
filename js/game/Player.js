@@ -5,6 +5,7 @@ var PlayerConstants = {
     moveImages : [],
     attackImages : [],
     jumpingImages : [],
+    hitImage : [],
     IDLE : 0,
     MOVE : 1
 }
@@ -19,6 +20,12 @@ PlayerConstants['jumpingImages']['L'].src = "./images/player/jumpLeft.png";
 
 PlayerConstants['jumpingImages']['R'] = new Image();
 PlayerConstants['jumpingImages']['R'].src = "./images/player/jumpRight.png";
+
+PlayerConstants['hitImage']['L'] = new Image();
+PlayerConstants['hitImage']['L'].src = "./images/player/persoHitLeft.png";
+
+PlayerConstants['hitImage']['R'] = new Image();
+PlayerConstants['hitImage']['R'].src = "./images/player/persoHitRight.png";
 
 PlayerConstants['moveImages']['L'] = [];
 PlayerConstants['moveImages']['L'].push(new Image());
@@ -130,20 +137,24 @@ var Player = Base.extend({
 	draw: function(canvas, context, camera, area){
         var img;
 
-        if(this.attacking){       	
-        	img = PlayerConstants['attackImages'][this.currentDirection][this.animationAttackingIndex];
+        if(this.recovery > 0) {
+            img = PlayerConstants['hitImage'][this.currentDirection];
+        } else {
+            if(this.attacking){
+                img = PlayerConstants['attackImages'][this.currentDirection][this.animationAttackingIndex];
+            }
+            else {
+                if(this.onGround) {
+                    if(this.mouvement != "") {
+                        img = PlayerConstants['moveImages'][this.currentDirection][this.animationIndex];
+                    } else {
+                        img = PlayerConstants['idleImages'][this.currentDirection];
+                    }
+                } else {
+                    img = PlayerConstants['jumpingImages'][this.currentDirection];
+                }
+            }
         }
-        else {
-        	if(this.onGround) {
-	            if(this.mouvement != "") {
-	                img = PlayerConstants['moveImages'][this.currentDirection][this.animationIndex];
-	            } else {
-	                img = PlayerConstants['idleImages'][this.currentDirection];
-	            }
-	        } else {
-	            img = PlayerConstants['jumpingImages'][this.currentDirection];
-	        }
-        }     
         
         var offsetX = (this.mouvement == "" && this.currentDirection == "L") ? -20 : 0;
         var offsetY = (this.attacking) ? 40 : 0;
@@ -307,6 +318,8 @@ var Player = Base.extend({
 
 
 		this.hp -= dmg;
+
 		this.recovery = 300;		
+
 	}
 });

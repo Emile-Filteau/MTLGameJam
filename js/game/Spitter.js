@@ -210,7 +210,7 @@ constructor : function(posX, posY) {
 	},
 	collide : function(player){
         var colisionBool = this.base(player);
-        console.log(colisionBool);
+        //console.log(colisionBool);
         if(colisionBool){
             if(player.recovery == 0){
                 player.takeDamage(1, this);

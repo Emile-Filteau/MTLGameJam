@@ -1,7 +1,8 @@
 include("js/game/Door.js");
 include("js/game/Block.js");
-include("js/game/NPC.JS");
+include("js/game/NPC.js");
 include("js/game/Hole.js");
+include("js/game/Apple.js");
 
 var Area = Base.extend({
     constructor : function(gameRef, width, height, backgroundSrc, foregroundSrc, groundSrc, cloudsSrc) {
@@ -24,13 +25,14 @@ var Area = Base.extend({
         this.blocks = [] ;
         this.holes = [];
         this.ennemies = [];
+        this.apples = [];
         this.npc = ""//[new Friendly(80, 100, 400, this.groundLevel - 200, "")];
 
        //this.ennemies = [new Spitter(600, this.groundLevel)];
 
         this.ennemies = [];
 
-        this.ennemies.push(new Spectre(800, 200,"L"));
+       // this.ennemies.push(new Spectre(800, 200,"L"));
         this.ennemies.push(new Spitter(600, this.groundLevel ));
         this.ennemies.push(new Spitter(700, this.groundLevel ));
         this.ennemies.push(new Spitter(1000, this.groundLevel ));
@@ -49,10 +51,11 @@ var Area = Base.extend({
 
 
         this.blocks.push(new Block(1495, this.groundLevel + 30));
-        this.blocks.push(new Block(2105, this.groundLevel + 30));
+        this.blocks.push(new Block(2105, this. groundLevel + 30));
         this.blocks.push(new Block(2440, this.groundLevel + 30));
         this.blocks.push(new Block(2440, this.groundLevel + 30 - 100));
-        //this.doors.push(new Door("town", 1000, height-198));  
+
+        this.doors.push(new Door("town", 8400, this.groundLevel+25));
         
         this.holes.push(new Hole(2480, 185));//2670
         this.holes.push(new Hole(2900, 230));//3137
@@ -66,18 +69,26 @@ var Area = Base.extend({
     update : function(framerate, player) {
         this.backgroundOffset = player.x - 400;
 
-        //console.log(player.x + " " + this.blocks[0].x);
         for(i in this.npc){
             this.npc[i].update(framerate, player);
         }
         for(i in this.ennemies){
             if(this.ennemies[i].hp > 0){
                 this.ennemies[i].update(framerate, player);
-            }           
+            }     
+            else {
+                var spawnApple = this.ennemies[i].dropApple();
+                if(spawnApple){
+                    this.apples.push(new Apple(this.ennemies[i].x, this.ennemies[i].y+this.ennemies[i].height/2+30, 2));
+                }
+                this.ennemies.splice(i, 1);
+            }      
         }
 
         for(i in this.doors) {
             if(this.doors[i].collide(player)) {
+                alert("Level cleared ! Boss coming soon :)");
+                location.reload();
                 this.game.changeArea(this.doors[i]);
             }
         }
@@ -88,6 +99,15 @@ var Area = Base.extend({
             for(j in this.ennemies){
                 this.holes[i].collideNPC(this.ennemies[j]);
             } 
+        }
+
+        for(i in this.apples){
+            this.apples[i].collide(player, this);
+
+            if(!this.apples[i].showApple){
+                player.eatApple(this.apples[i].hp);
+                this.apples.splice(i, 1);
+            }
         }
 
         for(i in this.blocks) {
@@ -121,6 +141,10 @@ var Area = Base.extend({
     },
 
     drawProps : function(canvas, context, player, camera) {
+        for(var i in this.apples){
+            this.apples[i].draw(canvas, context, player, camera, this);
+        }
+
         for(var i in this.blocks){
             this.blocks[i].draw(canvas, context, player, camera, this);
         }
@@ -147,7 +171,7 @@ var Area = Base.extend({
         }
 
         for(i in this.doors) {
-            this.doors[i].draw(canvas, context);
+            this.doors[i].draw(canvas, context, player, camera, this);
         }
     }
 });

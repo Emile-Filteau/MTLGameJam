@@ -9,14 +9,14 @@ var SpectreConstants = {
 SpectreConstants['idleImages']['L'] = [];
 SpectreConstants['idleImages']['L']["U"] = new Image()
 SpectreConstants['idleImages']['L']["D"] = new Image()
-SpectreConstants['idleImages']['L']["U"].src = "./images/spectre/left/up.png";
-SpectreConstants['idleImages']['L']["D"].src = "./images/spectre/left/down.png"
+SpectreConstants['idleImages']['L']["U"].src = location.href + "images/spectre/left/up.png";
+SpectreConstants['idleImages']['L']["D"].src = location.href + "images/spectre/left/down.png"
 
 SpectreConstants['idleImages']['R'] = [];
 SpectreConstants['idleImages']['R']["U"] = new Image()
 SpectreConstants['idleImages']['R']["D"] = new Image()
-SpectreConstants['idleImages']['R']["U"].src = "./images/spectre/right/up.png";
-SpectreConstants['idleImages']['R']["D"].src = "./images/spectre/right/down.png";
+SpectreConstants['idleImages']['R']["U"].src = location.href + "images/spectre/right/up.png";
+SpectreConstants['idleImages']['R']["D"].src = location.href + "images/spectre/right/down.png";
 /*
 SpectreConstants['deathImages']['L'] = [];
 SpectreConstants['deathImages']['L'].push(new Image());
@@ -24,7 +24,7 @@ SpectreConstants['deathImages']['L'].push(new Image());
 SpectreConstants['deathImages']['L'].push(new Image());
 SpectreConstants['deathImages']['L'].push(new Image());
 for(i in SpectreConstants['deathImages']['L']) {
-    SpectreConstants['deathImages']['L'][i].src = "./images/spectre/runLeft/SpitterWalk"+i+".png";
+    SpectreConstants['deathImages']['L'][i].src = location.href + "images/spectre/runLeft/SpitterWalk"+i+".png";
 }
 SpectreConstants['deathImages']['R'] = [];
 SpectreConstants['deathImages']['R'].push(new Image());
@@ -32,7 +32,7 @@ SpectreConstants['deathImages']['R'].push(new Image());
 SpectreConstants['deathImages']['R'].push(new Image());
 SpectreConstants['deathImages']['R'].push(new Image());
 for(i in SpectreConstants['deathImages']['R']) {
-    SpectreConstants['deathImages']['R'][i].src = "./images/spectre/runRight/SpitterWalk"+i+".png";
+    SpectreConstants['deathImages']['R'][i].src = location.href + "images/spectre/runRight/SpitterWalk"+i+".png";
 }*/
 var Spectre = Hostile.extend({
 	
@@ -58,6 +58,11 @@ var Spectre = Hostile.extend({
         this.maxHeight = 100;
 	},
 	
+    dropApple : function(){
+
+        return false;
+    },
+
 	draw : function(canvas, context, player, camera, area) {
         if(this.moving || this.attacking) {
             if(player.x < camera.halfWidth) {

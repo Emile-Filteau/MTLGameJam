@@ -7,10 +7,10 @@ var BoommerConstants = {
     MOVE : 1
 }
 BoommerConstants['idleImages']['L'] = new Image();
-BoommerConstants['idleImages']['L'].src = "./images/boomers/standbyLeftBig.png";
+BoommerConstants['idleImages']['L'].src = location.href + "images/boomers/standbyLeftBig.png";
 
 BoommerConstants['idleImages']['R'] = new Image();
-BoommerConstants['idleImages']['R'].src = "./images/boomers/standbyRightBig.png";
+BoommerConstants['idleImages']['R'].src = location.href + "images/boomers/standbyRightBig.png";
 
 BoommerConstants['moveImages']['L'] = [];
 BoommerConstants['moveImages']['L'].push(new Image());
@@ -19,7 +19,7 @@ BoommerConstants['moveImages']['L'].push(new Image());
 BoommerConstants['moveImages']['L'].push(new Image());
 BoommerConstants['moveImages']['L'].push(new Image());
 for(i in BoommerConstants['moveImages']['L']) {
-    BoommerConstants['moveImages']['L'][i].src = "./images/boomers/runLeft/SlugWalkBig"+i+".png";
+    BoommerConstants['moveImages']['L'][i].src = location.href + "images/boomers/runLeft/SlugWalkBig"+i+".png";
 }
 BoommerConstants['moveImages']['R'] = [];
 BoommerConstants['moveImages']['R'].push(new Image());
@@ -28,7 +28,7 @@ BoommerConstants['moveImages']['R'].push(new Image());
 BoommerConstants['moveImages']['R'].push(new Image());
 BoommerConstants['moveImages']['R'].push(new Image());
 for(i in BoommerConstants['moveImages']['R']) {
-    BoommerConstants['moveImages']['R'][i].src = "./images/boomers/runRight/SlugWalkBig"+i+".png";
+    BoommerConstants['moveImages']['R'][i].src = location.href + "images/boomers/runRight/SlugWalkBig"+i+".png";
 }
 BoommerConstants['attackImages']['R'] = [];
 BoommerConstants['attackImages']['R'].push(new Image());
@@ -38,7 +38,7 @@ BoommerConstants['attackImages']['R'].push(new Image());
 BoommerConstants['attackImages']['R'].push(new Image());
 BoommerConstants['attackImages']['R'].push(new Image());
 for(i in BoommerConstants['attackImages']['R']) {
-    BoommerConstants['attackImages']['R'][i].src = "./images/boomers/slugAttackRight/SlugAttack"+i+".png";
+    BoommerConstants['attackImages']['R'][i].src = location.href + "images/boomers/slugAttackRight/SlugAttack"+i+".png";
 }
 BoommerConstants['attackImages']['L'] = [];
 BoommerConstants['attackImages']['L'].push(new Image());
@@ -48,7 +48,7 @@ BoommerConstants['attackImages']['L'].push(new Image());
 BoommerConstants['attackImages']['L'].push(new Image());
 BoommerConstants['attackImages']['L'].push(new Image());
 for(i in BoommerConstants['attackImages']['L']) {
-    BoommerConstants['attackImages']['L'][i].src = "./images/boomers/slugAttackLeft/SlugAttack"+i+".png";
+    BoommerConstants['attackImages']['L'][i].src = location.href + "images/boomers/slugAttackLeft/SlugAttack"+i+".png";
 }
 
 
@@ -92,19 +92,19 @@ constructor : function(posX, posY) {
         }
         else if(this.attacking){
         	if(player.x < camera.halfWidth) {
-        		console.log('atk1');
+        		//console.log('atk1');
         		context.drawImage(BoommerConstants['attackImages'][this.currentDirection][this.animationIndex],
                  					this.x - this.width/2,
                   					this.y);
         	}
         	else if(player.x > area.width - camera.halfWidth - player.width/2) {
-        		console.log('atk2');
+        		//console.log('atk2');
         		context.drawImage(BoommerConstants['attackImages'][this.currentDirection][this.animationIndex],
                  					this.x - area.width/2 + player.width/2,
                  					this.y-10);
             }
             else{
-            	console.log('atk3');
+            	//console.log('atk3');
             	var playerDistance = Math.abs(player.x - this.x);
         	context.drawImage(BoommerConstants['attackImages'][this.currentDirection][this.animationIndex],
         						camera.halfWidth - this.width/2 - 90,
@@ -119,7 +119,7 @@ constructor : function(posX, posY) {
         	this.moving = false;
         	this.attacking = true;
 
-        	console.log('attack!');
+        	//console.log('attack!');
         	this.animation += framerate;
         	if(this.animation >= 250) {
                 this.animationIndex++;

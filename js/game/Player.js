@@ -91,7 +91,7 @@ var Player = Base.extend({
         this.images["R"].src = spriteSrcR;
         this.images["L"].src = spriteSrcL;
 
-		this.speed = 7.5;
+		this.speed = 9.5;
 		this.mouvement = "";
 		this.currentDirection = "R";
 		this.gravity = 1.4;

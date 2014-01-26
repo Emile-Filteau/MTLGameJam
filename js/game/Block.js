@@ -27,10 +27,15 @@ var Block = Base.extend({
     },
 
     collide : function(player) {
-        if(player.x + 69 > this.x && player.x < this.x + 50) {
-            if(player.y >= this.y)
-                return true;
+        
+        //console.log((player.x + player.width/2) + " " + player.x);
+        if((player.x + player.width/2) == (this.x - this.width/2)){
+            console.log("MUR DE MARDE");
         }
-        return false;
+            
+
+        if(player.x == this.x){
+            console.log("SUCH MUR DE MARDE");
+        }
     }
 });

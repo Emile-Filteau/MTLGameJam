@@ -41,7 +41,7 @@ var Area = Base.extend({
         this.ennemies.push(new Spitter(8000, this.groundLevel ));
         this.ennemies.push(new Spitter(15000, this.groundLevel ));
 
-        //this.ennemies.push(new Spectre(500, 200));
+        this.ennemies.push(new Spectre(900, 99 , "L"));
 
         this.backgroundOffset = 0;
         this.foreGroundFinalOffset = 0;

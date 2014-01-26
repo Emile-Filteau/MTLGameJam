@@ -248,6 +248,7 @@ var Player = Base.extend({
         if(this.hp == 0) {
             alert("You are dead !!");
             window.location = "/MTLGameJam";
+            location.reload();
         }
 
         if(this.y > area.height) {

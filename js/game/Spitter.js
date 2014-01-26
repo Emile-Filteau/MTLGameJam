@@ -221,21 +221,24 @@ constructor : function(posX, posY) {
             if(player.currentDirection.indexOf("L") != -1){
                 //console.log((player.x - player.width/2) - player.weapons[player.equippedWeapon].reach + " " + (this.x + this.width/2));
 
-                if((player.x - player.width/2 -  player.weapons[player.equippedWeapon].reach) <= (this.x + this.width/2) && (player.x + player.width/2 +  player.weapons[player.equippedWeapon].reach) >= (this.x - this.width/2))
+                if((player.x - player.width/2 -  player.weapons[player.equippedWeapon].reach) <= (this.x + this.width/2) 
+                    && (player.x + player.width/2 +  player.weapons[player.equippedWeapon].reach) >= (this.x - this.width/2)){
                     player.weapons[player.equippedWeapon].doDamage(this);
-                SoundManager.play("moan");
-                this.hit = 250;
+                    SoundManager.play("moan");
+                    this.hit = 250;
+                }
             }
 
             if(player.currentDirection.indexOf("R") != -1){
                 //console.log((player.x + player.width/2) + " " + (player.weapons[player.equippedWeapon].reach + (player.x + player.width/2)) + " " + this.x + " " + (this.x - this.width/2));
 
-                if((player.x + player.width/2 +  player.weapons[player.equippedWeapon].reach) >= (this.x - this.width/2) && (player.x + player.width/2 +  player.weapons[player.equippedWeapon].reach) <= (this.x + this.width/2))
+                if((player.x + player.width/2 +  player.weapons[player.equippedWeapon].reach) >= (this.x - this.width/2) 
+                    && (player.x + player.width/2 +  player.weapons[player.equippedWeapon].reach) <= (this.x + this.width/2)){
                     player.weapons[player.equippedWeapon].doDamage(this);
                 SoundManager.play("moan");
                 this.hit = 250;
-            }
-
+                }
+            }        
         }
     }
 

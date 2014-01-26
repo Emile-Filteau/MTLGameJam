@@ -39,9 +39,9 @@ var Spectre = Hostile.extend({
     constructor : function(posX, posY) {
 		this.height = 62;
 		this.width = 58;
-		this.x = posX;
+		this.x = posX ;
 		this.y = posY - this.height/2 - 50;
-        this.hp = 3;
+        this.hp = 1;
         this.currentDirection = "L";
         this.currentOrientation = "U";
         this.moving = true;

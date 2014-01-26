@@ -21,18 +21,18 @@ var NPC = Base.extend({
 	},
 
 	update : function(framerate, player) {
-		//	console.log(player);
+		//	//console.log(player);
 		var collisionResult = this.collide(player);
 		var rand = Math.random();
 		if(rand > 0.1 ){
 			rand = Math.random();
 			if( rand > 0.5 && this.x < 900) {	//900 is arbitrary for testing
 				this.x += 1;		
-				//console.log("Friendly move RIGHT");
+				////console.log("Friendly move RIGHT");
 			}
 			else if(this.x > 0){
 				this.x -= 1;
-				//console.log("Friendly move LEFT");
+				////console.log("Friendly move LEFT");
 			}
 		}
 	},
@@ -43,7 +43,7 @@ var NPC = Base.extend({
 		}
         if(player.x + (player.width/2 - 10) > this.x && player.x - (player.width/2 - 5) < this.x ) {
             if( (player.y + player.height >= this.y && player.y <= this. y) || (player.y <= this.y + this.height && player.y + player.height >= this.y + this.height)){
-            //    console.log("mob "+this.y+":"+player.y+player.height);
+            //    //console.log("mob "+this.y+":"+player.y+player.height);
                 player.collidesWith(this);
                 return this;
             }

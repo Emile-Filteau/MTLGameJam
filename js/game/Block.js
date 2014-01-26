@@ -2,7 +2,7 @@ var BlockConstants = {
     image : new Image()
 }
 
-BlockConstants['image'].src = "./images/env/block.png"
+BlockConstants['image'].src = location.href + "images/env/block.png"
 
 var Block = Base.extend({
     constructor : function(x, y) {
@@ -31,28 +31,28 @@ var Block = Base.extend({
             if((player.x + player.width/2) > (this.x - this.width/2)-10 && (player.x + player.width/2) < (this.x + this.width/2) -10
                 && (player.groundY - player.y) > this.height /2){
                     player.onBlock = true;
-                   // console.log(0);
+                   // //console.log(0);
             }
 
             if((player.x + player.width/2) >= (this.x - this.width/2) && (player.x - player.width/2) <= (this.x + this.width/2) ){
-                       // console.log(1);
+                       // //console.log(1);
                         player.groundY = (this.y - this.height -21);
                         player.canRunLeft = true;
                         player.canRunRight = true;
                 if(player.mouvement.indexOf("R") != -1 
                     && ( (player.y + player.height) >= ( this.y)-10 )){
-                    //console.log(2);
+                    ////console.log(2);
                     player.canRunRight = false;
                 }
 
                 else if(player.mouvement.indexOf("L") != -1 
                         && ((player.y + player.height) >= ( this.y)-10 )){
-                    //console.log(3);
+                    ////console.log(3);
                     player.canRunLeft = false;
                 }
 
                 if((player.groundY - player.y) > this.height - 41 && player.onBlock){
-                    //console.log(4);
+                    ////console.log(4);
                     player.groundY = (this.y - this.height -21);
                     player.canRunLeft = true;
                     player.canRunRight = true;

@@ -25,7 +25,7 @@ BlindedByRage = FilthyEngine.extend({
 		/** Ajax call example
          AjaxManager.execute("scriptpath/scriptname.php", {key1:'value1', key2:'value2'}, function(data){
 			//callback with scripts answer passed as param
-			console.log(data);
+			//console.log(data);
 		});
 		*/
 	},

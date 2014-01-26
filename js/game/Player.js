@@ -1,5 +1,5 @@
 include("js/game/Weapon.js");
-
+//console.log(location.href);
 var PlayerConstants = {
     idleImages : [],
     moveImages : [],
@@ -10,22 +10,22 @@ var PlayerConstants = {
     MOVE : 1
 }
 PlayerConstants['idleImages']['L'] = new Image();
-PlayerConstants['idleImages']['L'].src = "./images/player/standbyLeft.png";
+PlayerConstants['idleImages']['L'].src = location.href + "images/player/standbyLeft.png";
 
 PlayerConstants['idleImages']['R'] = new Image();
-PlayerConstants['idleImages']['R'].src = "./images/player/standbyRight.png";
+PlayerConstants['idleImages']['R'].src = location.href + "images/player/standbyRight.png";
 
 PlayerConstants['jumpingImages']['L'] = new Image();
-PlayerConstants['jumpingImages']['L'].src = "./images/player/jumpLeft.png";
+PlayerConstants['jumpingImages']['L'].src = location.href + "images/player/jumpLeft.png";
 
 PlayerConstants['jumpingImages']['R'] = new Image();
-PlayerConstants['jumpingImages']['R'].src = "./images/player/jumpRight.png";
+PlayerConstants['jumpingImages']['R'].src = location.href + "images/player/jumpRight.png";
 
 PlayerConstants['hitImage']['L'] = new Image();
-PlayerConstants['hitImage']['L'].src = "./images/player/persoHitLeft.png";
+PlayerConstants['hitImage']['L'].src = location.href + "images/player/persoHitLeft.png";
 
 PlayerConstants['hitImage']['R'] = new Image();
-PlayerConstants['hitImage']['R'].src = "./images/player/persoHitRight.png";
+PlayerConstants['hitImage']['R'].src = location.href + "images/player/persoHitRight.png";
 
 PlayerConstants['moveImages']['L'] = [];
 PlayerConstants['moveImages']['L'].push(new Image());
@@ -37,7 +37,7 @@ PlayerConstants['moveImages']['L'].push(new Image());
 PlayerConstants['moveImages']['L'].push(new Image());
 PlayerConstants['moveImages']['L'].push(new Image());
 for(i in PlayerConstants['moveImages']['L']) {
-    PlayerConstants['moveImages']['L'][i].src = "./images/player/runLeft/run"+i+".png";
+    PlayerConstants['moveImages']['L'][i].src = location.href + "images/player/runLeft/run"+i+".png";
 }
 PlayerConstants['moveImages']['R'] = [];
 PlayerConstants['moveImages']['R'].push(new Image());
@@ -49,7 +49,7 @@ PlayerConstants['moveImages']['R'].push(new Image());
 PlayerConstants['moveImages']['R'].push(new Image());
 PlayerConstants['moveImages']['R'].push(new Image());
 for(i in PlayerConstants['moveImages']['R']) {
-    PlayerConstants['moveImages']['R'][i].src = "./images/player/runRight/run"+i+".png";
+    PlayerConstants['moveImages']['R'][i].src = location.href + "images/player/runRight/run"+i+".png";
 }
 
 
@@ -59,7 +59,7 @@ PlayerConstants['attackImages']['L'].push(new Image());
 PlayerConstants['attackImages']['L'].push(new Image());
 
 for(i in PlayerConstants['attackImages']['L']) {
-    PlayerConstants['attackImages']['L'][i].src = "./images/player/attackLeft/attack"+i+".png";
+    PlayerConstants['attackImages']['L'][i].src = location.href + "images/player/attackLeft/attack"+i+".png";
 }
 
 PlayerConstants['attackImages']['R'] = [];
@@ -68,7 +68,7 @@ PlayerConstants['attackImages']['R'].push(new Image());
 
 
 for(i in PlayerConstants['attackImages']['R']) {
-    PlayerConstants['attackImages']['R'][i].src = "./images/player/attackRight/attack"+i+".png";
+    PlayerConstants['attackImages']['R'][i].src = location.href + "images/player/attackRight/attack"+i+".png";
 }
 
 var Player = Base.extend({
@@ -129,7 +129,7 @@ var Player = Base.extend({
 	},
 	collidesWith : function(collidingObject){
 		if(collidingObject){ 
-			//console.log (collidingObject);
+			////console.log (collidingObject);
 			this.collidingObject = collidingObject;
 			return this.collidingObject;
 		}
@@ -213,9 +213,9 @@ var Player = Base.extend({
 	},
 
 	interact: function(){
-		console.log("PLAYER initiated Interaction.");
+		//console.log("PLAYER initiated Interaction.");
 		if(this.collidingObject){
-			console.log("PLAYER is interacting near WorldObject '"+this.collidingObject+"'");
+			//console.log("PLAYER is interacting near WorldObject '"+this.collidingObject+"'");
 		}
 
 	},

@@ -1,6 +1,6 @@
 include("js/game/Door.js");
 include("js/game/Block.js");
-include("js/game/NPC.JS");
+include("js/game/NPC.js");
 include("js/game/Hole.js");
 include("js/game/Apple.js");
 

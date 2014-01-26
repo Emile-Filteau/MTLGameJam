@@ -8,7 +8,7 @@ var Door = Base.extend({
         this.destY = destY;
 
         this.image = new Image();
-        this.image.src = "./images/env/area_door.png"
+        this.image.src = location.href + "images/env/area_door.png"
         this.width = 121;
         this.height = 300;
 

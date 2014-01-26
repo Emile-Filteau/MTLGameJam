@@ -6,16 +6,16 @@ var BlindedByRageGame = Game.extend({
 		this.base(cameraWidth, cameraHeight);
         this.areas = [];
         this.currentArea = "";
-        this.addArea("main", new Area(this, 9500, cameraHeight, "./images/Background.png", "./images/env/trees.png", "./images/Level_ground2.png", "./images/clouds.png"));
+        this.addArea("main", new Area(this, 9500, cameraHeight, location.href + "images/Background.png", location.href + "images/env/trees.png", location.href + "images/Level_ground2.png", location.href + "images/clouds.png"));
         this.setArea("main");
-        this.player = new Player(100, this.camera.height - 170, "./images/Barb_knight_small_L.png", "./images/Barb_knight_small_R.png");
+        this.player = new Player(100, this.camera.height - 170, location.href + "images/Barb_knight_small_L.png", location.href + "images/Barb_knight_small_R.png");
 
         this.appleFull = new Image();
-        this.appleFull.src = "./images/apples/AppleFull.png";
+        this.appleFull.src = location.href + "images/apples/AppleFull.png";
         this.appleHalf = new Image();
-        this.appleHalf.src = "./images/apples/AppleHalf.png";
+        this.appleHalf.src = location.href + "images/apples/AppleHalf.png";
         this.appleEmpty = new Image();
-        this.appleEmpty.src = "./images/apples/AppleEmpty.png";
+        this.appleEmpty.src = location.href + "images/apples/AppleEmpty.png";
 	},
 
     addArea : function(areaName, area) {
@@ -74,7 +74,7 @@ var BlindedByRageGame = Game.extend({
     },
 
 	update : function(framerate) {
-       //console.log(this.player.x)
+       ////console.log(this.player.x)
        this.player.update(framerate, this.areas[this.currentArea]);
 
        this.camera.update(framerate, this.player)

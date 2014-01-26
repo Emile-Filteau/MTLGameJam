@@ -25,11 +25,11 @@ constructor : function(width, height, posX, posY, sprite) {
 			rand = Math.random();
 			if( rand > 0.5 && this.x < 900) {	//900 is arbitrary for testing
 				this.x += 1;		
-				//console.log("Friendly move RIGHT");
+				////console.log("Friendly move RIGHT");
 			}
 			else if(this.x > 0){
 				this.x -= 1;
-				//console.log("Friendly move LEFT");
+				////console.log("Friendly move LEFT");
 			}
 		}*/
 	},

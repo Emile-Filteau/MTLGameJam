@@ -7,6 +7,11 @@ var Door = Base.extend({
         this.destX = destX;
         this.destY = destY;
 
+        this.image = new Image();
+        this.image.src = "./images/env/area_door.png"
+        this.width = 121;
+        this.height = 300;
+
     },
     /*
     goTo : function() {
@@ -14,8 +19,7 @@ var Door = Base.extend({
     },
 */
     draw : function(canvas, context) {
-        context.fillStyle = "#FFFFFF";
-        context.fillRect(this.x, this.y, 50 , 125);
+        context.drawImage(this.image, this.x, this.y-this.height);
     },
 
     collide : function(player) {

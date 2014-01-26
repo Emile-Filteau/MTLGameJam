@@ -52,7 +52,8 @@ var Area = Base.extend({
         this.blocks.push(new Block(2105, this.groundLevel + 70));
         this.blocks.push(new Block(2440, this.groundLevel + 70));
         this.blocks.push(new Block(2440, this.groundLevel + 70 - 100));
-        //this.doors.push(new Door("town", 1000, height-198));  
+
+        this.doors.push(new Door("town", 500, this.groundLevel));
         
         this.holes.push(new Hole(2480, 185));//2670
         this.holes.push(new Hole(2900, 230));//3137

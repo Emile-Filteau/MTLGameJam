@@ -82,8 +82,8 @@ constructor : function(posX, posY) {
         this.animationIndex = 0;
         this.animation = 0;
         this.animationFrameDamageTreshold = 3;
-        this.aggroRadius = 300;
-        isAggro = false;
+        this.aggroRadius = 250;
+        this.isAggro = false;
 
         this.canRunLeft = true;
         this.canRunRight = true;
@@ -160,8 +160,8 @@ constructor : function(posX, posY) {
             this.hit -= framerate;
         } else {
 
-             if(Math.abs(this.x - player.x) < this.aggroRadius  || isAggro) {
-                isAggro = true;
+             if(Math.abs(this.x - player.x) < this.aggroRadius  || this.isAggro) {
+                this.isAggro = true;
                if( Math.abs((this.x - player.x)) <= this.attackReach || (this.attacking && this.animationIndex > 0 )) {
                     this.moving = false;
                     this.attacking = true;
@@ -209,6 +209,18 @@ constructor : function(posX, posY) {
             }
             else{
                     //patrol
+                var rand = Math.random();
+                if(rand > 0.01 ){
+                    rand = Math.random();
+                    if( rand > 0.99) {   
+                        this.currentDirection = "L";
+                        this.x -= this.speed;
+                    } 
+                    else if(rand < 0.01) {
+                        this.currentDirection = "R";
+                        this.x += this.speed;
+                    }
+                }
             }
         }
 	},

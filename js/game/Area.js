@@ -25,7 +25,10 @@ var Area = Base.extend({
         this.holes = [];
         this.ennemies = [];
         this.npc = ""//[new Friendly(80, 100, 400, this.groundLevel - 200, "")];
+
        /* this.ennemies = [new Spitter(600, this.groundLevel)];
+
+        this.ennemies = [];
         this.ennemies.push(new Spitter(600, this.groundLevel));
         this.ennemies.push(new Spitter(1600, this.groundLevel));
         this.ennemies.push(new Spitter(1000, this.groundLevel));
@@ -33,6 +36,9 @@ var Area = Base.extend({
         this.ennemies.push(new Spitter(2500, this.groundLevel));*/
         this.ennemies.push(new Spitter(3200, this.groundLevel));
         /*this.ennemies.push(new Spitter(2800, this.groundLevel));
+        this.ennemies.push(new Spitter(15000, this.groundLevel));
+        this.ennemies.push(new Spitter(3000, this.groundLevel));
+        this.ennemies.push(new Spitter(2800, this.groundLevel));
         this.ennemies.push(new Spitter(5000, this.groundLevel));
         this.ennemies.push(new Spitter(4000, this.groundLevel));
         this.ennemies.push(new Spitter(8000, this.groundLevel));
@@ -41,7 +47,6 @@ var Area = Base.extend({
         this.ennemies.push(new Spitter(2200, this.groundLevel));*/
 
         //this.ennemies.push(new Spectre(500, 200));
-
 
         this.backgroundOffset = 0;
         this.foreGroundFinalOffset = 0;

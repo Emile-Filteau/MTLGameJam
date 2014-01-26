@@ -85,6 +85,9 @@ constructor : function(posX, posY) {
         this.aggroRadius = 300;
         isAggro = false;
 
+        this.canRunLeft = true;
+        this.canRunRight = true;
+
         this.hit = 0;
 
 	},
@@ -193,10 +196,11 @@ constructor : function(posX, posY) {
                         }
                         this.animation = 0;
                     }
-                    if(this.x > player.x) {
+                    if(this.x > player.x && this.canRunLeft) {
                         this.x -= this.speed;
                         this.currentDirection = "L";
-                    } else {
+                    } 
+                    else if(this.x < player.x && this.canRunRight) {
                         this.x += this.speed;
                         this.currentDirection = "R";
                     }

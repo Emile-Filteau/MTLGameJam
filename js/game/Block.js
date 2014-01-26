@@ -48,7 +48,7 @@ var Block = Base.extend({
             }*/
         
 if (Math.abs(this.x - player.x) < 250 && Math.abs( (this.y + this.height/2 ) - (player.y + player.height/2)) < 400){
-        if((player.x + player.width/2) > (this.x - this.width/2) && (player.x + player.width/2) < (this.x + this.width/2) 
+        if((player.x + player.width/2) > (this.x - this.width/2)-10 && (player.x + player.width/2) < (this.x + this.width/2) -10
                     && (player.groundY - player.y) > this.height /2){
             player.onBlock = true;
             console.log(0);
@@ -56,15 +56,19 @@ if (Math.abs(this.x - player.x) < 250 && Math.abs( (this.y + this.height/2 ) - (
         //À revoir : on passe au travers des blocks, mais les block stackés marchent, 
         //on peut passer en dessous si y'en a des flotants 
         // On peut grimper sur un block en sautant par le dessous (plateforme style, pas de nouvelle classe encore.)
-        if((player.x + player.width/2) > (this.x - this.width/2) && (player.x + player.width/2) < (this.x + this.width/2)){
+        if((player.x + player.width/2) >= (this.x - this.width/2) && (player.x - player.width/2) <= (this.x + this.width/2) ){
                         console.log(1);
-            if(player.mouvement.indexOf("R") != -1 && ( (player.y) >= ( this.y + this.height) || (player.y + player.height) <= ( this.y - this.height) )){
+                        player.groundY = (this.y - this.height -21);
+                        player.canRunLeft = true;
+                        player.canRunRight = true;
+            if(player.mouvement.indexOf("R") != -1 
+                && ( /* (player.y) >= ( this.y + this.height) || */ (player.y + player.height) >= ( this.y)-10 )){
                 console.log(2);
                 player.canRunRight = false;
             }
 
             else if(player.mouvement.indexOf("L") != -1 
-                    && ( (player.y) >= ( this.y + this.height) || (player.y + player.height) <= ( this.y - this.height) )){
+                    && ( /*(player.y) >= ( this.y + this.height) || */(player.y + player.height) >= ( this.y)-10 )){
                 console.log(3);
                 player.canRunLeft = false;
             }

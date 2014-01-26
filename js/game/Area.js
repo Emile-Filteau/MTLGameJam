@@ -13,7 +13,7 @@ var Area = Base.extend({
         this.clouds = new Image();
         this.ground = new Image();
 
-        this.groundLevel = height - 170;
+        this.groundLevel = height - 130;
 
         this.backgound.src = backgroundSrc;
         this.foreground.src = foregroundSrc;
@@ -48,10 +48,10 @@ var Area = Base.extend({
         this.groundFinalOffset = 0;
 
 
-        this.blocks.push(new Block(1495, this.groundLevel + 70));
-        this.blocks.push(new Block(2105, this.groundLevel + 70));
-        this.blocks.push(new Block(2440, this.groundLevel + 70));
-        this.blocks.push(new Block(2440, this.groundLevel + 70 - 100));
+        this.blocks.push(new Block(1495, this.groundLevel + 30));
+        this.blocks.push(new Block(2105, this.groundLevel + 30));
+        this.blocks.push(new Block(2440, this.groundLevel + 30));
+        this.blocks.push(new Block(2440, this.groundLevel + 30 - 100));
         //this.doors.push(new Door("town", 1000, height-198));  
         
         this.holes.push(new Hole(2480, 185));//2670

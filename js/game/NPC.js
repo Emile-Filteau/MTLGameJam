@@ -38,7 +38,7 @@ var NPC = Base.extend({
 	},
 	collide : function(player) {
         if(player.x + (player.width/2 - 10) > this.x && player.x - (player.width/2 - 5) < this.x ) {
-            if(player.y + player.height <= this.y && player.y >= this.y + this.height){
+            if(player.y + player.height >= this.y && player.y <= this.y + this.height){
                 //console.log("COLLISION");
                 player.collidesWith(this);
                 return this;

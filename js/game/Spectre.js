@@ -58,6 +58,11 @@ var Spectre = Hostile.extend({
         this.maxHeight = 350;
 	},
 	
+    dropApple : function(){
+
+        return false;
+    },
+
 	draw : function(canvas, context, player, camera, area) {
         if(this.moving || this.attacking) {
             if(player.x < camera.halfWidth) {

@@ -195,6 +195,17 @@ var Player = Base.extend({
 	    }
 	},
 
+	eatApple: function(hpUP){
+		
+		if((this.hp += hpUP) <= 6){
+			this.hp += hpUP;
+		}
+		else {
+			this.hp = 6;
+		}
+		
+	},
+
 	endJump: function(){
 		
 		if(this.velocityY < -6.0)
@@ -233,9 +244,10 @@ var Player = Base.extend({
 	},
 
 	update: function(framerate, area){
+
         if(this.hp == 0) {
             alert("You are dead !!");
-            window.location = "/";
+            window.location = "/MTLGameJam";
         }
 
         if(this.y > area.height) {

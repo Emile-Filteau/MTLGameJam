@@ -91,6 +91,18 @@ constructor : function(posX, posY) {
         this.hit = 0;
 
 	},
+
+    dropApple : function(){
+
+        var rand = Math.floor((Math.random()*10)+1);
+
+        if(rand <= 4){
+            return true;
+        }
+        else {
+            return false;
+        }
+    },
 	
 	draw : function(canvas, context, player, camera, area) {
         if(this.hit > 0) {

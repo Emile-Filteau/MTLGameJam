@@ -25,70 +25,29 @@ var Block = Base.extend({
             context.drawImage(BlockConstants['image'], camera.halfWidth - playerDistance - this.width/2, this.y - this.height);
         }
     },
-
-    collideX : function(player, area) {
-
-     
-        if((player.x + player.width/2) > (this.x - this.width/2) && (player.x + player.width/2) < (this.x + this.width/2)){
-
-            if(player.mouvement.indexOf("R") != -1 && (player.staticGround - player.y) < this.height - 41){
+    collide : function(player, area) {
+if (Math.abs(this.x - player.x) < 250 && Math.abs( (this.y + this.height/2 ) - (player.y + player.height/2)) < 400){
+        if((player.x + player.width/2) > (this.x - this.width/2)-10 && (player.x + player.width/2) < (this.x + this.width/2) -10
+                    && (player.groundY - player.y) > this.height /2){
+            player.onBlock = true;
+            console.log(0);
+        }
+        if((player.x + player.width/2) >= (this.x - this.width/2) && (player.x - player.width/2) <= (this.x + this.width/2) ){
+                        console.log(1);
+                        player.groundY = (this.y - this.height -21);
+                        player.canRunLeft = true;
+                        player.canRunRight = true;
+            if(player.mouvement.indexOf("R") != -1 
+                && ( /* (player.y) >= ( this.y + this.height) || */ (player.y + player.height) >= ( this.y)-10 )){
+                console.log(2);
                 player.canRunRight = false;
             }
 
-            else if(player.mouvement.indexOf("L") != -1 && (player.staticGround - player.y) < this.height - 41){
+            else if(player.mouvement.indexOf("L") != -1 
+                    && ( /*(player.y) >= ( this.y + this.height) || */(player.y + player.height) >= ( this.y)-10 )){
+                console.log(3);
                 player.canRunLeft = false;
             }                
         }
-    },
-
-    collideY : function(player, area) {
-
-        if((player.x + player.width/2) > (this.x - this.width/2) && (player.x + player.width/2) < (this.x + this.width/2) && (player.groundY - player.y) > this.height){
-            player.onBlock = true;
-            console.log(this);
-            return this;
-        }
-        else {
-            return null;
-        }
-
-
-     
-       /* if((player.x + player.width/2) > (this.x - this.width/2) && (player.x + player.width/2) < (this.x + this.width/2)){
-
-            if((player.groundY - player.y) > this.height - 41 && player.onBlock){
-                player.groundY = (area.groundLevel - this.height + 21);
-            }
-
-            if(player.onBlock && (player.x - player.width/2) < (this.x - this.width/2 - 30) && player.mouvement.indexOf("L") != -1){
-                player.onBlock = false;
-            }
-                
-        }
-        
-        if(player.onBlock && (player.x - player.width/2) > (this.x + this.width/2) && player.mouvement.indexOf("R") != -1){
-            player.onBlock = false;
-        }*/
-    },
-
-    etage : function(player, area) {
-    
-        if((player.x + player.width/2) > (this.x - this.width/2) && (player.x + player.width/2) < (this.x + this.width/2)){
-
-            if((player.groundY - player.y) > this.height - 41 && player.onBlock){
-                player.groundY = (area.groundLevel - this.height + 21);
-            }
-
-            if(player.onBlock && (player.x - player.width/2) < (this.x - this.width/2 - 30) && player.mouvement.indexOf("L") != -1){
-                player.onBlock = false;
-            }
-
-            if(player.onBlock && (player.x - player.width/2) > (this.x + this.width/2) && player.mouvement.indexOf("R") != -1){
-                player.onBlock = false;
-            } 
-                
-        }
-        
-        
-    }
+    }}
 }); 

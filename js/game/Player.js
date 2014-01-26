@@ -182,6 +182,7 @@ var Player = Base.extend({
 		if(this.onGround && !this.inHole){
 	        this.velocityY = -22.0;
 	        this.onGround = false;
+	        this.onBlock = false;
 
 	        if(this.currentDirection.indexOf("L") != -1 && this.velocityX != 0){
 				this.velocityX = -2.0;

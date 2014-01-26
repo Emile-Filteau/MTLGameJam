@@ -108,6 +108,7 @@ var Player = Base.extend({
         this.animationAttackingIndex = 0;
         this.animationAttacking = 0;
         this.doDamage = false;
+        this.recovery = 0;
 	},
 
 	attack: function(){
@@ -115,7 +116,7 @@ var Player = Base.extend({
         SoundManager.play("swoosh");
 	},
 	collidesWith : function(collidingObject){
-		if(collidingObject){
+		if(collidingObject){ 
 			//console.log (collidingObject);
 			this.collidingObject = collidingObject;
 			return this.collidingObject;
@@ -214,6 +215,14 @@ var Player = Base.extend({
 	},
 
 	update: function(framerate, area){
+		//console.log("recoveryTimer: " + this.recovery);
+
+		if(this.recovery <= 0){
+			this.recovery = 0;
+		}
+		else{
+			this.recovery -= framerate;
+		}
 
         if(this.attacking){
         	this.animationAttacking += framerate;
@@ -252,7 +261,10 @@ var Player = Base.extend({
         }    
         	
 		this.velocityY += this.gravity;        
-	    this.x += this.velocityX;    
+	    this.x += this.velocityX; 
+	    if(this.x < 0){
+	    	this.x = 0;
+	    }   
 	    this.y += this.velocityY;  
 
 	    if(this.y > this.groundY && !this.inHole){
@@ -266,5 +278,35 @@ var Player = Base.extend({
 	    }
 
 	    this.move(area);
+	},
+	takeDamage:function(dmg){
+		if(this.onGround && !this.inHole){
+	        this.velocityY = -22.0;
+	        this.onGround = false;
+
+	        if(this.currentDirection.indexOf("L") != -1 && this.velocityX != 0){
+				this.velocityX = -2.0;
+			}
+				
+			else if(this.currentDirection.indexOf("R") != -1 && this.velocityX != 0){
+				this.velocityX = 2.0;
+			}
+            SoundManager.play("jump");
+	    }
+
+		this.velocityY 	= -22;
+		var knockbackDirection;
+		if(this.currentDirection == 'R'){
+			knockbackDirection = -1;
+		}
+		else{
+			knockbackDirection = 1
+		}
+		this.velocityX += (14 * dmg * knockbackDirection)
+		
+
+
+		this.hp -= dmg;
+		this.recovery = 4500;		
 	}
 });

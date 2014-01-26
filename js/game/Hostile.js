@@ -109,8 +109,13 @@ constructor : function(posX, posY) {
         */
 	},
 	collide : function(player){
-		this.base(player);
-
+		var colisionBool = this.base(player);
+		console.log(colisionBool);
+		if(colisionBool){
+			if(player.recovery == 0){
+				player.takeDamage(1);
+			}
+		}
 		if(player.doDamage && this.y <= player.y){
 			if(player.currentDirection.indexOf("L") != -1){
 				//console.log((player.x - player.width/2) - player.weapons[player.equippedWeapon].reach + " " + (this.x + this.width/2));
@@ -127,6 +132,7 @@ constructor : function(posX, posY) {
 			}
 				
 		}
+	
 	}
 
 });

@@ -133,7 +133,7 @@ constructor : function(posX, posY) {
                 if(this.animationIndex == SpitterConstants['attackImages'][this.currentDirection].length - this.animationFrameDamageTreshold
                     && (Math.abs((this.x - player.x)) <= this.attackReach ) ) {
                     console.log('PUKE HITS OH YEAH');
-                    player.hp -= 1;
+                    player.takeDamage(1);
                 } 
                 if(this.animationIndex >= SpitterConstants['attackImages'][this.currentDirection].length) {
                     this.animationIndex=0;

@@ -46,47 +46,51 @@ var Block = Base.extend({
                     player.canRunLeft = true;
                 }
             }*/
-//var collisionCalculated = 0;
-if (Math.abs(this.x - player.x) < 150 && Math.abs( (this.y + this.height/2 ) - (player.y + player.height/2)) < 200){
-
+        
+if (Math.abs(this.x - player.x) < 250 && Math.abs( (this.y + this.height/2 ) - (player.y + player.height/2)) < 400){
         if((player.x + player.width/2) > (this.x - this.width/2) && (player.x + player.width/2) < (this.x + this.width/2) 
                     && (player.groundY - player.y) > this.height /2){
             player.onBlock = true;
             console.log(0);
         }
+        //À revoir : on passe au travers des blocks, mais les block stackés marchent, 
+        //on peut passer en dessous si y'en a des flotants 
+        // On peut grimper sur un block en sautant par le dessous (plateforme style, pas de nouvelle classe encore.)
         if((player.x + player.width/2) > (this.x - this.width/2) && (player.x + player.width/2) < (this.x + this.width/2)){
-            console.log(1);
-            if(player.mouvement.indexOf("R") != -1 && (player.staticGround - player.y) < this.height - 41){
+                        console.log(1);
+            if(player.mouvement.indexOf("R") != -1 && ( (player.y) >= ( this.y + this.height) || (player.y + player.height) <= ( this.y - this.height) )){
                 console.log(2);
                 player.canRunRight = false;
             }
 
-            else if(player.mouvement.indexOf("L") != -1 && (player.staticGround - player.y) < this.height - 41){
+            else if(player.mouvement.indexOf("L") != -1 
+                    && ( (player.y) >= ( this.y + this.height) || (player.y + player.height) <= ( this.y - this.height) )){
                 console.log(3);
                 player.canRunLeft = false;
             }
 
             if((player.groundY - player.y) > this.height - 41 && player.onBlock){
                 console.log(4);
-                player.groundY = (area.groundLevel - this.height + 21);
+                player.groundY = (this.y - this.height -21);
+                        //player.groundY = this.y;
                 player.canRunLeft = true;
                 player.canRunRight = true;
             }
-
-            if(player.onBlock && (player.x - player.width/2) < (this.x - this.width/2 - 30) && player.mouvement.indexOf("L") != -1){
+                
+        } else{
+            player.onBlock = false;
+        }
+           /* if(player.onBlock && (player.x + player.width/2 -10) < (this.x - this.width/2 ) && player.mouvement.indexOf("L") != -1){
                 console.log(5);
                 player.onBlock = false;
             }
-                
-        }
-            if(player.onBlock && (player.x - player.width/2) > (this.x + this.width/2 - 30) && player.mouvement.indexOf("R") != -1){
+
+            if(player.onBlock && (player.x - player.width/2 + 10) > (this.x + this.width/2 - 30) && player.mouvement.indexOf("R") != -1){
                 console.log(6);
                 player.onBlock = false;
-            }
+            }*/
 
         }
-     //  if (collisionCalculated == 0){
-      //      player.onBlock = false;
-     //   }
+        
     }
 });

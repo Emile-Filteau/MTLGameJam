@@ -3,6 +3,7 @@ include("js/game/Block.js");
 include("js/game/NPC.JS");
 include("js/game/Hole.js");
 
+var block;
 var Area = Base.extend({
     constructor : function(gameRef, width, height, backgroundSrc, foregroundSrc, groundSrc, cloudsSrc) {
         this.width = width;
@@ -27,7 +28,7 @@ var Area = Base.extend({
         this.ennemies = [new Spitter(600, this.groundLevel)];
         this.ennemies.push(new Spectre(500, 200));
 
-
+        this.ennemies = []
         this.backgroundOffset = 0;
         this.foreGroundFinalOffset = 0;
         this.groundFinalOffset = 0;
@@ -71,7 +72,11 @@ var Area = Base.extend({
         }
 
         for(i in this.blocks) {
-            this.blocks[i].collide(player, this);
+            this.blocks[i].collideX(player, this);
+            block = this.blocks[i].collideY(player, this);
+            if(block){
+                block.etage(player, this);
+            }
         }
     },
 

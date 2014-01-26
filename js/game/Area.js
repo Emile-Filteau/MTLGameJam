@@ -24,6 +24,7 @@ var Area = Base.extend({
         this.blocks = [] ;
         this.npc = ""//[new Friendly(80, 100, 400, this.groundLevel - 200, "")];
         this.ennemies = [new Spitter(600, this.groundLevel)];
+        this.ennemies.push(new Spectre(500, 200));
 
         this.backgroundOffset = 0;
         this.foreGroundFinalOffset = 0;

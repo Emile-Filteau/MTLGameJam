@@ -17,6 +17,7 @@ BlindedByRage = FilthyEngine.extend({
         SoundManager.load("sounds/footsteps", 'footsteps', true);
         SoundManager.load("sounds/swoosh", 'swoosh', false);
         SoundManager.load("sounds/jump", 'jump', false);
+        SoundManager.load("sounds/moan", "moan", false);
         SoundManager.setVolume("swoosh", 0.5)
         SoundManager.setVolume("jump", 0.2)
         SoundManager.setVolume("footsteps", 0.3)

@@ -52,7 +52,8 @@ var Spectre = Hostile.extend({
         this.animationIndex = 0;
         this.animation = 0;
         this.animationFrameDamageTreshold = 3
-
+        this.aggroRadius = 300;
+        this.isAggro = false;
         this.minHeight = 200;
         this.maxHeight = 350;
 	},
@@ -81,6 +82,8 @@ var Spectre = Hostile.extend({
 	},
 
 	update : function(framerate, player) {
+        if(Math.abs(this.x - player.x) < this.aggroRadius  || this.isAggro) {
+            this.isAggro = true;
         if(Math.abs((this.x - player.x)) <= this.attackReach || (this.attacking && this.animationIndex > 0 )) {
         	this.moving = false;
         	this.attacking = true;
@@ -126,6 +129,7 @@ var Spectre = Hostile.extend({
             }
         }
         this.collide(player);
+    }
 	},
 
 	collide : function(player){

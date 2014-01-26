@@ -53,7 +53,7 @@ var Area = Base.extend({
         this.blocks.push(new Block(2440, this.groundLevel + 30));
         this.blocks.push(new Block(2440, this.groundLevel + 30 - 100));
 
-        this.doors.push(new Door("town", 500, this.groundLevel));
+        this.doors.push(new Door("town", 8400, this.groundLevel+25));
         
         this.holes.push(new Hole(2480, 185));//2670
         this.holes.push(new Hole(2900, 230));//3137
@@ -148,7 +148,7 @@ var Area = Base.extend({
         }
 
         for(i in this.doors) {
-            this.doors[i].draw(canvas, context);
+            this.doors[i].draw(canvas, context, player, camera, this);
         }
     }
 });

@@ -31,15 +31,15 @@ var Area = Base.extend({
         this.ennemies = [];
 
         this.ennemies.push(new Spectre(800, 200,"L"));
-        this.ennemies.push(new Spitter(600, this.groundLevel + 20));
-        this.ennemies.push(new Spitter(700, this.groundLevel + 20));
-        this.ennemies.push(new Spitter(1000, this.groundLevel + 20));
-        this.ennemies.push(new Spitter(2800, this.groundLevel + 20));
-        this.ennemies.push(new Spitter(4000, this.groundLevel + 20));
-        this.ennemies.push(new Spitter(5000, this.groundLevel + 20));
-        this.ennemies.push(new Spitter(6500, this.groundLevel + 20));
-        this.ennemies.push(new Spitter(8000, this.groundLevel + 20));
-        this.ennemies.push(new Spitter(15000, this.groundLevel + 20));
+        this.ennemies.push(new Spitter(600, this.groundLevel ));
+        this.ennemies.push(new Spitter(700, this.groundLevel ));
+        this.ennemies.push(new Spitter(1000, this.groundLevel ));
+        this.ennemies.push(new Spitter(2800, this.groundLevel ));
+        this.ennemies.push(new Spitter(4000, this.groundLevel ));
+        this.ennemies.push(new Spitter(5000, this.groundLevel ));
+        this.ennemies.push(new Spitter(6500, this.groundLevel ));
+        this.ennemies.push(new Spitter(8000, this.groundLevel ));
+        this.ennemies.push(new Spitter(15000, this.groundLevel ));
 
         //this.ennemies.push(new Spectre(500, 200));
 

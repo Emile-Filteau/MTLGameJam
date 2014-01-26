@@ -118,7 +118,8 @@ constructor : function(posX, posY) {
 				player.takeDamage(1, this);
 			}
 		}
-		if(player.doDamage && this.y + this.height <= player.y){
+		if(player.doDamage && ( (this.y + this.height >= player.y && this.y + this.height < player.y + player.height) 
+								|| (this.y <= player.y + player.height && this.y > player.y)  ) ){
 			if(player.currentDirection.indexOf("L") != -1){
 				//console.log((player.x - player.width/2) - player.weapons[player.equippedWeapon].reach + " " + (this.x + this.width/2));
 

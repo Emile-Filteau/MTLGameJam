@@ -47,16 +47,18 @@ var Spectre = Hostile.extend({
         this.moving = true;
         this.attacking = false;
         this.speed = 4;
-        this.attackReach = 30;
+        this.attackReach = 100;
         this.attackSpeed = 1.7;
         this.animationIndex = 0;
         this.animation = 0;
-        this.animationFrameDamageTreshold = 3;
+        this.animationFrameDamageTreshold = 3
+
+        this.minHeight = 200;
+        this.maxHeight = 350;
 	},
 	
 	draw : function(canvas, context, player, camera, area) {
-
-        if(this.moving) {
+        if(this.moving || this.attacking) {
             if(player.x < camera.halfWidth) {
                 context.drawImage(SpectreConstants['idleImages'][this.currentDirection][this.currentOrientation],
                  					this.x - this.width/2,
@@ -81,46 +83,41 @@ var Spectre = Hostile.extend({
 	update : function(framerate, player) {
         if(Math.abs((this.x - player.x)) <= this.attackReach || (this.attacking && this.animationIndex > 0 )) {
         	this.moving = false;
-        	this.attacking = true; 
-            //console.log('attack!');
-        	this.animation += framerate;
-        	if(this.animation >= this.attackSpeed * 100) {
-                this.animationIndex++;
-                if(this.animationIndex == SpectreConstants['attackImages'][this.currentDirection].length - this.animationFrameDamageTreshold
-                    && (Math.abs((this.x - player.x)) <= this.attackReach ) ) {
-                    console.log('PUKE HITS OH YEAH');
-                    player.hp -= 1;
-                } 
-                if(this.animationIndex >= SpectreConstants['attackImages'][this.currentDirection].length) {
-                    this.animationIndex=0;
-                    attacking = false;
-                    movien = true;
-                }
-                this.animation = 0;
-            }
-
-        }
-        else if (this.animationIndex == 0){
-        	this.attacking = false;
-        	this.moving = true;
-        	this.animationIndex = 0
+        	this.attacking = true;
         }
         if(this.moving) {
-            this.animation += framerate;
-            /*
-            if(this.animation >= 250) {
-                this.animationIndex++;
-                if(this.animationIndex >= SpectreConstants['moveImages'][this.currentDirection].length) {
-                    this.animationIndex=0;
+            if(this.currentDirection == "L") {
+                if(this.currentOrientation == "U") {
+                    this.x -= this.speed;
+                    this.y -= this.speed;
+                    if(this.y <= this.minHeight)
+                        this.currentOrientation = "D";
+                } else {
+                    this.x -= this.speed;
+                    this.y += this.speed;
+                    if(this.y >= this.maxHeight)
+                        this.currentOrientation = "U";
                 }
-                this.animation = 0;
-            }*/
-            if(this.x > player.x) {
-                this.x -= this.speed;
-                this.currentDirection = "L";
             } else {
-                this.x += this.speed;
+                if(this.currentOrientation == "U") {
+                    this.x += this.speed;
+                    this.y -= this.speed;
+                    if(this.y <= this.minHeight)
+                        this.currentOrientation = "D";
+                } else {
+                    this.x += this.speed;
+                    this.y += this.speed;
+                    if(this.y >= this.maxHeight)
+                        this.currentOrientation = "U";
+                }
+            }
+        } else if(this.attacking) {
+            if(this.x < player.x) {
+                this.x+=this.speed;
                 this.currentDirection = "R";
+            } else {
+                this.x-=this.speed;
+                this.currentDirection = "L";
             }
         }
         this.collide(player);

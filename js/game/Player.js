@@ -235,7 +235,7 @@ var Player = Base.extend({
 	update: function(framerate, area){
         if(this.hp == 0) {
             alert("You are dead !!");
-            window.location = "/";
+            location.reload();
         }
 
         if(this.y > area.height) {

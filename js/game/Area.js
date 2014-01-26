@@ -79,6 +79,8 @@ var Area = Base.extend({
 
         for(i in this.doors) {
             if(this.doors[i].collide(player)) {
+                alert("Level cleared ! Boss coming soon :)");
+                location.reload();
                 this.game.changeArea(this.doors[i]);
             }
         }

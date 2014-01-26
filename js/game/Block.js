@@ -25,9 +25,7 @@ var Block = Base.extend({
             context.drawImage(BlockConstants['image'], camera.halfWidth - playerDistance - this.width/2, this.y - this.height);
         }
     },
-
     collide : function(player, area) {
-        
         if (Math.abs(this.x - player.x) < 250 
         && Math.abs( (this.y + this.height/2 ) - (player.y + player.height/2)) < 400){
             if((player.x + player.width/2) > (this.x - this.width/2)-10 && (player.x + player.width/2) < (this.x + this.width/2) -10
@@ -64,7 +62,21 @@ var Block = Base.extend({
             player.onBlock = false;
             }
 
-        }
+        }        
+    },
+
+    collideNPC: function(npc, area){
         
+        if((npc.x + npc.width/2) >= (this.x - this.width/2) && (npc.x - npc.width/2) <= (this.x + this.width/2) ){
+            npc.canRunLeft = true;
+            npc.canRunRight = true;
+            if(npc.currentDirection.indexOf("R") != -1){
+                npc.canRunRight = false;
+            }
+
+            else if(npc.currentDirection.indexOf("L") != -1){
+                npc.canRunLeft = false;
+            }                
+        }   
     }
-});
+}); 

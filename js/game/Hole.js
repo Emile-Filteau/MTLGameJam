@@ -18,5 +18,26 @@ var Hole = Base.extend({
 				player.inHole = true;
 			}
 		}
+	},
+
+	collideNPC: function(npc){
+
+		
+		if (Math.abs(this.x - npc.x) < 350 && npc.isAggro){
+
+			if(npc.currentDirection.indexOf("L") != -1){
+			
+				if (Math.abs(npc.x - (this.x + this.width)) <= 2){
+					npc.canRunLeft = false;
+				}
+			}
+				
+			else if(npc.currentDirection.indexOf("R") != -1){
+
+				if (Math.abs((npc.x) - this.x) <= 0){
+					npc.canRunRight = false;
+				}
+			}
+		}	
 	}
 });

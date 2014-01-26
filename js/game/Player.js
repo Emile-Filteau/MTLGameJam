@@ -69,8 +69,9 @@ var Player = Base.extend({
 
 		this.height = 100;
 		this.width = 40;
+		this.posY = posY;
 		this.x = posX;
-		this.y = posY + this.height;
+		this.y = this.posY + this.height;
 		this.hp = 6;
 		this.sanity = 100;
 
@@ -99,8 +100,12 @@ var Player = Base.extend({
 		this.velocityY = 0.0;
 		this.onGround = true;
 		this.inHole = false;
+		this.onBlock = false;
 		this.groundY = posY;
+		this.staticGround = this.groundY;
 		this.collidingObject = false;
+		this.canRunLeft = true;
+		this.canRunRight = true;
 
         this.animationIndex = 0;
         this.animation = 0;
@@ -192,21 +197,22 @@ var Player = Base.extend({
 	},
 	move: function(area){
 
-
-		if(this.mouvement.indexOf("L") != -1){
+		if(this.mouvement.indexOf("L") != -1 && this.canRunLeft){
+			this.canRunRight = true;
 			this.x -= this.speed;
             if(this.x - this.width/2 <= 0)
                 this.x = this.width/2;
 			this.currentDirection = "L";
 		}
 			
-		else if(this.mouvement.indexOf("R") != -1){
+		else if(this.mouvement.indexOf("R") != -1 && this.canRunRight){
+			this.canRunLeft = true;
 			this.x += this.speed;
             if(this.x >= area.width)
-                this.x = area.width;
+                this.x = area.width;      	
 			this.currentDirection = "R";
 		}
-			
+		
 	},
 
 	mouvementReplace: function(direction){
@@ -214,6 +220,8 @@ var Player = Base.extend({
 	},
 
 	update: function(framerate, area){
+    			
+		//console.log(this.groundY + " " + this.y);
 
         if(this.attacking){
         	this.animationAttacking += framerate;
@@ -250,6 +258,10 @@ var Player = Base.extend({
         else {
         	this.inHole = false;
         }    
+
+        if(!this.onBlock){
+        	this.groundY = this.staticGround;
+        }
         	
 		this.velocityY += this.gravity;        
 	    this.x += this.velocityX;    

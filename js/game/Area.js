@@ -27,21 +27,20 @@ var Area = Base.extend({
         this.ennemies = [new Spitter(600, this.groundLevel)];
         this.ennemies.push(new Spectre(500, 200));
 
-        this.ennemies = [];
         this.backgroundOffset = 0;
         this.foreGroundFinalOffset = 0;
         this.groundFinalOffset = 0;
 
 
-        this.blocks.push(new Block(1495.00, this.groundLevel + 50));
-        this.blocks.push(new Block(2300, this.groundLevel + 50));
+        this.blocks.push(new Block(1495, this.groundLevel + 50));
+        this.blocks.push(new Block(2105, this.groundLevel + 50));
         this.blocks.push(new Block(2440, this.groundLevel + 50));
         this.blocks.push(new Block(2440, this.groundLevel + 50 - 100));
         //this.doors.push(new Door("town", 1000, height-198));  
         
         this.holes.push(new Hole(2480, 185));//2670
         this.holes.push(new Hole(2900, 230));//3137
-        this.holes.push(new Hole(4047, 315));//4365
+        this.holes.push(new Hole(4047, 310));//4365
         this.holes.push(new Hole(5025, 197));//5222
         this.holes.push(new Hole(6580, 247));//6827
         this.holes.push(new Hole(7035, 242));//7277
@@ -71,7 +70,7 @@ var Area = Base.extend({
         }
 
         for(i in this.blocks) {
-            this.blocks[i].collide(player);
+            this.blocks[i].collide(player, this);
         }
     },
 

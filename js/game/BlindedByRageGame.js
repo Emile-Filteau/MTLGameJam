@@ -15,7 +15,7 @@ var BlindedByRageGame = Game.extend({
         this.appleHalf = new Image();
         this.appleHalf.src = "./images/apples/AppleHalf.png";
         this.appleEmpty = new Image();
-        this.appleEmpty.sec = "./images/apples/AppleEmpty.png"
+        this.appleEmpty.src = "./images/apples/AppleEmpty.png";
 	},
 
     addArea : function(areaName, area) {
@@ -48,6 +48,7 @@ var BlindedByRageGame = Game.extend({
     drawPlayerLife : function(canvas, context) {
         for(var i=0;i<3;i++) {
             var img = this.appleEmpty;
+
             if(i == 0) {
                 if(this.player.hp >= 2)
                     img = this.appleFull

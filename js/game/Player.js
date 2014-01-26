@@ -5,6 +5,7 @@ var PlayerConstants = {
     moveImages : [],
     attackImages : [],
     jumpingImages : [],
+    hitImage : [],
     IDLE : 0,
     MOVE : 1
 }
@@ -19,6 +20,12 @@ PlayerConstants['jumpingImages']['L'].src = "./images/player/jumpLeft.png";
 
 PlayerConstants['jumpingImages']['R'] = new Image();
 PlayerConstants['jumpingImages']['R'].src = "./images/player/jumpRight.png";
+
+PlayerConstants['hitImage']['L'] = new Image();
+PlayerConstants['hitImage']['L'].src = "./images/player/persoHitLeft.png";
+
+PlayerConstants['hitImage']['R'] = new Image();
+PlayerConstants['hitImage']['R'].src = "./images/player/persoHitRight.png";
 
 PlayerConstants['moveImages']['L'] = [];
 PlayerConstants['moveImages']['L'].push(new Image());
@@ -113,6 +120,7 @@ var Player = Base.extend({
         this.animationAttackingIndex = 0;
         this.animationAttacking = 0;
         this.doDamage = false;
+        this.recovery = 0;
 	},
 
 	attack: function(){
@@ -120,7 +128,7 @@ var Player = Base.extend({
         SoundManager.play("swoosh");
 	},
 	collidesWith : function(collidingObject){
-		if(collidingObject){
+		if(collidingObject){ 
 			//console.log (collidingObject);
 			this.collidingObject = collidingObject;
 			return this.collidingObject;
@@ -134,20 +142,24 @@ var Player = Base.extend({
 	draw: function(canvas, context, camera, area){
         var img;
 
-        if(this.attacking){       	
-        	img = PlayerConstants['attackImages'][this.currentDirection][this.animationAttackingIndex];
+        if(this.recovery > 0) {
+            img = PlayerConstants['hitImage'][this.currentDirection];
+        } else {
+            if(this.attacking){
+                img = PlayerConstants['attackImages'][this.currentDirection][this.animationAttackingIndex];
+            }
+            else {
+                if(this.onGround) {
+                    if(this.mouvement != "") {
+                        img = PlayerConstants['moveImages'][this.currentDirection][this.animationIndex];
+                    } else {
+                        img = PlayerConstants['idleImages'][this.currentDirection];
+                    }
+                } else {
+                    img = PlayerConstants['jumpingImages'][this.currentDirection];
+                }
+            }
         }
-        else {
-        	if(this.onGround) {
-	            if(this.mouvement != "") {
-	                img = PlayerConstants['moveImages'][this.currentDirection][this.animationIndex];
-	            } else {
-	                img = PlayerConstants['idleImages'][this.currentDirection];
-	            }
-	        } else {
-	            img = PlayerConstants['jumpingImages'][this.currentDirection];
-	        }
-        }     
         
         var offsetX = (this.mouvement == "" && this.currentDirection == "L") ? -20 : 0;
         var offsetY = (this.attacking) ? 40 : 0;
@@ -220,8 +232,14 @@ var Player = Base.extend({
 	},
 
 	update: function(framerate, area){
-    			
-		//console.log(this.groundY + " " + this.y);
+
+		if(this.recovery <= 0){
+			this.recovery = 0;
+		}
+		else{
+			this.recovery -= framerate;
+		}
+
 
         if(this.attacking){
         	this.animationAttacking += framerate;
@@ -264,7 +282,10 @@ var Player = Base.extend({
         }
         	
 		this.velocityY += this.gravity;        
-	    this.x += this.velocityX;    
+	    this.x += this.velocityX; 
+	    if(this.x < 0){
+	    	this.x = 0;
+	    }   
 	    this.y += this.velocityY;  
 
 	    if(this.y > this.groundY && !this.inHole){
@@ -278,5 +299,37 @@ var Player = Base.extend({
 	    }
 
 	    this.move(area);
+	},
+	takeDamage:function(dmg, sourceOfDmg){
+		if(this.onGround && !this.inHole){
+	        this.velocityY = -22.0;
+	        this.onGround = false;
+
+	        if(this.currentDirection.indexOf("L") != -1 && this.velocityX != 0){
+				this.velocityX = -2.0;
+			}
+				
+			else if(this.currentDirection.indexOf("R") != -1 && this.velocityX != 0){
+				this.velocityX = 2.0;
+			}
+            SoundManager.play("jump");
+	    }
+
+		this.velocityY 	= -22;
+		var knockbackDirection;
+		if(sourceOfDmg.x >= this.x){
+			knockbackDirection = -1;
+		}
+		else{
+			knockbackDirection = 1
+		}
+		this.velocityX += (14 * dmg * knockbackDirection)
+		
+
+
+		this.hp -= dmg;
+
+		this.recovery = 300;		
+
 	}
 });

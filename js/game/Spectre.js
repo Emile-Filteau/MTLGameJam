@@ -37,8 +37,8 @@ for(i in SpectreConstants['deathImages']['R']) {
 var Spectre = Hostile.extend({
 	
     constructor : function(posX, posY) {
-		this.height = 31;
-		this.width = 29;
+		this.height = 62;
+		this.width = 58;
 		this.x = posX;
 		this.y = posY - this.height/2 - 50;
         this.hp = 3;
@@ -118,6 +118,11 @@ var Spectre = Hostile.extend({
             } else {
                 this.x-=this.speed;
                 this.currentDirection = "L";
+            }
+            if(this.x > player.x - player.width/2 && this.x < player.x + player.width/2) {
+                this.y += this.speed;
+            } else {
+                this.y -= this.speed;
             }
         }
         this.collide(player);

@@ -6,7 +6,7 @@ var BlindedByRageGame = Game.extend({
 		this.base(cameraWidth, cameraHeight);
         this.areas = [];
         this.currentArea = "";
-        this.addArea("main", new Area(this, 9500, cameraHeight, location.href + "images/background.png", location.href + "images/env/trees.png", location.href + "images/Level_ground2.png", location.href + "images/clouds.png"));
+        this.addArea("main", new Area(this, 9500, cameraHeight, location.href + "images/Background.png", location.href + "images/env/trees.png", location.href + "images/Level_ground2.png", location.href + "images/clouds.png"));
         this.setArea("main");
         this.player = new Player(100, this.camera.height - 170, location.href + "images/Barb_knight_small_L.png", location.href + "images/Barb_knight_small_R.png");
 

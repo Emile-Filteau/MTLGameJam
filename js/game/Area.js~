@@ -121,7 +121,7 @@ var Area = Base.extend({
         }
 
     	  for(i in this.projectiles) {
-
+    	  	console.log(i);
             if(this.projectiles[i].show) {
                 this.projectiles[i].update();
             }

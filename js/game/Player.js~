@@ -280,8 +280,8 @@ var Player = Base.extend({
                //add projectile to list to be rendered.
                //
               	area.addProjectile(new AttackArc(this.x+this.width/2, this.y, this.currentDirection, this));
-				//var derp = new AttackArc(this.x+this.width/2, this.y, this.currentDirection, this);
-				//console.log(derp);					
+var derp = new AttackArc(this.x+this.width/2, this.y, this.currentDirection, this);
+console.log(derp);					
 					console.log(this);                
                 console.log(area);
                                  				

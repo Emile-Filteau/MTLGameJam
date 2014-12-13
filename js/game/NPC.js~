@@ -7,7 +7,7 @@ var NPC = Base.extend({
 		this.x = posX;
 		this.y = posY;
 		this.sprite = sprite;
-		this.hp = 100;	
+		this.hp = 100;	//À CHANGER, CRISSEMENT HARDCODÉ
 
 
         this.frameCounter = 0;
@@ -42,8 +42,7 @@ var NPC = Base.extend({
         	return false;
 		}
         if(player.x + (player.width/2 - 10) > this.x && player.x - (player.width/2 - 5) < this.x ) {
-            if( (player.y + player.height >= this.y && player.y <= this. y) 
-            || (player.y <= this.y + this.height && player.y + player.height >= this.y + this.height)){
+            if( (player.y + player.height >= this.y && player.y <= this. y) || (player.y <= this.y + this.height && player.y + player.height >= this.y + this.height)){
             //    //console.log("mob "+this.y+":"+player.y+player.height);
                 player.collidesWith(this);
                 return this;

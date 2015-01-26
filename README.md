@@ -4,6 +4,8 @@
 The game is a action platformer game. The main goal is to get to the other side of the forest and kill the demon king. 
 Key bindings are simple : left - right arrow keys to move. space bar to jump and E to attack in front of you.
 
+The game was developped in javascript using [FilhyEngine](https://github.com/Emile-Filteau/FilthyEngine)
+
 ## Installation Instructions ##
  
 1. Install an apache server such as wamp or xampp
